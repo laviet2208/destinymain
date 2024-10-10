@@ -110,6 +110,7 @@ class _welcome_screenState extends State<welcome_screen> {
                   child: TextButton(
                     style: ButtonStyle(
                       backgroundColor: WidgetStatePropertyAll<Color>(Color.fromARGB(255, 0, 76, 255)),
+                      overlayColor: WidgetStatePropertyAll<Color>(Color.fromARGB(255, 0, 0, 0).withOpacity(0.1)),
                       shape: MaterialStatePropertyAll<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10), // Adjust the radius as needed
