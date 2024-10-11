@@ -1,3 +1,6 @@
+import 'package:destinymain/general_ingredient/normal_button.dart';
+import 'package:destinymain/login_screen/login_screen.dart';
+import 'package:destinymain/signup_screen/signup_screen.dart';
 import 'package:flutter/material.dart';
 
 class welcome_screen extends StatefulWidget {
@@ -103,80 +106,93 @@ class _welcome_screenState extends State<welcome_screen> {
 
               SizedBox(height: height/3,),
 
-              Padding(
-                padding: EdgeInsets.only(left: 25, right: 25),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: TextButton(
-                    style: ButtonStyle(
-                      backgroundColor: WidgetStatePropertyAll<Color>(Color.fromARGB(255, 0, 76, 255)),
-                      overlayColor: WidgetStatePropertyAll<Color>(Color.fromARGB(255, 0, 0, 0).withOpacity(0.1)),
-                      shape: MaterialStatePropertyAll<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10), // Adjust the radius as needed
-                        ),
-                      ),
-                    ),
-                    onPressed: () async {
+              normal_button(backgroundColor: Color.fromARGB(255, 0, 76, 255), overlayColor: Color.fromARGB(255, 0, 0, 0).withOpacity(0.1), borderRadius: 10, content: "Let's get started", contentColor: Colors.white, padding: 25,
+                event: () {
+                  Navigator.pushReplacement(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) => signup_screen(),
+                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                        var begin = 0.0;
+                        var end = 1.0;
+                        var curve = Curves.easeInOut;
 
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 7, bottom: 7),
-                      child: Text(
-                        "Let's get started",
-                        style: TextStyle(
-                          fontFamily: 'nuni',
-                          color: Colors.white,
-                          fontSize: width/22,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+                        return FadeTransition(
+                          opacity: animation.drive(tween),
+                          child: child,
+                        );
+                      },
+                      transitionDuration: Duration(milliseconds: 500), // Độ dài của hiệu ứng
                     ),
-                  ),
-                ),
+                  );                },
               ),
 
               SizedBox(height: 10,),
 
-              Padding(
-                padding: EdgeInsets.only(left: 25, right: 25),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      alignment: Alignment.center,
-                      child: Text(
-                        'I already have an account',
-                        style: TextStyle(
-                          fontFamily: 'nuni',
-                          fontSize: width/28,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-
-                    SizedBox(width: 10,),
-
-                    Container(
-                      height: 30,
-                      width: 30,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(1000),
-                        color: Color.fromARGB(255, 0, 76, 255),
-                      ),
-                      child: Center(
-                        child: Padding(
-                          padding: EdgeInsets.all(2),
-                          child: Icon(
-                            Icons.chevron_right,
-                            color: Colors.white,
+              GestureDetector(
+                child: Padding(
+                  padding: EdgeInsets.only(left: 25, right: 25),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        alignment: Alignment.center,
+                        child: Text(
+                          'I already have an account',
+                          style: TextStyle(
+                            fontFamily: 'nuni',
+                            fontSize: width/28,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
-                    ),
-                  ],
+
+                      SizedBox(width: 10,),
+
+                      Container(
+                        height: 30,
+                        width: 30,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(1000),
+                          color: Color.fromARGB(255, 0, 76, 255),
+                        ),
+                        child: Center(
+                          child: Padding(
+                            padding: EdgeInsets.all(2),
+                            child: Icon(
+                              Icons.chevron_right,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
+                onTap: () {
+                  Navigator.pushReplacement(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) => login_screen(),
+                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                        var begin = 0.0;
+                        var end = 1.0;
+                        var curve = Curves.easeInOut;
+
+                        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+                        return FadeTransition(
+                          opacity: animation.drive(tween),
+                          child: child,
+                        );
+                      },
+                      transitionDuration: Duration(milliseconds: 500), // Độ dài của hiệu ứng
+                    ),
+                  );
+                },
               ),
             ],
           ),
