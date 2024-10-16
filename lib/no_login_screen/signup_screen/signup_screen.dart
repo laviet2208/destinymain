@@ -1,19 +1,22 @@
-import 'package:destinymain/login_screen/login_screen.dart';
+import 'package:destinymain/general_ingredient/normal_textfield.dart';
+import 'package:destinymain/general_ingredient/password_textfield.dart';
 import 'package:flutter/material.dart';
-
-import '../general_ingredient/normal_button.dart';
-import '../general_ingredient/normal_textfield.dart';
+import '../../general_ingredient/normal_button.dart';
+import '../loading_screen/welcome_screen.dart';
 import 'background.dart';
 
-class login_step_2_screen extends StatefulWidget {
-  const login_step_2_screen({super.key});
+class signup_screen extends StatefulWidget {
+  const signup_screen({super.key});
 
   @override
-  State<login_step_2_screen> createState() => _login_step_2_screenState();
+  State<signup_screen> createState() => _signup_screenState();
 }
 
-class _login_step_2_screenState extends State<login_step_2_screen> {
+class _signup_screenState extends State<signup_screen> {
+  final emailController = TextEditingController();
   final passController = TextEditingController();
+  final firstnameController = TextEditingController();
+  final lastnameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -42,41 +45,11 @@ class _login_step_2_screenState extends State<login_step_2_screen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          alignment: Alignment.center,
-                          child: Container(
-                            height: width/3,
-                            width: width/3,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(1000),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.2),
-                                  blurRadius: 10.0,
-                                  offset: Offset(0, 5),
-                                ),
-                              ],
-                            ),
-                            child: Container(
-                              margin: EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage('assets/image/decor/avatar.png'),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        SizedBox(height: 20,),
-
-                        Container(
-                          alignment: Alignment.center,
+                          alignment: Alignment.centerLeft,
                           child: Text(
-                            'Hello, Hoang Viet' + ' !',
+                            'Create \nAccount',
                             style: TextStyle(
-                              fontSize: width/15,
+                              fontSize: width/10,
                               color: Colors.black,
                               fontFamily: 'nuni',
                               fontWeight: FontWeight.bold,
@@ -84,41 +57,34 @@ class _login_step_2_screenState extends State<login_step_2_screen> {
                           ),
                         ),
 
-                        SizedBox(height: 10,),
+                        SizedBox(height: height/4,),
 
-                        Container(
-                          alignment: Alignment.center,
-                          child: Text(
-                            'Type your password',
-                            style: TextStyle(
-                              fontSize: width/24,
-                              color: Colors.black,
-                              fontFamily: 'nuni',
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-
-                        SizedBox(height: 20,),
-
-                        normal_textfield(controller: passController, hint: 'Your password', event: () {}),
-
-                        SizedBox(height: 20,),
-
-                        normal_button(backgroundColor: Color.fromARGB(255, 0, 76, 255), overlayColor: Color.fromARGB(255, 0, 0, 0).withOpacity(0.1), borderRadius: 10, content: "Continue", contentColor: Colors.white, padding: 0,
-                          event: () {
-
-                          },
-                        ),
+                        normal_textfield(controller: emailController, hint: 'Your email', event: () {}),
 
                         SizedBox(height: 10,),
 
-                        normal_button(backgroundColor: Colors.transparent, overlayColor: Color.fromARGB(255, 0, 0, 0).withOpacity(0.1), borderRadius: 10, content: "Not you?", contentColor: Colors.black, padding: 0,
+                        password_textfield(controller: passController, hint: 'Password', event: () {}),
+
+                        SizedBox(height: 10,),
+
+                        normal_textfield(controller: firstnameController, hint: 'Your first name', event: () {}),
+
+                        SizedBox(height: 10,),
+
+                        normal_textfield(controller: lastnameController, hint: 'Your last name', event: () {}),
+
+                        SizedBox(height: 10,),
+
+                        normal_button(backgroundColor: Color.fromARGB(255, 0, 76, 255), overlayColor: Color.fromARGB(255, 0, 0, 0).withOpacity(0.1), borderRadius: 10, content: "Done", event: () {  }, contentColor: Colors.white, padding: 0,),
+
+                        SizedBox(height: 10,),
+
+                        normal_button(backgroundColor: Colors.white, overlayColor: Color.fromARGB(255, 0, 0, 0).withOpacity(0.1), borderRadius: 10, content: "Cancel", contentColor: Colors.black, padding: 0,
                           event: () {
                             Navigator.pushReplacement(
                               context,
                               PageRouteBuilder(
-                                pageBuilder: (context, animation, secondaryAnimation) => login_screen(), // Màn hình đích
+                                pageBuilder: (context, animation, secondaryAnimation) => welcome_screen(), // Màn hình đích
                                 transitionsBuilder: (context, animation, secondaryAnimation, child) {
                                   var begin = Offset(1.0, 0.0);
                                   var end = Offset.zero;
@@ -149,7 +115,7 @@ class _login_step_2_screenState extends State<login_step_2_screen> {
         Navigator.pushReplacement(
           context,
           PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) => login_screen(), // Màn hình đích
+            pageBuilder: (context, animation, secondaryAnimation) => welcome_screen(), // Màn hình đích
             transitionsBuilder: (context, animation, secondaryAnimation, child) {
               var begin = Offset(1.0, 0.0);
               var end = Offset.zero;

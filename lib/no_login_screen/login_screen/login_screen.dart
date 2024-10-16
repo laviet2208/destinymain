@@ -1,10 +1,9 @@
-import 'package:destinymain/login_screen/login_step_2_screen.dart';
 import 'package:flutter/material.dart';
-
-import '../general_ingredient/normal_button.dart';
-import '../general_ingredient/normal_textfield.dart';
+import '../../general_ingredient/normal_button.dart';
+import '../../general_ingredient/normal_textfield.dart';
 import '../loading_screen/welcome_screen.dart';
 import 'background.dart';
+import 'login_step_2_screen.dart';
 
 class login_screen extends StatefulWidget {
   const login_screen({super.key});

@@ -1,7 +1,9 @@
 import 'package:destinymain/general_ingredient/normal_button.dart';
-import 'package:destinymain/login_screen/login_screen.dart';
-import 'package:destinymain/signup_screen/signup_screen.dart';
+import 'package:destinymain/no_login_screen/preview_screen/preview_screen.dart';
 import 'package:flutter/material.dart';
+
+import '../login_screen/login_screen.dart';
+import '../signup_screen/signup_screen.dart';
 
 class welcome_screen extends StatefulWidget {
   const welcome_screen({super.key});
@@ -177,6 +179,59 @@ class _welcome_screenState extends State<welcome_screen> {
                     context,
                     PageRouteBuilder(
                       pageBuilder: (context, animation, secondaryAnimation) => login_screen(),
+                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                        var begin = 0.0;
+                        var end = 1.0;
+                        var curve = Curves.easeInOut;
+
+                        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+                        return FadeTransition(
+                          opacity: animation.drive(tween),
+                          child: child,
+                        );
+                      },
+                      transitionDuration: Duration(milliseconds: 500), // Độ dài của hiệu ứng
+                    ),
+                  );
+                },
+              ),
+
+              SizedBox(height: 10,),
+
+              GestureDetector(
+                child: Padding(
+                  padding: EdgeInsets.only(left: 25, right: 25),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        alignment: Alignment.center,
+                        child: Text(
+                          'Use the app as a guest',
+                          style: TextStyle(
+                            fontFamily: 'nuni',
+                            fontSize: width/28,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+
+                      SizedBox(width: 10,),
+
+                      Icon(
+                        Icons.chevron_right,
+                        color: Colors.black,
+                      ),
+                    ],
+                  ),
+                ),
+                onTap: () {
+                  Navigator.pushReplacement(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) => preview_screen(),
                       transitionsBuilder: (context, animation, secondaryAnimation, child) {
                         var begin = 0.0;
                         var end = 1.0;

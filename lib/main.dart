@@ -1,14 +1,23 @@
-import 'package:destinymain/loading_screen/welcome_screen.dart';
-import 'package:destinymain/signup_screen/signup_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'loading_screen/loading_screen.dart';
-
+import 'no_login_screen/loading_screen/welcome_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    // options: FirebaseOptions(
+    //     apiKey: "AIzaSyC6JdUqnd_7iIzehRlQ3w47j_mT7heI8no",
+    //     authDomain: "ly-s-shopping.firebaseapp.com",
+    //     databaseURL: "https://ly-s-shopping-default-rtdb.firebaseio.com",
+    //     projectId: "ly-s-shopping",
+    //     storageBucket: "ly-s-shopping.appspot.com",
+    //     messagingSenderId: "217543052939",
+    //     appId: "1:217543052939:web:c31f88567af02c94a40e8e",
+    //     measurementId: "G-B2TH1RNX84",
+    //   ),
+  );
   runApp(const MyApp());
 }
 

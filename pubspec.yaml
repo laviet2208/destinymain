@@ -111,3 +111,11 @@ flutter:
     - family: nuni
       fonts:
         - asset: assets/font/NunitoSans.ttf
+
+    - family: rale
+      fonts:
+        - asset: assets/font/Raleway-Regular.ttf
+
+    - family: raleb
+      fonts:
+        - asset: assets/font/Raleway-Bold.ttf

@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "96965763722",
+    "firebase_url": "https://destiny-usa-default-rtdb.firebaseio.com",
+    "project_id": "destiny-usa",
+    "storage_bucket": "destiny-usa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:96965763722:android:0c66109e2cdf8f7fbb0373",
+        "android_client_info": {
+          "package_name": "destn.dstnm.destinymain"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIkBvdkY6kjuNuFc8vHWEqqA_9Zs8DacI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
