@@ -1,9 +1,15 @@
+import 'package:destinymain/general_ingredient/generalController.dart';
 import 'package:destinymain/general_ingredient/normal_textfield.dart';
 import 'package:destinymain/general_ingredient/password_textfield.dart';
+import 'package:destinymain/no_login_screen/login_screen/login_screen.dart';
 import 'package:flutter/material.dart';
+import '../../data/Account/Account.dart';
+import '../../data/otherData/Tool.dart';
 import '../../general_ingredient/normal_button.dart';
+import '../../general_ingredient/utils/utils.dart';
 import '../loading_screen/welcome_screen.dart';
 import 'background.dart';
+import 'controller/signupController.dart';
 
 class signup_screen extends StatefulWidget {
   const signup_screen({super.key});
@@ -13,10 +19,18 @@ class signup_screen extends StatefulWidget {
 }
 
 class _signup_screenState extends State<signup_screen> {
+  bool loading = false;
   final emailController = TextEditingController();
   final passController = TextEditingController();
   final firstnameController = TextEditingController();
   final lastnameController = TextEditingController();
+
+  bool can_continue() {
+    if (emailController.text.isNotEmpty && passController.text.isNotEmpty && firstnameController.text.isNotEmpty && lastnameController.text.isNotEmpty) {
+      return true;
+    }
+    return false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,29 +89,55 @@ class _signup_screenState extends State<signup_screen> {
 
                         SizedBox(height: 10,),
 
-                        normal_button(backgroundColor: Color.fromARGB(255, 0, 76, 255), overlayColor: Color.fromARGB(255, 0, 0, 0).withOpacity(0.1), borderRadius: 10, content: "Done", event: () {  }, contentColor: Colors.white, padding: 0,),
+                        Padding(
+                          padding: EdgeInsets.only(left: 0, right: 0),
+                          child: SizedBox(
+                            width: double.infinity,
+                            child: TextButton(
+                              style: ButtonStyle(
+                                backgroundColor: WidgetStatePropertyAll<Color>(can_continue() ? Color.fromARGB(255, 0, 76, 255) : Colors.grey),
+                                overlayColor: WidgetStatePropertyAll<Color>(Color.fromARGB(255, 0, 0, 0).withOpacity(0.1)),
+                                shape: MaterialStatePropertyAll<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                              ),
+                              onPressed: () async {
+                                if (can_continue()) {
+                                  Account account = Account(id: '', username: emailController.text.toString(), password: passController.text.toString(), address: '', createTime: getCurrentTime(), money: 0, firstName: firstnameController.text.toString(), lastName: lastnameController.text.toString(), phoneNum: '', lockstatus: 1, voucherList: []);
+                                  String id = getCurrentTimeString();
+                                  account.id = 'TK' + id;
+                                  await signupController.signUpPressed(account,
+                                        () {setState(() {loading = true;});},
+                                        () {setState(() {loading = false;});},
+                                        () {setState(() {loading = false;}); toastMessage('PLease check your email to verify'); generalController.changeScreenFade(context, login_screen());},
+                                  );
+                                } else {
+                                  toastMessage('please fill all infomation');
+                                }
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 7, bottom: 7),
+                                child: !loading ? Text(
+                                  'Done',
+                                  style: TextStyle(
+                                    fontFamily: 'nuni',
+                                    color: Colors.white,
+                                    fontSize: width/22,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ) : CircularProgressIndicator(color: Colors.white,),
+                              ),
+                            ),
+                          ),
+                        ),
 
                         SizedBox(height: 10,),
 
                         normal_button(backgroundColor: Colors.white, overlayColor: Color.fromARGB(255, 0, 0, 0).withOpacity(0.1), borderRadius: 10, content: "Cancel", contentColor: Colors.black, padding: 0,
                           event: () {
-                            Navigator.pushReplacement(
-                              context,
-                              PageRouteBuilder(
-                                pageBuilder: (context, animation, secondaryAnimation) => welcome_screen(), // Màn hình đích
-                                transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                  var begin = Offset(1.0, 0.0);
-                                  var end = Offset.zero;
-                                  var curve = Curves.easeOut;
-                                  var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-                                  return SlideTransition(
-                                    position: animation.drive(tween),
-                                    child: child,
-                                  );
-                                },
-                                transitionDuration: Duration(milliseconds: 200), // Độ dài của hiệu ứng
-                              ),
-                            );
+                            generalController.changeScreenSlide(context, welcome_screen());
                           },
                         ),
 
@@ -112,23 +152,7 @@ class _signup_screenState extends State<signup_screen> {
         ),
       ),
       onWillPop: () async {
-        Navigator.pushReplacement(
-          context,
-          PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) => welcome_screen(), // Màn hình đích
-            transitionsBuilder: (context, animation, secondaryAnimation, child) {
-              var begin = Offset(1.0, 0.0);
-              var end = Offset.zero;
-              var curve = Curves.easeOut;
-              var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-              return SlideTransition(
-                position: animation.drive(tween),
-                child: child,
-              );
-            },
-            transitionDuration: Duration(milliseconds: 200), // Độ dài của hiệu ứng
-          ),
-        );
+        generalController.changeScreenSlide(context, welcome_screen());
         return true;
       },
     );

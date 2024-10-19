@@ -16,43 +16,49 @@ class product_type_area extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          product_type_title(),
+          Padding(
+            padding: EdgeInsets.only(left: 15, right: 15,),
+            child: product_type_title(),
+          ),
 
           SizedBox(height: 8,),
 
-          mainpage_final_data.typeList.isNotEmpty ? Container(
-            child: GridView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, // số phần tử trên mỗi hàng
-                mainAxisSpacing: 8, // khoảng cách giữa các hàng
-                crossAxisSpacing: 15, // khoảng cách giữa các cột
-                childAspectRatio: 165/192,
+          Padding(
+            padding: EdgeInsets.only(left: 15, right: 15,),
+            child: mainpage_final_data.typeList.isNotEmpty ? Container(
+              child: GridView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, // số phần tử trên mỗi hàng
+                  mainAxisSpacing: 8, // khoảng cách giữa các hàng
+                  crossAxisSpacing: 15, // khoảng cách giữa các cột
+                  childAspectRatio: 165/192,
+                ),
+                itemCount: mainpage_final_data.typeList.length > 4 ? 4 : mainpage_final_data.typeList.length,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    child: item_product_type(productType: mainpage_final_data.typeList[index]),
+                  );
+                },
               ),
-              itemCount: mainpage_final_data.typeList.length > 4 ? 4 : mainpage_final_data.typeList.length,
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  child: item_product_type(productType: mainpage_final_data.typeList[index]),
-                );
-              },
-            ),
-          ) : Container(
-            child: GridView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, // số phần tử trên mỗi hàng
-                mainAxisSpacing: 8, // khoảng cách giữa các hàng
-                crossAxisSpacing: 15, // khoảng cách giữa các cột
-                childAspectRatio: 165/192,
+            ) : Container(
+              child: GridView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, // số phần tử trên mỗi hàng
+                  mainAxisSpacing: 8, // khoảng cách giữa các hàng
+                  crossAxisSpacing: 15, // khoảng cách giữa các cột
+                  childAspectRatio: 165/192,
+                ),
+                itemCount: 4,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    child: item_product_type_loading(),
+                  );
+                },
               ),
-              itemCount: 4,
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  child: item_product_type_loading(),
-                );
-              },
             ),
           ),
         ],

@@ -1,4 +1,6 @@
 import 'dart:math';
+import 'package:destinymain/data/product/Dimension.dart';
+
 import 'Time.dart';
 
 Time getCurrentTime() {
@@ -84,6 +86,76 @@ String generateID(int count) {
   }
 
   return returnString;
+}
+
+String getCostString(List<Dimension> list) {
+  String costString = '';
+  double maxCost = 0;
+  double minCost = list.first.cost;
+  for (int i = 0; i < list.length; i++) {
+    if (list[i].cost > maxCost) {
+      maxCost = list[i].cost;
+    }
+
+    if (list[i].cost < minCost) {
+      minCost = list[i].cost;
+    }
+  }
+
+  if (maxCost != 0 && minCost != 0) {
+    costString = getStringNumber(maxCost) + ' - ' + getStringNumber(minCost) + '.USDT';
+  }
+
+  if (maxCost == 0 && minCost != 0) {
+    costString = getStringNumber(minCost) + '.USDT';
+  }
+
+  if (maxCost != 0 && minCost == 0) {
+    costString = getStringNumber(maxCost) + '.USDT';
+  }
+
+  if (maxCost == minCost) {
+    costString = getStringNumber(maxCost) + '.USDT';
+  }
+
+  return costString;
+}
+
+String getCurrentTimeString() {
+  String id = (DateTime.now().hour >= 10 ? DateTime.now().hour.toString() : '0' + DateTime.now().hour.toString()) + (DateTime.now().minute >= 10 ? DateTime.now().minute.toString() : '0' + DateTime.now().minute.toString()) + (DateTime.now().second >= 10 ? DateTime.now().second.toString() : '0' + DateTime.now().second.toString()) + (DateTime.now().day >= 10 ? DateTime.now().day.toString() : '0' + DateTime.now().day.toString()) + (DateTime.now().month >= 10 ? DateTime.now().month.toString() : '0' + DateTime.now().month.toString()) + (DateTime.now().year >= 10 ? DateTime.now().year.toString() : '0' + DateTime.now().year.toString());
+  return id;
+}
+
+String getCostBeforeSaleString(List<Dimension> list) {
+  String costString = '';
+  double maxCostBf = 0;
+  double minCostBf = list.first.costBfSale;
+  for (int i = 0; i < list.length; i++) {
+    if (list[i].costBfSale > maxCostBf) {
+      maxCostBf = list[i].costBfSale;
+    }
+
+    if (list[i].costBfSale < minCostBf) {
+      minCostBf = list[i].costBfSale;
+    }
+  }
+  if (maxCostBf != 0 && minCostBf != 0) {
+    costString = getStringNumber(maxCostBf) + ' - ' + getStringNumber(minCostBf) + '.USDT';
+  }
+
+  if (maxCostBf == 0 && minCostBf != 0) {
+    costString = getStringNumber(minCostBf) + '.USDT';
+  }
+
+  if (maxCostBf != 0 && minCostBf == 0) {
+    costString = getStringNumber(maxCostBf) + '.USDT';
+  }
+
+  if (maxCostBf == minCostBf && maxCostBf != 0) {
+    costString = getStringNumber(maxCostBf) + '.USDT';
+  }
+
+  return costString;
 }
 
 String getAllTimeString(Time time) {

@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:destinymain/data/ProductDataHandle/ProductDataHandle.dart';
+import 'package:destinymain/data/product/Product.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -8,16 +12,27 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     // options: FirebaseOptions(
-    //     apiKey: "AIzaSyC6JdUqnd_7iIzehRlQ3w47j_mT7heI8no",
-    //     authDomain: "ly-s-shopping.firebaseapp.com",
-    //     databaseURL: "https://ly-s-shopping-default-rtdb.firebaseio.com",
-    //     projectId: "ly-s-shopping",
-    //     storageBucket: "ly-s-shopping.appspot.com",
-    //     messagingSenderId: "217543052939",
-    //     appId: "1:217543052939:web:c31f88567af02c94a40e8e",
-    //     measurementId: "G-B2TH1RNX84",
+    //     apiKey: "AIzaSyBcRF7x0mYTbTEwm3C_DTEFOPvhqyX7X-c",
+    //     authDomain: "destiny-usa.firebaseapp.com",
+    //     databaseURL: "https://destiny-usa-default-rtdb.firebaseio.com",
+    //     projectId: "destiny-usa",
+    //     storageBucket: "destiny-usa.appspot.com",
+    //     messagingSenderId: "96965763722",
+    //     appId: "1:96965763722:web:683ba60b8d977c7dbb0373",
+    //     measurementId: "G-B7X16QF6RK"
     //   ),
   );
+  // if (await ProductDataHandle.CheckIfFirstTimeEnter()) {
+  //   ProductDataHandle.getAllProductFB();
+  // } else {
+  //
+  // }
+  // SharedPreferences prefs = await SharedPreferences.getInstance();
+  // List<String>? productsJson = prefs.getStringList('productList');
+  // if (productsJson != null) {
+  //   List<Product> prdList = productsJson.map((jsonProduct) => Product.fromJson(jsonDecode(jsonProduct))).toList();
+  //   print(prdList[0].name);
+  // }
   runApp(const MyApp());
 }
 

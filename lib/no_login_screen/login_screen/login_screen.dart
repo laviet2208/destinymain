@@ -1,8 +1,13 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:destinymain/general_ingredient/generalController.dart';
 import 'package:flutter/material.dart';
 import '../../general_ingredient/normal_button.dart';
 import '../../general_ingredient/normal_textfield.dart';
+import '../../general_ingredient/utils/utils.dart';
+import '../../in_use_screen/main_screen/main_screen.dart';
 import '../loading_screen/welcome_screen.dart';
 import 'background.dart';
+import 'loginController.dart';
 import 'login_step_2_screen.dart';
 
 class login_screen extends StatefulWidget {
@@ -13,7 +18,16 @@ class login_screen extends StatefulWidget {
 }
 
 class _login_screenState extends State<login_screen> {
+  bool loading = false;
   final emailController = TextEditingController();
+  final passController = TextEditingController();
+
+  bool can_continue() {
+    if (emailController.text.isNotEmpty && passController.text.isNotEmpty) {
+      return true;
+    }
+    return false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,51 +87,82 @@ class _login_screenState extends State<login_screen> {
 
                         SizedBox(height: 20,),
 
-                        normal_button(backgroundColor: Color.fromARGB(255, 0, 76, 255), overlayColor: Color.fromARGB(255, 0, 0, 0).withOpacity(0.1), borderRadius: 10, content: "Next", contentColor: Colors.white, padding: 0,
-                          event: () {
-                            Navigator.pushReplacement(
-                              context,
-                              PageRouteBuilder(
-                                pageBuilder: (context, animation, secondaryAnimation) => login_step_2_screen(),
-                                transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                  var begin = 0.0;
-                                  var end = 1.0;
-                                  var curve = Curves.easeInOut;
+                        normal_textfield(controller: passController, hint: 'Your password', event: () {}),
 
-                                  var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                        SizedBox(height: 5,),
 
-                                  return FadeTransition(
-                                    opacity: animation.drive(tween),
-                                    child: child,
-                                  );
-                                },
-                                transitionDuration: Duration(milliseconds: 500), // Độ dài của hiệu ứng
+                        Padding(
+                          padding: EdgeInsets.only(left: 15, right: 15),
+                          child: GestureDetector(
+                            child: Container(
+                              height: 20,
+                              alignment: Alignment.centerRight,
+                              decoration: BoxDecoration(
+                                color: Colors.transparent,
                               ),
-                            );
-                          },
+                              child: AutoSizeText(
+                                'Forgot password?',
+                                style: TextStyle(
+                                  fontFamily: 'rale',
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 100,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                            onTap: () {
+
+                            },
+                          ),
+                        ),
+
+                        SizedBox(height: 10,),
+
+                        Padding(
+                          padding: EdgeInsets.only(left: 0, right: 0),
+                          child: SizedBox(
+                            width: double.infinity,
+                            child: TextButton(
+                              style: ButtonStyle(
+                                backgroundColor: WidgetStatePropertyAll<Color>(can_continue() ? Color.fromARGB(255, 0, 76, 255) : Colors.grey),
+                                overlayColor: WidgetStatePropertyAll<Color>(Color.fromARGB(255, 0, 0, 0).withOpacity(0.1)),
+                                shape: MaterialStatePropertyAll<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10), // Adjust the radius as needed
+                                  ),
+                                ),
+                              ),
+                              onPressed: () async {
+                                if (can_continue()) {
+                                  setState(() {loading = true;});
+                                  await loginController.loginHandleWeb(emailController.text.toString(), passController.text.toString(),
+                                        () {Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => main_screen()),);},
+                                        () {setState(() {loading = false;});},);
+                                } else {
+                                  toastMessage('Please fill all information and try again');
+                                }
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 7, bottom: 7),
+                                child: !loading ? Text(
+                                  'Log in',
+                                  style: TextStyle(
+                                    fontFamily: 'nuni',
+                                    color: Colors.white,
+                                    fontSize: width/22,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ) : CircularProgressIndicator(color: Colors.white,),
+                              ),
+                            ),
+                          ),
                         ),
 
                         SizedBox(height: 10,),
 
                         normal_button(backgroundColor: Colors.transparent, overlayColor: Color.fromARGB(255, 0, 0, 0).withOpacity(0.1), borderRadius: 10, content: "Cancel", contentColor: Colors.black, padding: 0,
                           event: () {
-                            Navigator.pushReplacement(
-                              context,
-                              PageRouteBuilder(
-                                pageBuilder: (context, animation, secondaryAnimation) => welcome_screen(), // Màn hình đích
-                                transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                  var begin = Offset(1.0, 0.0);
-                                  var end = Offset.zero;
-                                  var curve = Curves.easeOut;
-                                  var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-                                  return SlideTransition(
-                                    position: animation.drive(tween),
-                                    child: child,
-                                  );
-                                },
-                                transitionDuration: Duration(milliseconds: 200), // Độ dài của hiệu ứng
-                              ),
-                            );
+                            generalController.changeScreenSlide(context, welcome_screen());
                           },
                         ),
 
@@ -132,23 +177,7 @@ class _login_screenState extends State<login_screen> {
         ),
       ),
       onWillPop: () async {
-        Navigator.pushReplacement(
-          context,
-          PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) => welcome_screen(), // Màn hình đích
-            transitionsBuilder: (context, animation, secondaryAnimation, child) {
-              var begin = Offset(1.0, 0.0);
-              var end = Offset.zero;
-              var curve = Curves.easeOut;
-              var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-              return SlideTransition(
-                position: animation.drive(tween),
-                child: child,
-              );
-            },
-            transitionDuration: Duration(milliseconds: 200), // Độ dài của hiệu ứng
-          ),
-        );
+        generalController.changeScreenSlide(context, welcome_screen());
         return true;
       },
     );

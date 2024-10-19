@@ -1,6 +1,10 @@
+import 'dart:ui';
+
+import 'package:destinymain/data/product/Product.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 import '../../../../data/AdsData/AdsData.dart';
+import '../../../../data/product/ProductDirectory.dart';
 import '../../../../data/product/ProductType.dart';
 
 class MainPageController {
@@ -32,5 +36,40 @@ class MainPageController {
       });
     }
     return dataList;
+  }
+
+  /// getTopProduct
+  static Future<List<Product>> getTopProduct() async {
+    final reference = FirebaseDatabase.instance.ref();
+    DatabaseEvent snapshot = await reference.child('UI').child('productTop').once();
+    final dynamic data = snapshot.snapshot.value;
+    List<Product> dataList = [];
+    if (data != null) {
+      for (final result in data) {
+        dataList.add(Product.fromJson(result));
+      }
+    }
+    return dataList;
+  }
+
+  /// getDirectoryUi
+  static Future<List<String>> getDirectoryUi() async {
+    final reference = FirebaseDatabase.instance.ref();
+    List<String> directoryList = [];
+    DatabaseEvent snapshot = await reference.child('UI').child('productDirectory').once();
+    final dynamic data = snapshot.snapshot.value;
+    for (final result in data) {
+      String id = result.toString();
+      directoryList.add(id);
+    }
+    return directoryList;
+  }
+
+  /// getDirectory
+  static Future<ProductDirectory> getDirectory(String id) async {
+    final reference = FirebaseDatabase.instance.ref();
+    DatabaseEvent snapshot = await reference.child('productDirectory').child(id).once();
+    final dynamic data = snapshot.snapshot.value;
+    return ProductDirectory.fromJson(data);
   }
 }

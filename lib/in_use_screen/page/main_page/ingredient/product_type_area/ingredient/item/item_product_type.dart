@@ -29,7 +29,7 @@ class _item_product_typeState extends State<item_product_type> {
           BoxShadow(
             color: Colors.black.withOpacity(0.2),
             blurRadius: 10.0,
-            offset: Offset(0, 5),
+            offset: Offset(0, 2),
           ),
         ],
       ),

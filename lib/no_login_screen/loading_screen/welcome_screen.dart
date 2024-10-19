@@ -1,6 +1,8 @@
+import 'package:destinymain/general_ingredient/generalController.dart';
 import 'package:destinymain/general_ingredient/normal_button.dart';
 import 'package:destinymain/no_login_screen/preview_screen/preview_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../login_screen/login_screen.dart';
 import '../signup_screen/signup_screen.dart';
@@ -13,6 +15,14 @@ class welcome_screen extends StatefulWidget {
 }
 
 class _welcome_screenState extends State<welcome_screen> {
+  List<String> dataList = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -175,25 +185,7 @@ class _welcome_screenState extends State<welcome_screen> {
                   ),
                 ),
                 onTap: () {
-                  Navigator.pushReplacement(
-                    context,
-                    PageRouteBuilder(
-                      pageBuilder: (context, animation, secondaryAnimation) => login_screen(),
-                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                        var begin = 0.0;
-                        var end = 1.0;
-                        var curve = Curves.easeInOut;
-
-                        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-                        return FadeTransition(
-                          opacity: animation.drive(tween),
-                          child: child,
-                        );
-                      },
-                      transitionDuration: Duration(milliseconds: 500), // Độ dài của hiệu ứng
-                    ),
-                  );
+                  generalController.changeScreenFade(context, login_screen());
                 },
               ),
 
@@ -228,25 +220,7 @@ class _welcome_screenState extends State<welcome_screen> {
                   ),
                 ),
                 onTap: () {
-                  Navigator.pushReplacement(
-                    context,
-                    PageRouteBuilder(
-                      pageBuilder: (context, animation, secondaryAnimation) => preview_screen(),
-                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                        var begin = 0.0;
-                        var end = 1.0;
-                        var curve = Curves.easeInOut;
-
-                        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-                        return FadeTransition(
-                          opacity: animation.drive(tween),
-                          child: child,
-                        );
-                      },
-                      transitionDuration: Duration(milliseconds: 500), // Độ dài của hiệu ứng
-                    ),
-                  );
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => preview_screen()),);
                 },
               ),
             ],
