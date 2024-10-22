@@ -88,6 +88,53 @@ String generateID(int count) {
   return returnString;
 }
 
+String getDiscountPercentRange(List<Dimension> list) {
+  String rangeString = '';
+  double maxCost = 0;
+  double minCost = list.first.cost;
+  double maxCostBf = 0;
+  double minCostBf = list.first.costBfSale;
+  int firstPercent = 0;
+  int lastPercent = 0;
+  for (int i = 0; i < list.length; i++) {
+    if (list[i].cost > maxCost) {
+      maxCost = list[i].cost;
+    }
+
+    if (list[i].cost < minCost) {
+      minCost = list[i].cost;
+    }
+
+    if (list[i].costBfSale > maxCostBf) {
+      maxCostBf = list[i].costBfSale;
+    }
+
+    if (list[i].costBfSale < minCostBf) {
+      minCostBf = list[i].costBfSale;
+    }
+  }
+  if (maxCostBf != 0) {
+    firstPercent = calculateDiscountPercentage(maxCostBf, maxCost);
+  }
+  if (minCostBf != 0) {
+    lastPercent = calculateDiscountPercentage(minCostBf, minCost);
+  }
+  if (firstPercent != 0 && lastPercent != 0) {
+    if (firstPercent < lastPercent) {
+      rangeString = firstPercent.toString() + '-' + lastPercent.toString();
+    } else {
+      rangeString = lastPercent.toString() + '-' + firstPercent.toString();
+    }
+  }
+  if (firstPercent != 0 && lastPercent == 0) {
+    rangeString = firstPercent.toString();
+  }
+  if (firstPercent == 0 && lastPercent != 0) {
+    rangeString = lastPercent.toString();
+  }
+  return "You can save ~ " + rangeString + ' %';
+}
+
 String getCostString(List<Dimension> list) {
   String costString = '';
   double maxCost = 0;

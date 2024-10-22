@@ -13,6 +13,7 @@ class top_product_item extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+    Uint8List image = Uint8List.fromList(base64Decode(product.imageList.first));
     return Container(
       width: (width - 90)/5,
       height: (width - 90)/5,
@@ -31,7 +32,7 @@ class top_product_item extends StatelessWidget {
         padding: EdgeInsets.all(5),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(1000),
-          child: Image.memory(Uint8List.fromList(base64Decode(product.imageList.first))),
+          child: Image.memory(image),
         ),
       ),
     );

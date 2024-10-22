@@ -1,4 +1,7 @@
+import 'package:destinymain/in_use_screen/page/main_page/main_page.dart';
 import 'package:flutter/material.dart';
+
+import '../../data/finalData.dart';
 
 class main_screen extends StatefulWidget {
   const main_screen({super.key});
@@ -8,8 +11,79 @@ class main_screen extends StatefulWidget {
 }
 
 class _main_screenState extends State<main_screen> {
+  Widget getBody(int index) {
+    if (index == 0) {
+      return main_page();
+    }
+    if (index == 1) {
+
+    }
+    if (index == 2) {
+
+    }
+    if (index == 3) {
+
+    }
+    if (index == 4) {
+
+    }
+    return Container();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
-  }
+    return WillPopScope(
+      child: Scaffold(
+        backgroundColor: Color.fromARGB(255, 240, 241, 242),
+        body: getBody(finalData.currentPage),
+        bottomNavigationBar: Padding(
+          padding: EdgeInsets.only(left: 10, right: 10, bottom: 5),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20.0),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 10.0,
+                  offset: Offset(0, 5),
+                ),
+              ],
+            ),
+            child: NavigationBarTheme(
+              data: NavigationBarThemeData(
+                indicatorColor: Color.fromARGB(255, 0, 76, 255).withOpacity(0.2),
+                labelTextStyle: MaterialStateProperty.all(
+                  TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12,
+                    color: Colors.black,
+                    fontFamily: 'muli',
+                  ),
+                ),
+                backgroundColor: Colors.transparent,
+                labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+              ),
+              child: NavigationBar(
+                height: 70,
+                selectedIndex: finalData.currentPage,
+                onDestinationSelected: (selectedPage) => setState(() {
+                  finalData.currentPage = selectedPage;
+                }),
+                destinations: [
+                  NavigationDestination(icon: Icon(Icons.home_outlined, color: finalData.currentPage == 0 ? Colors.black : Colors.black, size: 22,), label: 'Home',),
+                  NavigationDestination(icon: Icon(Icons.account_circle_outlined, color: finalData.currentPage == 1 ? Colors.black : Colors.black, size: 22,), label: 'Account',),
+                  NavigationDestination(icon: Icon(Icons.search, color: finalData.currentPage == 2 ? Colors.black : Colors.black, size: 22,), label: 'Notice',),
+                  NavigationDestination(icon: Icon(Icons.notifications_none, color: finalData.currentPage == 3 ? Colors.black : Colors.black, size: 22,), label: 'Cart',),
+                  NavigationDestination(icon: Icon(Icons.discount_outlined), label: 'Favourite',),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+      onWillPop: () async {
+        return false;
+      },
+    );  }
 }

@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:destinymain/in_use_screen/page/main_page/final_data/mainpage_final_data.dart';
 import 'package:destinymain/in_use_screen/page/main_page/ingredient/top_product_area/ingredient/top_product_item/top_product_item.dart';
 import 'package:destinymain/in_use_screen/page/main_page/ingredient/top_product_area/ingredient/top_product_item/top_product_item_loading.dart';

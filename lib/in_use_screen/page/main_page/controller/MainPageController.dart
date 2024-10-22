@@ -27,6 +27,20 @@ class MainPageController {
   /// getProductType
   static Future<List<ProductType>> getProductType() async {
     final reference = FirebaseDatabase.instance.ref();
+    DatabaseEvent snapshot = await reference.child("productType").limitToFirst(4).once();
+    final dynamic data = snapshot.snapshot.value;
+    List<ProductType> dataList = [];
+    if (data != null) {
+      data.forEach((key, value) {
+        dataList.add(ProductType.fromJson(value));
+      });
+    }
+    return dataList;
+  }
+
+  /// getAllProductType
+  static Future<List<ProductType>> getAllProductType() async {
+    final reference = FirebaseDatabase.instance.ref();
     DatabaseEvent snapshot = await reference.child("productType").once();
     final dynamic data = snapshot.snapshot.value;
     List<ProductType> dataList = [];

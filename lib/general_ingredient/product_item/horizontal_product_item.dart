@@ -2,17 +2,21 @@ import 'dart:convert';
 import 'dart:typed_data';
 import 'package:destinymain/data/otherData/Tool.dart';
 import 'package:destinymain/data/product/Product.dart';
+import 'package:destinymain/general_ingredient/generalController.dart';
+import 'package:destinymain/in_use_screen/product_view_screen/product_view_screen.dart';
 import 'package:flutter/material.dart';
 
 class horizontal_product_item extends StatelessWidget {
   final Product product;
-  const horizontal_product_item({super.key, required this.product});
+  final Widget current;
+  const horizontal_product_item({super.key, required this.product, required this.current});
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     double width1 = (width - 45)/2;
+    Uint8List image = Uint8List.fromList(base64Decode(product.imageList.first));
     return GestureDetector(
       child: Container(
         width: width1,
@@ -54,35 +58,35 @@ class horizontal_product_item extends StatelessWidget {
                       bottom: 0,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(5),
-                        child: Image.memory(Uint8List.fromList(base64Decode(product.imageList.first))),
+                        child: Image.memory(image),
                       ),
                     ),
 
-                    Positioned(
-                      top: 5,
-                      right: 5,
-                      child: Container(
-                        width: (width1 - 16)/5,
-                        height: (width1 - 16)/5,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(1000),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.2),
-                              blurRadius: 10.0,
-                              offset: Offset(0, 2),
-                            ),
-                          ],
-                        ),
-                        child: Center(
-                          child: Icon(
-                            Icons.favorite_border,
-                            size: 20,
-                          ),
-                        ),
-                      ),
-                    ),
+                    // Positioned(
+                    //   top: 5,
+                    //   right: 5,
+                    //   child: Container(
+                    //     width: (width1 - 16)/5,
+                    //     height: (width1 - 16)/5,
+                    //     decoration: BoxDecoration(
+                    //       color: Colors.white,
+                    //       borderRadius: BorderRadius.circular(1000),
+                    //       boxShadow: [
+                    //         BoxShadow(
+                    //           color: Colors.black.withOpacity(0.2),
+                    //           blurRadius: 10.0,
+                    //           offset: Offset(0, 2),
+                    //         ),
+                    //       ],
+                    //     ),
+                    //     child: Center(
+                    //       child: Icon(
+                    //         Icons.favorite_border,
+                    //         size: 20,
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
@@ -181,6 +185,9 @@ class horizontal_product_item extends StatelessWidget {
           ],
         ),
       ),
+      onTap: () {
+        generalController.changeScreenSlide(context, product_view_screen(product: product, previousWidget: current));
+      },
     );
   }
 }

@@ -14,10 +14,14 @@ class ads_area extends StatefulWidget {
 
 class _ads_areaState extends State<ads_area> {
   int currentIndex = 0;
+  List<Uint8List> imageList = [];
   late PageController _controller;
   @override
   void initState() {
     _controller = PageController(initialPage: 0);
+    for (int i = 0; i < mainpage_final_data.adsList.length; i++) {
+      imageList.add(Uint8List.fromList(base64Decode(mainpage_final_data.adsList[i].image)));
+    }
     super.initState();
   }
 
@@ -55,14 +59,14 @@ class _ads_areaState extends State<ads_area> {
                           currentIndex = index;
                         });
                       },
-                      itemCount: mainpage_final_data.adsList.length,
+                      itemCount: imageList.length,
                       itemBuilder: (context, index) {
                         return Container(
                           width: width - 30,
                           height: (width - 30)/2,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(20),
-                            child: Image.memory(Uint8List.fromList(base64Decode(mainpage_final_data.adsList[index].image))),
+                            child: Image.memory(imageList[index]),
                           ),
                         );
                       },

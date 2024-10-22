@@ -1,26 +1,26 @@
-import 'package:destinymain/general_ingredient/generalController.dart';
-import 'package:destinymain/in_use_screen/page/main_page/controller/MainPageController.dart';
-import 'package:destinymain/in_use_screen/page/main_page/final_data/mainpage_final_data.dart';
-import 'package:destinymain/in_use_screen/page/main_page/ingredient/ads_area/ads_area.dart';
-import 'package:destinymain/in_use_screen/page/main_page/ingredient/ads_area/ads_area_loading.dart';
-import 'package:destinymain/in_use_screen/page/main_page/ingredient/app_bar/main_page_app_bar.dart';
-import 'package:destinymain/in_use_screen/page/main_page/ingredient/product_directory_area/loading/product_directory_area_loading.dart';
-import 'package:destinymain/in_use_screen/page/main_page/ingredient/product_directory_area/product_directory_area.dart';
-import 'package:destinymain/in_use_screen/page/main_page/ingredient/product_type_area/product_type_area.dart';
-import 'package:destinymain/in_use_screen/page/main_page/ingredient/top_product_area/top_product_area.dart';
-import 'package:destinymain/no_login_screen/loading_screen/welcome_screen.dart';
+import 'package:destinymain/in_use_screen/main_screen/main_screen.dart';
 import 'package:flutter/material.dart';
-import '../../data/product/ProductDirectory.dart';
-import '../../general_ingredient/normal_button.dart';
+import '../../../data/product/ProductDirectory.dart';
+import '../../../general_ingredient/generalController.dart';
+import '../../../no_login_screen/loading_screen/welcome_screen.dart';
+import 'controller/MainPageController.dart';
+import 'final_data/mainpage_final_data.dart';
+import 'ingredient/ads_area/ads_area.dart';
+import 'ingredient/ads_area/ads_area_loading.dart';
+import 'ingredient/app_bar/main_page_app_bar.dart';
+import 'ingredient/product_directory_area/loading/product_directory_area_loading.dart';
+import 'ingredient/product_directory_area/product_directory_area.dart';
+import 'ingredient/product_type_area/product_type_area.dart';
+import 'ingredient/top_product_area/top_product_area.dart';
 
-class preview_screen extends StatefulWidget {
-  const preview_screen({super.key});
+class main_page extends StatefulWidget {
+  const main_page({super.key});
 
   @override
-  State<preview_screen> createState() => _preview_screenState();
+  State<main_page> createState() => _main_pageState();
 }
 
-class _preview_screenState extends State<preview_screen> {
+class _main_pageState extends State<main_page> {
   bool loading1 = false;
   bool loading2 = false;
   bool loading3 = false;
@@ -31,6 +31,8 @@ class _preview_screenState extends State<preview_screen> {
     mainpage_final_data.adsList.clear();
     mainpage_final_data.typeList.clear();
     mainpage_final_data.topProduct.clear();
+    mainpage_final_data.directory_list.clear();
+    mainpage_final_data.directory_id_list.clear();
     setState(() {
       loading1 = true;
       loading2 = true;
@@ -41,9 +43,9 @@ class _preview_screenState extends State<preview_screen> {
     mainpage_final_data.adsList = await MainPageController.getAdsData();
     setState(() {loading1 = false;});
     mainpage_final_data.typeList = await MainPageController.getProductType();
-    setState(() {loading2 = false;});
+    // setState(() {loading2 = false;});
     mainpage_final_data.topProduct = await MainPageController.getTopProduct();
-    setState(() {loading3 = false;});
+    // setState(() {loading3 = false;});
     mainpage_final_data.directory_id_list = await MainPageController.getDirectoryUi();
     mainpage_final_data.directory_list.clear();
     for (int i = 0; i < mainpage_final_data.directory_id_list.length; i++) {
@@ -96,32 +98,6 @@ class _preview_screenState extends State<preview_screen> {
 
                     SizedBox(height: 15,),
 
-                    Container(
-                      alignment: Alignment.center,
-                      child: Text(
-                        'Want to use more features ?',
-                        style: TextStyle(
-                          fontFamily: 'rale',
-                          fontSize: width/28,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-
-                    SizedBox(height: 10,),
-
-                    Padding(
-                      padding: EdgeInsets.only(left: 15, right: 15),
-                      child: normal_button(backgroundColor: Color.fromARGB(255, 0, 76, 255), overlayColor: Color.fromARGB(255, 0, 0, 0).withOpacity(0.1), borderRadius: 10, content: "Use your account now !", contentColor: Colors.white, padding: 0,
-                        event: () {
-                          generalController.changeScreenFade(context, welcome_screen());
-                        },
-                      ),
-                    ),
-
-                    SizedBox(height: 15,),
-
                     product_type_area(),
 
                     SizedBox(height: 25,),
@@ -138,7 +114,7 @@ class _preview_screenState extends State<preview_screen> {
                         itemBuilder: (context, index) {
                           return Padding(
                             padding: EdgeInsets.only(bottom: 25),
-                            child: product_directory_area(productDirectory: mainpage_final_data.directory_list[index], current: preview_screen(),),
+                            child: product_directory_area(productDirectory: mainpage_final_data.directory_list[index], current: main_screen(),),
                           );
                         },
                       ),

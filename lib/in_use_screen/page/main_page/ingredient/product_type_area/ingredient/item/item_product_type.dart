@@ -5,6 +5,7 @@ import 'dart:typed_data';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:destinymain/data/product/ProductType.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
 class item_product_type extends StatefulWidget {
   final ProductType productType;
@@ -15,6 +16,14 @@ class item_product_type extends StatefulWidget {
 }
 
 class _item_product_typeState extends State<item_product_type> {
+  late Uint8List image;
+
+  @override
+  void initState() {
+    image = Uint8List.fromList(base64Decode(widget.productType.image));
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = (MediaQuery.of(context).size.width - 45)/2;
@@ -39,7 +48,7 @@ class _item_product_typeState extends State<item_product_type> {
             top: 5,
             left: 5,
             right: 5,
-            child: Container(
+            child: image != null ? Container(
               height: width - 10,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(9),
@@ -49,7 +58,18 @@ class _item_product_typeState extends State<item_product_type> {
                 padding: EdgeInsets.all(0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  child: Image.memory(Uint8List.fromList(base64Decode(widget.productType.image)), fit: BoxFit.cover,),
+                  child: Image.memory(image, fit: BoxFit.cover,),
+                ),
+              ),
+            ) : Shimmer.fromColors(
+              baseColor: Colors.black,
+              highlightColor: Colors.white,
+              enabled: true,
+              child: Container(
+                height: width - 10,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(9),
+                  color: Colors.black.withOpacity(0.04),
                 ),
               ),
             ),

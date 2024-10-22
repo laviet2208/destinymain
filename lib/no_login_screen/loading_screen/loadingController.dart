@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+import 'controller.dart';
+
 class loading_screen extends StatefulWidget {
   const loading_screen({super.key});
 
@@ -13,6 +15,7 @@ class _loading_screenState extends State<loading_screen> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    loadingController.isLoginWeb(context);
     return WillPopScope(
       child: Scaffold(
         body: Container(

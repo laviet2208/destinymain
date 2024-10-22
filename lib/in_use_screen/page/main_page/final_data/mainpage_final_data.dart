@@ -9,4 +9,5 @@ class mainpage_final_data {
   static List<Product> topProduct = [];
   static List<String> directory_id_list = [];
   static List<ProductDirectory> directory_list = [];
+  static int number_open = -1;
 }

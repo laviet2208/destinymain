@@ -7,7 +7,8 @@ import 'controller/ProductDirectoryController.dart';
 
 class product_directory_area extends StatefulWidget {
   final ProductDirectory productDirectory;
-  const product_directory_area({super.key, required this.productDirectory});
+  final Widget current;
+  const product_directory_area({super.key, required this.productDirectory, required this.current});
 
   @override
   State<product_directory_area> createState() => _product_directory_areaState();
@@ -58,7 +59,7 @@ class _product_directory_areaState extends State<product_directory_area> {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: EdgeInsets.only(right: 15),
-                  child: horizontal_product_item(product: productList[index]),
+                  child: horizontal_product_item(product: productList[index], current: widget.current,),
                 );
               },
             ),

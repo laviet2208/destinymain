@@ -1,3 +1,5 @@
+import 'package:destinymain/general_ingredient/generalController.dart';
+import 'package:destinymain/in_use_screen/view_all_screen/view_all_type_screen/view_all_type_screen.dart';
 import 'package:flutter/material.dart';
 
 class product_type_title extends StatelessWidget {
@@ -62,7 +64,7 @@ class product_type_title extends StatelessWidget {
               ),
             ),
             onTap: () {
-
+              generalController.changeScreenFade(context, view_all_type_screen());
             },
           ),
         ],
