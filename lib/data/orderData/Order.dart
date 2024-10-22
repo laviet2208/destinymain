@@ -1,5 +1,5 @@
 import '../cartData/CartData.dart';
-import '../otherdata/Time.dart';
+import '../otherData/Time.dart';
 import '../voucherData/Voucher.dart';
 import 'Receiver.dart';
 

@@ -1,7 +1,9 @@
 import 'package:destinymain/in_use_screen/page/main_page/main_page.dart';
+import 'package:destinymain/in_use_screen/voucher_page/voucher_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../data/finalData.dart';
+import '../page/cart_page/cart_page.dart';
 
 class main_screen extends StatefulWidget {
   const main_screen({super.key});
@@ -19,13 +21,13 @@ class _main_screenState extends State<main_screen> {
 
     }
     if (index == 2) {
-
+      return cart_page();
     }
     if (index == 3) {
 
     }
     if (index == 4) {
-
+      return voucher_page();
     }
     return Container();
   }
@@ -73,7 +75,7 @@ class _main_screenState extends State<main_screen> {
                 destinations: [
                   NavigationDestination(icon: Icon(Icons.home_outlined, color: finalData.currentPage == 0 ? Colors.black : Colors.black, size: 22,), label: 'Home',),
                   NavigationDestination(icon: Icon(Icons.account_circle_outlined, color: finalData.currentPage == 1 ? Colors.black : Colors.black, size: 22,), label: 'Account',),
-                  NavigationDestination(icon: Icon(Icons.search, color: finalData.currentPage == 2 ? Colors.black : Colors.black, size: 22,), label: 'Notice',),
+                  NavigationDestination(icon: Icon(Icons.add_shopping_cart, color: finalData.currentPage == 2 ? Colors.black : Colors.black, size: 22,), label: 'Cart',),
                   NavigationDestination(icon: Icon(Icons.notifications_none, color: finalData.currentPage == 3 ? Colors.black : Colors.black, size: 22,), label: 'Cart',),
                   NavigationDestination(icon: Icon(Icons.discount_outlined), label: 'Favourite',),
                 ],

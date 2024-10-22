@@ -1,4 +1,4 @@
-import '../otherdata/Time.dart';
+import '../otherData/Time.dart';
 import '../voucherData/UserUse.dart';
 
 class Voucher {

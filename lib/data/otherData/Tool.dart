@@ -1,6 +1,10 @@
 import 'dart:math';
 import 'package:destinymain/data/product/Dimension.dart';
 
+import '../cartData/CartData.dart';
+import '../finalData.dart';
+import '../orderData/Order.dart';
+import '../voucherData/Voucher.dart';
 import 'Time.dart';
 
 Time getCurrentTime() {
@@ -49,30 +53,38 @@ int calculateDiscountPercentage(double originalPrice, double discountedPrice) {
   return discount.round();
 }
 
+double calculatetotalMoney() {
+  double cost = 0;
+  for (Cartdata cartdata in finalData.cartList) {
+    cost = cost + cartdata.dimension.cost * cartdata.number;
+  }
+  return cost;
+}
+
 // double calculatetotalMoney(Order order) {
 //   double cost = 0;
 //   for (Cartdata cartdata in order.productList) {
-//     cost = cost + cartdata.product.cost * cartdata.number;
+//     cost = cost + cartdata.dimension.cost * cartdata.number;
 //   }
 //   return cost;
 // }
 //
-// double getVoucherSale(Voucher voucher, double cost) {
-//   double money = 0;
-//
-//   if(voucher.Money < 100) {
-//     double mn = cost * voucher.Money/100;
-//     if (mn <= voucher.maxSale) {
-//       money = mn;
-//     } else {
-//       money = voucher.maxSale;
-//     }
-//   } else {
-//     money = voucher.Money;
-//   }
-//
-//   return money;
-// }
+double getVoucherSale(Voucher voucher, double cost) {
+  double money = 0;
+
+  if(voucher.Money < 100) {
+    double mn = cost * voucher.Money/100;
+    if (mn <= voucher.maxSale) {
+      money = mn;
+    } else {
+      money = voucher.maxSale;
+    }
+  } else {
+    money = voucher.Money;
+  }
+
+  return money;
+}
 
 String generateID(int count) {
   final character = "0123456789";
