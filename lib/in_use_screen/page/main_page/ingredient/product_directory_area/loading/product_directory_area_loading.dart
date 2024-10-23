@@ -1,3 +1,4 @@
+import 'package:destinymain/general_ingredient/product_item/horizontal_product_item_loading.dart';
 import 'package:destinymain/in_use_screen/page/main_page/ingredient/product_directory_area/loading/product_directory_title_loading.dart';
 import 'package:flutter/material.dart';
 
@@ -29,7 +30,7 @@ class product_directory_area_loading extends StatelessWidget {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: EdgeInsets.only(right: 15),
-                  child: Container(),
+                  child: horizontal_product_item_loading(),
                 );
               },
             ),

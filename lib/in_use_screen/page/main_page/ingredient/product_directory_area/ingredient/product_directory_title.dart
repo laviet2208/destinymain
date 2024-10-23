@@ -1,4 +1,6 @@
 import 'package:destinymain/data/product/ProductDirectory.dart';
+import 'package:destinymain/general_ingredient/generalController.dart';
+import 'package:destinymain/in_use_screen/view_all_screen/view_all_product_indirectory/view_all_product_indirectory.dart';
 import 'package:flutter/material.dart';
 
 class product_directory_title extends StatelessWidget {
@@ -68,7 +70,7 @@ class product_directory_title extends StatelessWidget {
               ),
             ),
             onTap: () {
-
+              generalController.changeScreenFade(context, view_all_product_indirectory(productDirectory: productDirectory));
             },
           ),
         ],

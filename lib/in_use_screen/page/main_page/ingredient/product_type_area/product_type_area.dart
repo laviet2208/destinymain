@@ -1,7 +1,10 @@
+import 'package:destinymain/general_ingredient/generalController.dart';
+import 'package:destinymain/in_use_screen/main_screen/main_screen.dart';
 import 'package:destinymain/in_use_screen/page/main_page/final_data/mainpage_final_data.dart';
 import 'package:destinymain/in_use_screen/page/main_page/ingredient/product_type_area/ingredient/item/item_product_type.dart';
 import 'package:destinymain/in_use_screen/page/main_page/ingredient/product_type_area/ingredient/item/item_product_type_loading.dart';
 import 'package:destinymain/in_use_screen/page/main_page/ingredient/product_type_area/ingredient/product_type_title.dart';
+import 'package:destinymain/in_use_screen/view_all_screen/view_all_product_in_type/view_all_product_in_type.dart';
 import 'package:flutter/material.dart';
 
 class product_type_area extends StatelessWidget {
@@ -39,6 +42,9 @@ class product_type_area extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     child: item_product_type(productType: mainpage_final_data.typeList[index]),
+                    onTap: () {
+                      generalController.changeScreenFade(context, view_all_product_in_type(productType: mainpage_final_data.typeList[index], beforeWidget: main_screen()));
+                    },
                   );
                 },
               ),

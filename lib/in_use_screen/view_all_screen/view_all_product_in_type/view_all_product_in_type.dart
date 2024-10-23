@@ -1,44 +1,44 @@
-import 'package:destinymain/data/finalData.dart';
-import 'package:destinymain/general_ingredient/generalController.dart';
-import 'package:destinymain/in_use_screen/main_screen/main_screen.dart';
-import 'package:destinymain/in_use_screen/page/main_page/controller/MainPageController.dart';
-import 'package:destinymain/in_use_screen/view_all_screen/view_all_type_screen/view_all_type_appbar.dart';
-import 'package:destinymain/no_login_screen/preview_screen/preview_screen.dart';
+import 'package:destinymain/data/product/ProductType.dart';
+import 'package:destinymain/in_use_screen/view_all_screen/view_all_product_in_type/view_all_in_type_appbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-import '../../../data/product/ProductType.dart';
-import '../../page/main_page/final_data/mainpage_final_data.dart';
-import '../../page/main_page/ingredient/product_type_area/ingredient/item/item_product_type.dart';
-import '../../page/main_page/ingredient/product_type_area/ingredient/item/item_product_type_loading.dart';
-import '../view_all_product_in_type/view_all_product_in_type.dart';
+import '../../../data/finalData.dart';
+import '../../../data/product/Product.dart';
+import '../../../general_ingredient/generalController.dart';
+import '../../../general_ingredient/product_item/horizontal_product_item.dart';
+import '../../../general_ingredient/product_item/horizontal_product_item_loading.dart';
+import '../../../no_login_screen/preview_screen/preview_screen.dart';
+import '../view_all_product_indirectory/viewAllProductController.dart';
 
-class view_all_type_screen extends StatefulWidget {
-  const view_all_type_screen({super.key});
+class view_all_product_in_type extends StatefulWidget {
+  final ProductType productType;
+  final Widget beforeWidget;
+  const view_all_product_in_type({super.key, required this.productType, required this.beforeWidget});
 
   @override
-  State<view_all_type_screen> createState() => _view_all_type_screenState();
+  State<view_all_product_in_type> createState() => _view_all_product_in_typeState();
 }
 
-class _view_all_type_screenState extends State<view_all_type_screen> {
-  List<ProductType> typeList = [];
+class _view_all_product_in_typeState extends State<view_all_product_in_type> {
+  List<Product> productList = [];
   bool loading = false;
-
   Future<void> _refresh() async {
     setState(() {
       loading = true;
     });
-    typeList = await MainPageController.getAllProductType();
+    productList = await viewAllProductController.get_product_list_by_type_id(widget.productType.id, () {setState(() {loading = false;});});
     setState(() {
-      loading = false;
+
     });
   }
 
   @override
   void initState() {
-    _refresh();
+    // TODO: implement initState
     super.initState();
+    _refresh();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +74,7 @@ class _view_all_type_screenState extends State<view_all_type_screen> {
               child: Scaffold(
                 appBar: AppBar(
                   backgroundColor: Colors.transparent,
-                  title: view_all_type_appbar(),
+                  title: view_all_in_type_appbar(name: widget.productType.name, beforeWidget: widget.beforeWidget,),
                 ),
                 backgroundColor: Colors.transparent,
                 body: !loading ? RefreshIndicator(
@@ -84,7 +84,7 @@ class _view_all_type_screenState extends State<view_all_type_screen> {
                       Container(
                         child: Padding(
                           padding: EdgeInsets.only(left: 15, right: 15,),
-                          child: typeList.isNotEmpty ? Container(
+                          child: productList.isNotEmpty ? Container(
                             child: GridView.builder(
                               shrinkWrap: true,
                               physics: NeverScrollableScrollPhysics(),
@@ -92,22 +92,19 @@ class _view_all_type_screenState extends State<view_all_type_screen> {
                                 crossAxisCount: 2, // số phần tử trên mỗi hàng
                                 mainAxisSpacing: 8, // khoảng cách giữa các hàng
                                 crossAxisSpacing: 15, // khoảng cách giữa các cột
-                                childAspectRatio: 165/192,
+                                childAspectRatio: ((width - 45)/2)/(((width - 45)/2)/2*3 + 20),
                               ),
-                              itemCount: typeList.length,
+                              itemCount: productList.length,
                               itemBuilder: (context, index) {
                                 return GestureDetector(
-                                  child: item_product_type(productType: typeList[index]),
-                                  onTap: () {
-                                    generalController.changeScreenFade(context, view_all_product_in_type(productType: mainpage_final_data.typeList[index], beforeWidget: widget));
-                                  },
+                                  child: horizontal_product_item(product: productList[index], current: widget),
                                 );
                               },
                             ),
                           ) : Container(
                             alignment: Alignment.center,
                             child: Text(
-                              'There are no categories here.',
+                              'There are no products here.',
                               style: TextStyle(
                                 fontSize: width/25,
                                 fontFamily: 'rale',
@@ -118,6 +115,8 @@ class _view_all_type_screenState extends State<view_all_type_screen> {
                           ),
                         ),
                       ),
+
+                      SizedBox(height: 20,)
                     ],
                   ),
                   onRefresh: _refresh,
@@ -130,12 +129,12 @@ class _view_all_type_screenState extends State<view_all_type_screen> {
                       crossAxisCount: 2, // số phần tử trên mỗi hàng
                       mainAxisSpacing: 8, // khoảng cách giữa các hàng
                       crossAxisSpacing: 15, // khoảng cách giữa các cột
-                      childAspectRatio: 165/192,
+                      childAspectRatio: ((width - 45)/2)/(((width - 45)/2)/2*3 + 20),
                     ),
-                    itemCount: 6,
+                    itemCount: 8,
                     itemBuilder: (context, index) {
                       return GestureDetector(
-                        child: item_product_type_loading(),
+                        child: horizontal_product_item_loading(),
                       );
                     },
                   ),
@@ -147,9 +146,9 @@ class _view_all_type_screenState extends State<view_all_type_screen> {
       ),
       onWillPop: () async {
         if (finalData.account.id != '') {
-          generalController.changeScreenSlide(context, main_screen());
+          generalController.changeScreenFade(context, widget.beforeWidget);
         } else {
-          generalController.changeScreenSlide(context, preview_screen());
+          generalController.changeScreenFade(context, preview_screen());
         }
         return false;
       },
