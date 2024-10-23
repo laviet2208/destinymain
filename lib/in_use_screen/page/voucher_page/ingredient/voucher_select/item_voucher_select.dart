@@ -115,7 +115,7 @@ class item_voucher_select extends StatelessWidget {
               height: 15,
               alignment: Alignment.centerLeft,
               child: AutoSizeText(
-                'Applicable for orders from ' + getStringNumber(voucher.mincost) + 'đ',
+                'Applicable for orders from ' + getStringNumber(voucher.mincost) + '.USDT',
                 style: TextStyle(
                     fontFamily: 'roboto',
                     fontSize: 200,
@@ -136,7 +136,7 @@ class item_voucher_select extends StatelessWidget {
               height: 15,
               alignment: Alignment.centerLeft,
               child: AutoSizeText(
-                'Discount on orders ' + getStringNumber(voucher.Money) + (voucher.type == 0 ? '%' : 'đ') + (voucher.type == 0 ? ' , max ' + getStringNumber(voucher.maxSale) + 'đ' : ''),
+                'Discount on orders ' + getStringNumber(voucher.Money) + (voucher.type == 0 ? '%' : '.USDT') + (voucher.type == 0 ? ' , max ' + getStringNumber(voucher.maxSale) + '.USDT' : ''),
                 style: TextStyle(
                     fontFamily: 'roboto',
                     fontSize: 200,

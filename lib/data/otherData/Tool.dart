@@ -72,7 +72,7 @@ double calculatetotalMoney() {
 double getVoucherSale(Voucher voucher, double cost) {
   double money = 0;
 
-  if(voucher.Money < 100) {
+  if(voucher.maxSale != 0) {
     double mn = cost * voucher.Money/100;
     if (mn <= voucher.maxSale) {
       money = mn;
@@ -136,6 +136,9 @@ String getDiscountPercentRange(List<Dimension> list) {
       rangeString = firstPercent.toString() + '-' + lastPercent.toString();
     } else {
       rangeString = lastPercent.toString() + '-' + firstPercent.toString();
+    }
+    if (firstPercent == lastPercent) {
+      rangeString = lastPercent.toString();
     }
   }
   if (firstPercent != 0 && lastPercent == 0) {

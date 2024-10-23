@@ -1,3 +1,4 @@
+import 'package:destinymain/general_ingredient/utils/utils.dart';
 import 'package:flutter/material.dart';
 import '../../../../data/otherData/Tool.dart';
 import '../../../../data/voucherData/Voucher.dart';
@@ -37,10 +38,10 @@ class voucher_item extends StatelessWidget {
                     width: (width - 30)/3,
                     height: (width - 30)/3,
                     decoration: BoxDecoration(
-                      // image: DecorationImage(
-                      //   fit: BoxFit.cover,
-                      //   image: AssetImage('assets/image/logo/mainlogo.png')
-                      // )
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage('assets/image/logo/mainlogo.png')
+                      )
                     ),
                   ),
 
@@ -140,7 +141,10 @@ class voucher_item extends StatelessWidget {
                                       size: 15,
                                     ),
                                   ),
-                                )
+                                  onTap: () {
+                                    toastMessage('Copy: ' + voucher.id);
+                                  },
+                                ),
                               ],
                             )
                           ),

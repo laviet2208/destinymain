@@ -1,7 +1,6 @@
-import 'package:destinymain/in_use_screen/voucher_page/ingredient/voucher_individual_item.dart';
 import 'package:flutter/material.dart';
-
-import '../../../data/finalData.dart';
+import '../../../../data/finalData.dart';
+import 'voucher_individual_item.dart';
 
 class individual_voucher_page extends StatefulWidget {
   const individual_voucher_page({super.key});

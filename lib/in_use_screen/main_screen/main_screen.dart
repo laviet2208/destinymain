@@ -1,9 +1,12 @@
+import 'package:destinymain/in_use_screen/account_page/account_page.dart';
 import 'package:destinymain/in_use_screen/page/main_page/main_page.dart';
-import 'package:destinymain/in_use_screen/voucher_page/voucher_page.dart';
+import 'package:destinymain/in_use_screen/page/notice_page/notice_page.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-
+import '../../data/Account/Account.dart';
 import '../../data/finalData.dart';
 import '../page/cart_page/cart_page.dart';
+import '../page/voucher_page/voucher_page.dart';
 
 class main_screen extends StatefulWidget {
   const main_screen({super.key});
@@ -18,18 +21,33 @@ class _main_screenState extends State<main_screen> {
       return main_page();
     }
     if (index == 1) {
-
+      return account_page(event: () { setState(() {}); },);
     }
     if (index == 2) {
       return cart_page();
     }
     if (index == 3) {
-
+      return notice_page();
     }
     if (index == 4) {
       return voucher_page();
     }
     return Container();
+  }
+
+  void get_account_data() {
+    final reference = FirebaseDatabase.instance.ref();
+    reference.child("Account").child(finalData.account.id).onValue.listen((event) {
+      final dynamic data = event.snapshot.value;
+      finalData.account = Account.fromJson(data);
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    get_account_data();
   }
 
   @override

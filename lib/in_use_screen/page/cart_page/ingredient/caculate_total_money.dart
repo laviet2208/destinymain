@@ -1,3 +1,4 @@
+import 'package:destinymain/in_use_screen/main_screen/main_screen.dart';
 import 'package:flutter/material.dart';
 import '../../../../data/finalData.dart';
 import '../../../../data/orderData/Order.dart';
@@ -5,6 +6,8 @@ import '../../../../data/orderData/Receiver.dart';
 import '../../../../data/otherData/Tool.dart';
 import '../../../../data/voucherData/Voucher.dart';
 import '../../../../general_ingredient/utils/utils.dart';
+import '../../voucher_page/ingredient/voucher_select/voucher_select.dart';
+import '../check_out/check_out_screen.dart';
 import 'cost_text_line.dart';
 
 class caculate_total_money extends StatefulWidget {
@@ -49,18 +52,18 @@ class _caculate_total_moneyState extends State<caculate_total_money> {
                 if (finalData.cartList.length == 0) {
                   toastMessage('Your cart is emty');
                 } else {
-                  // showModalBottomSheet(
-                  //   context: context,
-                  //   backgroundColor: Colors.white,
-                  //   barrierColor: Colors.white,
-                  //   builder: (context) {
-                  //     return voucher_select(voucher: widget.voucher, ontap: () {
-                  //       setState(() {
-                  //
-                  //       });
-                  //     }, cost: calculatetotalMoney());
-                  //   },
-                  // );
+                  showModalBottomSheet(
+                    context: context,
+                    backgroundColor: Colors.white,
+                    barrierColor: Colors.white,
+                    builder: (context) {
+                      return voucher_select(voucher: widget.voucher, ontap: () {
+                        setState(() {
+
+                        });
+                      }, cost: calculatetotalMoney());
+                    },
+                  );
                 }
               },
             ),
@@ -95,7 +98,7 @@ class _caculate_total_moneyState extends State<caculate_total_money> {
                       order.voucher = widget.voucher;
                       order.receiver.name = finalData.account.firstName + ' ' + finalData.account.lastName;
                       order.receiver.phoneNumber = finalData.account.phoneNum;
-                      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => check_out_screen(order: order, beforewidget: cart_screen(beforeWidget: main_screen()),)),);
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => check_out_screen(order: order, beforewidget: main_screen(),)),);
                     } else {
                       toastMessage('Your cart is empty');
                     }

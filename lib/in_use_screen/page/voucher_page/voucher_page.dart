@@ -36,6 +36,9 @@ class _voucher_pageState extends State<voucher_page> with SingleTickerProviderSt
     return Scaffold(
       body: Scaffold(
         body: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+          ),
           child: Stack(
             children: <Widget>[
               Positioned(

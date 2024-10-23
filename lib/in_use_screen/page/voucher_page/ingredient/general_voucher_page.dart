@@ -28,7 +28,7 @@ class _general_voucher_pageState extends State<general_voucher_page> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    // _refresh();
+    _refresh();
   }
 
   @override
