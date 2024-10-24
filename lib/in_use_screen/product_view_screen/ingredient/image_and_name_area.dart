@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:typed_data';
+import 'package:destinymain/data/finalData.dart';
 import 'package:destinymain/data/product/Product.dart';
 import 'package:flutter/material.dart';
 import '../../../data/otherData/Tool.dart';
@@ -69,7 +70,11 @@ class _image_and_name_areaState extends State<image_and_name_area> {
                   left: 5,
                   child: IconButton(
                     onPressed: () {
-                      generalController.changeScreenSlide(context, widget.previousWidget);
+                      if (finalData.account.id == '') {
+
+                      } else {
+                        generalController.changeScreenSlide(context, widget.previousWidget);
+                      }
                     },
                     style: ButtonStyle(
                       backgroundColor: WidgetStatePropertyAll<Color>(Colors.white),

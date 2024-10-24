@@ -64,7 +64,7 @@ class _chatRoomScreenState extends State<chatRoomScreen> {
           leading: IconButton(
             icon: Icon(Icons.arrow_back_ios_new_outlined, color: Colors.blueGrey,),
             onPressed: () {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => main_screen(),),);
+              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (BuildContext context) => main_screen(),),(route) => false,);
             },
           ),
           title: Row(
@@ -77,7 +77,7 @@ class _chatRoomScreenState extends State<chatRoomScreen> {
                     child: Container(
                       alignment: Alignment.centerLeft,
                       child: AutoSizeText(
-                        'Buy Smart Support',
+                        'Destiny USA Support',
                         style: TextStyle(
                           fontFamily: 'muli',
                           fontSize: 100,
@@ -201,7 +201,7 @@ class _chatRoomScreenState extends State<chatRoomScreen> {
         ),
       ),
       onWillPop: () async {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => main_screen()));
+        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (BuildContext context) => main_screen(),),(route) => false,);
         return true;
       },
     );

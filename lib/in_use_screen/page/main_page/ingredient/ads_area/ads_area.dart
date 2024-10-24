@@ -1,9 +1,17 @@
 import 'dart:convert';
 import 'dart:typed_data';
+import 'package:destinymain/data/finalData.dart';
+import 'package:destinymain/general_ingredient/generalController.dart';
+import 'package:destinymain/general_ingredient/utils/utils.dart';
+import 'package:destinymain/in_use_screen/main_screen/main_screen.dart';
 import 'package:destinymain/in_use_screen/page/main_page/final_data/mainpage_final_data.dart';
+import 'package:destinymain/in_use_screen/product_view_screen/product_view_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
+
+import '../../../../../data/product/Product.dart';
+import '../top_product_area/topProductController.dart';
 
 class ads_area extends StatefulWidget {
   const ads_area({super.key});
@@ -16,6 +24,7 @@ class _ads_areaState extends State<ads_area> {
   int currentIndex = 0;
   List<Uint8List> imageList = [];
   late PageController _controller;
+  bool loading = false;
   @override
   void initState() {
     _controller = PageController(initialPage: 0);
@@ -61,13 +70,43 @@ class _ads_areaState extends State<ads_area> {
                       },
                       itemCount: imageList.length,
                       itemBuilder: (context, index) {
-                        return Container(
-                          width: width - 30,
-                          height: (width - 30)/2,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: Image.memory(imageList[index]),
+                        return GestureDetector(
+                          child: Container(
+                            width: width - 30,
+                            height: (width - 30)/2,
+                            alignment: Alignment.center,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Image.memory(imageList[index]),
+                            ),
                           ),
+                          onTap: () async {
+                            if (mainpage_final_data.adsList[index].productId == '') {
+                              toastMessage('This ads is not have product to go!');
+                            } else {
+                              if (finalData.isComplete) {
+                                List<Product> proList = finalData.allProductList.where((x) => x.id == mainpage_final_data.adsList[index].id).toList();
+                                if (proList.isEmpty) {
+                                  toastMessage('This ads is not have product to go!');
+                                } else {
+                                  generalController.changeScreenFade(context, product_view_screen(product: proList.first, previousWidget: main_screen()));
+                                }
+                              } else {
+                                setState(() {
+                                  loading = true;
+                                });
+                                Product productS = await topProductController.getProductById(mainpage_final_data.adsList[index].id);
+                                setState(() {
+                                  loading = false;
+                                });
+                                if (productS.id != '') {
+                                  generalController.changeScreenFade(context, product_view_screen(product: productS, previousWidget: main_screen()));
+                                } else {
+                                  toastMessage('This ads is not have product to go!');
+                                }
+                              }
+                            }
+                          },
                         );
                       },
                     ),

@@ -61,6 +61,14 @@ double calculatetotalMoney() {
   return cost;
 }
 
+double calculatetotalOrderMoney(Order order) {
+  double cost = 0;
+  for (Cartdata cartdata in order.productList) {
+    cost = cost + cartdata.dimension.cost * cartdata.number;
+  }
+  return cost;
+}
+
 // double calculatetotalMoney(Order order) {
 //   double cost = 0;
 //   for (Cartdata cartdata in order.productList) {

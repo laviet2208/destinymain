@@ -24,13 +24,20 @@ class _view_all_product_indirectoryState extends State<view_all_product_indirect
   List<Product> productList = [];
   bool loading = false;
   Future<void> _refresh() async {
-    setState(() {
-      loading = true;
-    });
-    productList = await viewAllProductController.get_product_list_by_direct_id(widget.productDirectory.id, () {setState(() {loading = false;});});
-    setState(() {
+    if (finalData.isComplete) {
+      productList = finalData.allProductList.where((x) => x.productDirectory == widget.productDirectory.id).toList();
+      setState(() {
 
-    });
+      });
+    } else {
+      setState(() {
+        loading = true;
+      });
+      productList = await viewAllProductController.get_product_list_by_direct_id(widget.productDirectory.id, () {setState(() {loading = false;});});
+      setState(() {
+
+      });
+    }
   }
 
   @override

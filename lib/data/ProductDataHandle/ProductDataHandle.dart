@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:destinymain/data/finalData.dart';
 import 'package:destinymain/data/product/Product.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -52,11 +53,12 @@ class ProductDataHandle {
     DatabaseEvent snapshot = await reference.child("productList").orderByChild('showStatus').equalTo(1).once();
     final dynamic data = snapshot.snapshot.value;
     if (data != null) {
-      List<Product> dataList = [];
+      finalData.allProductList.clear();
       data.forEach((key, value) {
-        dataList.add(Product.fromJson(value));
+        finalData.allProductList.add(Product.fromJson(value));
       });
-      await WriteStringDataList('productList', dataList.map((product) => jsonEncode(product.toJsonString())).toList());
+      finalData.isComplete = true;
+      // await WriteStringDataList('productList', dataList.map((product) => jsonEncode(product.toJsonString())).toList());
       print('Đã lưu xong data');
     }
 

@@ -1,11 +1,14 @@
-import 'dart:convert';
-import 'dart:typed_data';
-
 import 'package:destinymain/in_use_screen/page/main_page/final_data/mainpage_final_data.dart';
 import 'package:destinymain/in_use_screen/page/main_page/ingredient/top_product_area/ingredient/top_product_item/top_product_item.dart';
 import 'package:destinymain/in_use_screen/page/main_page/ingredient/top_product_area/ingredient/top_product_item/top_product_item_loading.dart';
 import 'package:destinymain/in_use_screen/page/main_page/ingredient/top_product_area/ingredient/top_product_title.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../data/product/Product.dart';
+import '../../../../../general_ingredient/generalController.dart';
+import '../../../../main_screen/main_screen.dart';
+import '../../../../product_view_screen/product_view_screen.dart';
+import 'topProductController.dart';
 
 class top_product_area extends StatelessWidget {
   const top_product_area({super.key});

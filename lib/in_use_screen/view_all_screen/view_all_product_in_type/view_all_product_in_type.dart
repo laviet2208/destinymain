@@ -23,13 +23,20 @@ class _view_all_product_in_typeState extends State<view_all_product_in_type> {
   List<Product> productList = [];
   bool loading = false;
   Future<void> _refresh() async {
-    setState(() {
-      loading = true;
-    });
-    productList = await viewAllProductController.get_product_list_by_type_id(widget.productType.id, () {setState(() {loading = false;});});
-    setState(() {
+    if (finalData.isComplete) {
+      productList = finalData.allProductList.where((x) => x.productType == widget.productType.id).toList();
+      setState(() {
 
-    });
+      });
+    } else {
+      setState(() {
+        loading = true;
+      });
+      productList = await viewAllProductController.get_product_list_by_type_id(widget.productType.id, () {setState(() {loading = false;});});
+      setState(() {
+
+      });
+    }
   }
 
   @override

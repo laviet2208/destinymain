@@ -23,6 +23,7 @@ Future<void> main() async {
     //     measurementId: "G-B7X16QF6RK"
     //   ),
   );
+  await ProductDataHandle.getAllProductFB();
   // if (await ProductDataHandle.CheckIfFirstTimeEnter()) {
   //   ProductDataHandle.getAllProductFB();
   // } else {

@@ -3,12 +3,18 @@ import 'package:destinymain/general_ingredient/generalController.dart';
 import 'package:destinymain/in_use_screen/account_page/account_info_screen/account_info_screen.dart';
 import 'package:destinymain/in_use_screen/account_page/ingredient/account_page_appbar.dart';
 import 'package:destinymain/in_use_screen/account_page/ingredient/feature_button.dart';
+import 'package:destinymain/in_use_screen/history_order/history_order_screen.dart';
 import 'package:destinymain/in_use_screen/wallet_info/wallet_info.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import '../../data/chatData/chatRoom.dart';
+import '../../data/chatData/messenger.dart';
 import '../../general_ingredient/utils/utils.dart';
 import '../../no_login_screen/loading_screen/loadingController.dart';
+import '../chat_room/chat_room.dart';
 
 class account_page extends StatefulWidget {
   final VoidCallback event;
@@ -19,6 +25,28 @@ class account_page extends StatefulWidget {
 }
 
 class _account_pageState extends State<account_page> {
+  bool loading = false;
+  chatRoom room = chatRoom(account: finalData.account, messengerList: []);
+  Future<void> getChatRoom() async {
+    final reference = FirebaseDatabase.instance.ref();
+    await reference.child("Chatrooms").child(finalData.account.id).onValue.listen((event) async {
+      final dynamic Chatrooms = event.snapshot.value;
+      if(Chatrooms != null) {
+        room = chatRoom.fromJson(Chatrooms);
+        await pushChatRooms(room);
+      } else {
+        room = chatRoom(account: finalData.account, messengerList: []);
+        room.messengerList.add(messenger(type: 2, content: "Hello, this is Destiny USA's customer service department, how can we help you?"));
+        await pushChatRooms(room);
+      }
+    });
+  }
+
+  Future<void> pushChatRooms(chatRoom room) async {
+    final reference = FirebaseDatabase.instance.ref();
+    await reference.child("Chatrooms").child(finalData.account.id).set(room.toJson());
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -117,7 +145,7 @@ class _account_pageState extends State<account_page> {
 
                       Padding(
                         padding: EdgeInsets.only(left: 20, right: 20),
-                        child: feature_button(iconData: Icons.history, title: 'History orders', event: () {  },),
+                        child: feature_button(iconData: Icons.history, title: 'History orders', event: () { generalController.changeScreenSlide(context, history_order_screen()); },),
                       ),
 
                       SizedBox(height: 18,),
@@ -136,7 +164,126 @@ class _account_pageState extends State<account_page> {
 
                       Padding(
                         padding: EdgeInsets.only(left: 20, right: 20),
-                        child: feature_button(iconData: Icons.chat_outlined, title: 'Customer Care', event: () {  },),
+                        child: feature_button(iconData: Icons.chat_outlined, title: 'Customer Care', event: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                insetPadding: EdgeInsets.zero,
+                                contentPadding: EdgeInsets.all(10),
+                                clipBehavior: Clip.antiAliasWithSaveLayer,
+                                content: Container(
+                                  width: width - 80,
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Container(height: 15,),
+
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 15, right: 15),
+                                        child: GestureDetector(
+                                          child: Container(
+                                            height: 40,
+                                            decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(5),
+                                                color: Colors.blueAccent.withOpacity(0.7)
+                                            ),
+                                            child: Padding(
+                                              padding: EdgeInsets.only(top: 5, bottom: 5, right: 10, left: 10),
+                                              child: Container(
+                                                child: Row(
+                                                  children: [
+                                                    Icon(
+                                                      Icons.send,
+                                                      color: Colors.white,
+                                                    ),
+
+                                                    Container(width: 10,),
+
+                                                    Container(
+                                                      alignment: Alignment.centerLeft,
+                                                      child: Text(
+                                                        'Telegram',
+                                                        style: TextStyle(
+                                                            fontFamily: 'roboto',
+                                                            color: Colors.white,
+                                                            fontSize: 15,
+                                                            fontWeight: FontWeight.bold
+                                                        ),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          onTap: () {
+                                            // launch("https://t.me/Buysmart_support");
+                                          },
+                                        ),
+                                      ),
+
+                                      Container(height: 15,),
+
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 15, right: 15),
+                                        child: GestureDetector(
+                                          child: Container(
+                                            height: 40,
+                                            decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(5),
+                                                color: Colors.yellow.shade600
+                                            ),
+                                            child: Padding(
+                                              padding: EdgeInsets.only(top: 5, bottom: 5, right: 10, left: 10),
+                                              child: Container(
+                                                child: Row(
+                                                  children: [
+                                                    !loading ? Icon(
+                                                      Icons.chat_sharp,
+                                                      color: Colors.black,
+                                                    ) : CircularProgressIndicator(color: Colors.black,strokeWidth: 15,),
+
+                                                    Container(width: 10,),
+
+                                                    Container(
+                                                      alignment: Alignment.centerLeft,
+                                                      child: Text(
+                                                        'In-App Support',
+                                                        style: TextStyle(
+                                                            fontFamily: 'roboto',
+                                                            color: Colors.black,
+                                                            fontSize: 15,
+                                                            fontWeight: FontWeight.bold
+                                                        ),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          onTap: () async {
+                                            setState(() {
+                                              loading = false;
+                                            });
+                                            await getChatRoom();
+                                            setState(() {
+                                              loading = false;
+                                            });
+                                            generalController.changeScreenSlide(context, chatRoomScreen());
+                                          },
+                                        ),
+                                      ),
+
+                                      Container(height: 15,),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },),
                       ),
 
                       SizedBox(height: 18,),
