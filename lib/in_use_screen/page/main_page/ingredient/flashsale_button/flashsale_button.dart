@@ -3,6 +3,8 @@ import 'package:destinymain/in_use_screen/flash_sale_area/flash_sale_screen/flas
 import 'package:destinymain/in_use_screen/page/main_page/controller/MainPageController.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../data/finalLanguage.dart';
+
 class flashsale_button extends StatelessWidget {
   const flashsale_button({super.key});
 
@@ -30,7 +32,7 @@ class flashsale_button extends StatelessWidget {
                 context: context,
                 builder: (context) {
                   return AlertDialog(
-                    title: Text("OOPS! Flash sale hasn't started yet, please come back later.", style: TextStyle(fontFamily: 'raleb',fontSize: 15,),),
+                    title: Text(finalLanguage.mainLang.oOPSFlashSaleHasntStartedYet, style: TextStyle(fontFamily: 'raleb',fontSize: 15,),),
                     actions: <Widget>[
                       TextButton(
                         child: Text('Close', style: TextStyle(color: Colors.blueAccent,),),
@@ -59,7 +61,7 @@ class flashsale_button extends StatelessWidget {
                 SizedBox(height: 10,),
 
                 Text(
-                  'Flash Sale! Join now',
+                  finalLanguage.mainLang.flashSaleJointNow,
                   style: TextStyle(
                     fontFamily: 'raleb',
                     color: Colors.white,

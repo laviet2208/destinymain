@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:destinymain/data/finalLanguage.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../data/finaldata.dart';
@@ -18,7 +19,7 @@ class his_order_appbar extends StatelessWidget {
               child: Container(
                 alignment: Alignment.centerLeft,
                 child: AutoSizeText(
-                  'History Order',
+                  finalLanguage.mainLang.historyOrders,
                   style: TextStyle(
                     fontFamily: 'raleb',
                     fontSize: 100,

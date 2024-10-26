@@ -3,6 +3,8 @@ import 'package:destinymain/general_ingredient/generalController.dart';
 import 'package:destinymain/in_use_screen/view_all_screen/view_all_product_indirectory/view_all_product_indirectory.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../../data/finalLanguage.dart';
+
 class product_directory_title extends StatelessWidget {
   final ProductDirectory productDirectory;
   const product_directory_title({super.key, required this.productDirectory});
@@ -42,7 +44,7 @@ class product_directory_title extends StatelessWidget {
                     height: 40,
                     alignment: Alignment.center,
                     child: Text(
-                      'See all',
+                      finalLanguage.mainLang.seeAll,
                       style: TextStyle(
                         fontSize: width/23,
                         fontFamily: 'rale',

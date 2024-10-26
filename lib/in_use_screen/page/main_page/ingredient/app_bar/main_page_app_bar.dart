@@ -4,6 +4,8 @@ import 'package:destinymain/general_ingredient/utils/utils.dart';
 import 'package:destinymain/in_use_screen/search_screen/search_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../data/finalLanguage.dart';
+
 class main_page_app_bar extends StatelessWidget {
   const main_page_app_bar({super.key});
 
@@ -42,7 +44,7 @@ class main_page_app_bar extends StatelessWidget {
                       child: Container(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          'Search',
+                          finalLanguage.mainLang.search,
                           style: TextStyle(
                             fontFamily: 'rale',
                             color: Color.fromARGB(255, 199, 199, 199),

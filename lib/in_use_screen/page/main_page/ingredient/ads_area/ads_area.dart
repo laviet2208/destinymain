@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:destinymain/data/finalData.dart';
+import 'package:destinymain/data/finalLanguage.dart';
 import 'package:destinymain/general_ingredient/generalController.dart';
 import 'package:destinymain/general_ingredient/utils/utils.dart';
 import 'package:destinymain/in_use_screen/main_screen/main_screen.dart';
@@ -82,12 +83,12 @@ class _ads_areaState extends State<ads_area> {
                           ),
                           onTap: () async {
                             if (mainpage_final_data.adsList[index].productId == '') {
-                              toastMessage('This ads is not have product to go!');
+                              toastMessage(finalLanguage.mainLang.thisAdsIsNotHaveProductToGo);
                             } else {
                               if (finalData.isComplete) {
                                 List<Product> proList = finalData.allProductList.where((x) => x.id == mainpage_final_data.adsList[index].id).toList();
                                 if (proList.isEmpty) {
-                                  toastMessage('This ads is not have product to go!');
+                                  toastMessage(finalLanguage.mainLang.thisAdsIsNotHaveProductToGo);
                                 } else {
                                   generalController.changeScreenFade(context, product_view_screen(product: proList.first, previousWidget: main_screen(), type: 1,));
                                 }
@@ -102,7 +103,7 @@ class _ads_areaState extends State<ads_area> {
                                 if (productS.id != '') {
                                   generalController.changeScreenFade(context, product_view_screen(product: productS, previousWidget: main_screen(), type: 1,));
                                 } else {
-                                  toastMessage('This ads is not have product to go!');
+                                  toastMessage(finalLanguage.mainLang.thisAdsIsNotHaveProductToGo);
                                 }
                               }
                             }

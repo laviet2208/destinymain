@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:destinymain/data/finalLanguage.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../data/finaldata.dart';
@@ -43,7 +44,7 @@ class account_info_app_bar extends StatelessWidget {
                   child: Container(
                     width: (width - 40)/2,
                     child: Text(
-                      "Your profile",
+                      finalLanguage.mainLang.yourProfile,
                       maxLines: 2,
                       style: TextStyle(
                         fontFamily: 'raleb',

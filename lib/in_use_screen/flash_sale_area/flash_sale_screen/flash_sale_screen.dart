@@ -1,4 +1,5 @@
 import 'package:destinymain/data/finalData.dart';
+import 'package:destinymain/data/finalLanguage.dart';
 import 'package:destinymain/data/product/Product.dart';
 import 'package:destinymain/general_ingredient/generalController.dart';
 import 'package:destinymain/in_use_screen/flash_sale_area/cart_sale_screen/cart_sale_screen.dart';
@@ -175,7 +176,7 @@ class _flash_sale_screenState extends State<flash_sale_screen> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      feature_flashsale_button(iconData: Icons.add_shopping_cart, text1: 'Flash Sale ', text2: 'Cart', color1: Colors.black, color2: Colors.blue,
+                      feature_flashsale_button(iconData: Icons.add_shopping_cart, text1: 'Flash Sale ', text2: finalLanguage.mainLang.cart, color1: Colors.black, color2: Colors.blue,
                         event: () {
                           generalController.changeScreenSlide(context, cart_sale_screen());
                         },),

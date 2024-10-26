@@ -1,3 +1,4 @@
+import 'package:destinymain/data/finalLanguage.dart';
 import 'package:destinymain/general_ingredient/generalController.dart';
 import 'package:destinymain/in_use_screen/main_screen/main_screen.dart';
 import 'package:destinymain/in_use_screen/product_view_screen/product_view_screen.dart';
@@ -103,7 +104,7 @@ class _search_screenState extends State<search_screen> {
                                         decoration: InputDecoration(
                                           filled: true,
                                           fillColor: Colors.transparent,
-                                          hintText: 'Search product on Buy smart',
+                                          hintText: finalLanguage.mainLang.searchProductOnApp,
                                           hintStyle: TextStyle(color: Colors.grey[600]),
                                           border: InputBorder.none,
                                         ),

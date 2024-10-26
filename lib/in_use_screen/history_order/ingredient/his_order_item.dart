@@ -1,3 +1,4 @@
+import 'package:destinymain/data/finalLanguage.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import '../../../../data/finalData.dart';
@@ -21,22 +22,22 @@ class _his_order_itemState extends State<his_order_item> {
 
   void get_status() {
     if (widget.order.status == 'A') {
-      status = 'The order has not been processed yet';
+      status = finalLanguage.mainLang.theOrderHasNotBeenProcessedYet;
       statusColor = Colors.orange;
     }
 
     if (widget.order.status == 'B') {
-      status = 'Order is being processed';
+      status = finalLanguage.mainLang.orderIsBeingProcessed;
       statusColor = Colors.orange;
     }
 
     if (widget.order.status == 'C') {
-      status = 'Order has been completed';
+      status = finalLanguage.mainLang.orderHasBeenCompleted;
       statusColor = Colors.blueAccent;
     }
 
     if (widget.order.status == 'D') {
-      status = 'The order has been cancelled';
+      status = finalLanguage.mainLang.theOrderHasBeenCancelled;
       statusColor = Colors.red;
     }
   }
@@ -99,7 +100,7 @@ class _his_order_itemState extends State<his_order_item> {
           Container(
             alignment: Alignment.centerLeft,
             child: Text(
-              'Payment information',
+              finalLanguage.mainLang.paymentInformation,
               style: TextStyle(
                 fontFamily: 'rale',
                 fontSize: width/30,
@@ -115,11 +116,11 @@ class _his_order_itemState extends State<his_order_item> {
 
           SizedBox(height: 4,),
 
-          cost_text_line(title: 'Voucher', content: (widget.order.voucher.id == '' ? "Do not select voucher" : ('- ' + getStringNumber(getVoucherSale(widget.order.voucher, calculatetotalMoney())) + ' .USDT')), size: width/30, contentColor: Colors.blue, titleColor: Colors.grey,),
+          cost_text_line(title: 'Voucher', content: (widget.order.voucher.id == '' ? finalLanguage.mainLang.doNotSelectVoucher : ('- ' + getStringNumber(getVoucherSale(widget.order.voucher, calculatetotalMoney())) + ' .USDT')), size: width/30, contentColor: Colors.blue, titleColor: Colors.grey,),
 
           SizedBox(height: 4,),
 
-          cost_text_line(title: 'Sub total', content: getStringNumber(calculatetotalOrderMoney(widget.order) - getVoucherSale(widget.order.voucher, calculatetotalMoney())) + ' .USDT', size: width/25, contentColor: Colors.black, titleColor: Colors.black,),
+          cost_text_line(title: finalLanguage.mainLang.subTotal, content: getStringNumber(calculatetotalOrderMoney(widget.order) - getVoucherSale(widget.order.voucher, calculatetotalMoney())) + ' .USDT', size: width/25, contentColor: Colors.black, titleColor: Colors.black,),
 
           TextButton(
             onPressed: () {
@@ -131,7 +132,7 @@ class _his_order_itemState extends State<his_order_item> {
               );
             },
             child: Text(
-              'View products list',
+              finalLanguage.mainLang.viewProductsList,
               style: TextStyle(
                 fontFamily: 'rale',
                 color: Colors.blue,
@@ -146,8 +147,8 @@ class _his_order_itemState extends State<his_order_item> {
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    title: Text('Cancel Order'),
-                    content: Text('Are you sure you want to cancel this order?'),
+                    title: Text(finalLanguage.mainLang.cancelOrder),
+                    content: Text(finalLanguage.mainLang.areYouSureYouWantToCancelThisOrder),
                     actions: <Widget>[
                       TextButton(
                         child: Text('No', style: TextStyle(color: Colors.blue),),
@@ -174,7 +175,7 @@ class _his_order_itemState extends State<his_order_item> {
               );
             },
             child: Text(
-              'Cancel this order',
+              finalLanguage.mainLang.CancelThisOrder,
               style: TextStyle(
                 fontFamily: 'rale',
                 color: Colors.redAccent,

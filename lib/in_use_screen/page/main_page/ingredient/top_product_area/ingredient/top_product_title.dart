@@ -1,3 +1,5 @@
+import 'package:destinymain/data/finalData.dart';
+import 'package:destinymain/data/finalLanguage.dart';
 import 'package:flutter/material.dart';
 
 class top_product_title extends StatelessWidget {
@@ -12,7 +14,7 @@ class top_product_title extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            'Top Products',
+            finalLanguage.mainLang.topProducts,
             style: TextStyle(
               fontSize: width/18,
               fontFamily: 'raleb',

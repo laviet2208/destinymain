@@ -1,3 +1,4 @@
+import 'package:destinymain/data/finalLanguage.dart';
 import 'package:destinymain/in_use_screen/account_page/account_page.dart';
 import 'package:destinymain/in_use_screen/page/main_page/main_page.dart';
 import 'package:destinymain/in_use_screen/page/notice_page/notice_page.dart';
@@ -92,11 +93,11 @@ class _main_screenState extends State<main_screen> {
                   finalData.currentPage = selectedPage;
                 }),
                 destinations: [
-                  NavigationDestination(icon: Icon(Icons.home_outlined, color: finalData.currentPage == 0 ? Colors.black : Colors.black, size: 22,), label: 'Home',),
-                  NavigationDestination(icon: Icon(Icons.account_circle_outlined, color: finalData.currentPage == 1 ? Colors.black : Colors.black, size: 22,), label: 'Account',),
-                  NavigationDestination(icon: Icon(Icons.add_shopping_cart, color: finalData.currentPage == 2 ? Colors.black : Colors.black, size: 22,), label: 'Cart',),
-                  NavigationDestination(icon: Icon(Icons.notifications_none, color: finalData.currentPage == 3 ? Colors.black : Colors.black, size: 22,), label: 'Cart',),
-                  NavigationDestination(icon: Icon(Icons.discount_outlined), label: 'Favourite',),
+                  NavigationDestination(icon: Icon(Icons.home_outlined, color: finalData.currentPage == 0 ? Colors.black : Colors.black, size: 22,), label: finalLanguage.mainLang.home,),
+                  NavigationDestination(icon: Icon(Icons.account_circle_outlined, color: finalData.currentPage == 1 ? Colors.black : Colors.black, size: 22,), label: finalLanguage.mainLang.account,),
+                  NavigationDestination(icon: Icon(Icons.add_shopping_cart, color: finalData.currentPage == 2 ? Colors.black : Colors.black, size: 22,), label: finalLanguage.mainLang.cart,),
+                  NavigationDestination(icon: Icon(Icons.notifications_none, color: finalData.currentPage == 3 ? Colors.black : Colors.black, size: 22,), label: finalLanguage.mainLang.notification,),
+                  NavigationDestination(icon: Icon(Icons.discount_outlined), label: finalLanguage.mainLang.voucher,),
                 ],
               ),
             ),

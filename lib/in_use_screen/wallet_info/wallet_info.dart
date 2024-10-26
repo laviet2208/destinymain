@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:destinymain/data/finalLanguage.dart';
 import 'package:destinymain/general_ingredient/generalController.dart';
 import 'package:flutter/material.dart';
 import '../../../../../data/finaldata.dart';
@@ -103,7 +104,7 @@ class _wallet_infoState extends State<wallet_info> {
                                 children: [
                                   TextButton(
                                     child: Text(
-                                      'Deposit',
+                                      finalLanguage.mainLang.deposit,
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontFamily: 'rale',
@@ -132,7 +133,7 @@ class _wallet_infoState extends State<wallet_info> {
 
                                   TextButton(
                                     child: Text(
-                                      'Withdraw',
+                                      finalLanguage.mainLang.withdraw,
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontFamily: 'rale',
@@ -180,7 +181,7 @@ class _wallet_infoState extends State<wallet_info> {
                                 height: 25,
                                 alignment: Alignment.centerLeft,
                                 child: AutoSizeText(
-                                  'History Transaction',
+                                  finalLanguage.mainLang.historyTransaction,
                                   style: TextStyle(
                                     fontFamily: 'raleb',
                                     fontWeight: FontWeight.bold,

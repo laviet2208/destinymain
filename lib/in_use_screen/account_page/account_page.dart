@@ -1,4 +1,5 @@
 import 'package:destinymain/data/finalData.dart';
+import 'package:destinymain/data/finalLanguage.dart';
 import 'package:destinymain/general_ingredient/generalController.dart';
 import 'package:destinymain/in_use_screen/account_page/account_info_screen/account_info_screen.dart';
 import 'package:destinymain/in_use_screen/account_page/ingredient/account_page_appbar.dart';
@@ -15,6 +16,7 @@ import '../../data/chatData/messenger.dart';
 import '../../general_ingredient/utils/utils.dart';
 import '../../no_login_screen/loading_screen/loadingController.dart';
 import '../chat_room/chat_room.dart';
+import 'ingredient/language_change.dart';
 
 class account_page extends StatefulWidget {
   final VoidCallback event;
@@ -92,7 +94,7 @@ class _account_pageState extends State<account_page> {
                         child: Container(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            'Personal',
+                            finalLanguage.mainLang.personal,
                             style: TextStyle(
                               fontFamily: 'raleb',
                               color: Colors.black,
@@ -107,7 +109,7 @@ class _account_pageState extends State<account_page> {
 
                       Padding(
                         padding: EdgeInsets.only(left: 20, right: 20),
-                        child: feature_button(iconData: Icons.account_circle_outlined, title: 'Profile', event: () { generalController.changeScreenSlide(context, account_info_screen()); },),
+                        child: feature_button(iconData: Icons.account_circle_outlined, title: finalLanguage.mainLang.profile, event: () { generalController.changeScreenSlide(context, account_info_screen()); },),
                       ),
 
                       SizedBox(height: 18,),
@@ -126,7 +128,7 @@ class _account_pageState extends State<account_page> {
 
                       Padding(
                         padding: EdgeInsets.only(left: 20, right: 20),
-                        child: feature_button(iconData: Icons.account_balance_wallet_outlined, title: 'Your wallet', event: () { generalController.changeScreenSlide(context, wallet_info()); },),
+                        child: feature_button(iconData: Icons.account_balance_wallet_outlined, title: finalLanguage.mainLang.yourWallet, event: () { generalController.changeScreenSlide(context, wallet_info()); },),
                       ),
 
                       SizedBox(height: 18,),
@@ -145,7 +147,7 @@ class _account_pageState extends State<account_page> {
 
                       Padding(
                         padding: EdgeInsets.only(left: 20, right: 20),
-                        child: feature_button(iconData: Icons.history, title: 'History orders', event: () { generalController.changeScreenSlide(context, history_order_screen()); },),
+                        child: feature_button(iconData: Icons.history, title: finalLanguage.mainLang.historyOrders, event: () { generalController.changeScreenSlide(context, history_order_screen()); },),
                       ),
 
                       SizedBox(height: 18,),
@@ -164,7 +166,7 @@ class _account_pageState extends State<account_page> {
 
                       Padding(
                         padding: EdgeInsets.only(left: 20, right: 20),
-                        child: feature_button(iconData: Icons.chat_outlined, title: 'Customer Care', event: () {
+                        child: feature_button(iconData: Icons.chat_outlined, title: finalLanguage.mainLang.customerCare, event: () {
                           showDialog(
                             context: context,
                             builder: (context) {
@@ -205,7 +207,7 @@ class _account_pageState extends State<account_page> {
                                                       child: Text(
                                                         'Telegram',
                                                         style: TextStyle(
-                                                            fontFamily: 'roboto',
+                                                            fontFamily: 'rale',
                                                             color: Colors.white,
                                                             fontSize: 15,
                                                             fontWeight: FontWeight.bold
@@ -249,9 +251,9 @@ class _account_pageState extends State<account_page> {
                                                     Container(
                                                       alignment: Alignment.centerLeft,
                                                       child: Text(
-                                                        'In-App Support',
+                                                        finalLanguage.mainLang.inAppSupport,
                                                         style: TextStyle(
-                                                            fontFamily: 'roboto',
+                                                            fontFamily: 'rale',
                                                             color: Colors.black,
                                                             fontSize: 15,
                                                             fontWeight: FontWeight.bold
@@ -302,7 +304,7 @@ class _account_pageState extends State<account_page> {
 
                       Padding(
                         padding: EdgeInsets.only(left: 20, right: 20),
-                        child: feature_button(iconData: Icons.logout_outlined, title: 'Log out', event: () async {
+                        child: feature_button(iconData: Icons.logout_outlined, title: finalLanguage.mainLang.logOut, event: () async {
                           final FirebaseAuth _auth = FirebaseAuth.instance;
                           finalData.account.id = '';
                           finalData.account.username = '';
@@ -328,13 +330,13 @@ class _account_pageState extends State<account_page> {
 
                       Padding(
                         padding: EdgeInsets.only(left: 20, right: 20),
-                        child: feature_button(iconData: Icons.delete_outline_sharp, title: 'Request account deletion', event: () async {
+                        child: feature_button(iconData: Icons.delete_outline_sharp, title: finalLanguage.mainLang.requestAccountDeletion, event: () async {
                           final FirebaseAuth _auth = FirebaseAuth.instance;
                           finalData.account.id = '';
                           finalData.account.username = '';
                           finalData.account.voucherList.clear();
                           await _auth.signOut();
-                          toastMessage('Please allow 5-7 days for request processing.');
+                          toastMessage(finalLanguage.mainLang.pleaseAllow57Days);
                           Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => loading_screen()), (route) => false,);
                         },),
                       ),
@@ -346,7 +348,7 @@ class _account_pageState extends State<account_page> {
                         child: Container(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            'Features',
+                            finalLanguage.mainLang.features,
                             style: TextStyle(
                               fontFamily: 'raleb',
                               color: Colors.black,
@@ -361,7 +363,7 @@ class _account_pageState extends State<account_page> {
 
                       Padding(
                         padding: EdgeInsets.only(left: 20, right: 20),
-                        child: feature_button(iconData: Icons.notifications_active_outlined, title: 'Notification', event: () { finalData.currentPage = 3; widget.event(); },),
+                        child: feature_button(iconData: Icons.notifications_active_outlined, title: finalLanguage.mainLang.notification, event: () { finalData.currentPage = 3; widget.event(); },),
                       ),
 
                       SizedBox(height: 18,),
@@ -380,7 +382,7 @@ class _account_pageState extends State<account_page> {
 
                       Padding(
                         padding: EdgeInsets.only(left: 20, right: 20),
-                        child: feature_button(iconData: Icons.percent, title: 'Your vouchers', event: () { finalData.currentPage = 4; widget.event(); },),
+                        child: feature_button(iconData: Icons.percent, title: finalLanguage.mainLang.yourVouchers, event: () { finalData.currentPage = 4; widget.event(); },),
                       ),
 
                       SizedBox(height: 18,),
@@ -399,7 +401,7 @@ class _account_pageState extends State<account_page> {
 
                       Padding(
                         padding: EdgeInsets.only(left: 20, right: 20),
-                        child: feature_button(iconData: Icons.shopping_cart_outlined, title: 'Your cart', event: () { finalData.currentPage = 2; widget.event(); },),
+                        child: feature_button(iconData: Icons.shopping_cart_outlined, title: finalLanguage.mainLang.yourCart, event: () { finalData.currentPage = 2; widget.event(); },),
                       ),
 
                       SizedBox(height: 18,),
@@ -418,7 +420,14 @@ class _account_pageState extends State<account_page> {
 
                       Padding(
                         padding: EdgeInsets.only(left: 20, right: 20),
-                        child: feature_button(iconData: Icons.language, title: 'Language', event: () {  },),
+                        child: feature_button(iconData: Icons.language, title: finalLanguage.mainLang.language, event: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return language_change(event: () {setState(() {});});
+                            },
+                          );
+                        },),
                       ),
 
                       SizedBox(height: 28,),

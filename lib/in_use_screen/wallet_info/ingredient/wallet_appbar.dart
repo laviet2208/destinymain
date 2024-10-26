@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:destinymain/data/finalLanguage.dart';
 import 'package:flutter/material.dart';
 
 class wallet_appbar extends StatefulWidget {
@@ -21,7 +22,7 @@ class _wallet_appbarState extends State<wallet_appbar> {
               child: Container(
                 alignment: Alignment.centerLeft,
                 child: AutoSizeText(
-                  'Your Wallet',
+                  finalLanguage.mainLang.yourWallet,
                   style: TextStyle(
                     fontFamily: 'raleb',
                     fontSize: 100,

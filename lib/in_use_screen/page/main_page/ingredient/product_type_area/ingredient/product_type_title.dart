@@ -2,6 +2,8 @@ import 'package:destinymain/general_ingredient/generalController.dart';
 import 'package:destinymain/in_use_screen/view_all_screen/view_all_type_screen/view_all_type_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../../data/finalLanguage.dart';
+
 class product_type_title extends StatelessWidget {
   const product_type_title({super.key});
 
@@ -14,7 +16,7 @@ class product_type_title extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            'Categories',
+            finalLanguage.mainLang.categories,
             style: TextStyle(
               fontSize: width/18,
               fontFamily: 'raleb',
@@ -36,7 +38,7 @@ class product_type_title extends StatelessWidget {
                     height: 40,
                     alignment: Alignment.center,
                     child: Text(
-                      'See all',
+                      finalLanguage.mainLang.seeAll,
                       style: TextStyle(
                         fontSize: width/23,
                         fontFamily: 'rale',

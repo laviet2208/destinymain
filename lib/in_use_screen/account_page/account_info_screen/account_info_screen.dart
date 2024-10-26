@@ -1,3 +1,4 @@
+import 'package:destinymain/data/finalLanguage.dart';
 import 'package:destinymain/general_ingredient/generalController.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -104,35 +105,35 @@ class _account_info_screenState extends State<account_info_screen> {
                             children: [
                               Padding(
                                 padding: EdgeInsets.only(left: 25, right: 25),
-                                child: edit_text_in_account(textEditingController: firstname_controller, event: () {}, title: 'First name', hint: 'First name', readOnly: false,),
+                                child: edit_text_in_account(textEditingController: firstname_controller, event: () {}, title: finalLanguage.mainLang.firstName, hint: finalLanguage.mainLang.firstName, readOnly: false,),
                               ),
 
                               SizedBox(height: 20,),
 
                               Padding(
                                 padding: EdgeInsets.only(left: 25, right: 25),
-                                child: edit_text_in_account(textEditingController: lastname_controller, event: () {}, title: 'Last name', hint: 'Last name', readOnly: false,),
+                                child: edit_text_in_account(textEditingController: lastname_controller, event: () {}, title: finalLanguage.mainLang.lastName, hint: finalLanguage.mainLang.lastName, readOnly: false,),
                               ),
 
                               SizedBox(height: 20,),
 
                               Padding(
                                 padding: EdgeInsets.only(left: 25, right: 25),
-                                child: edit_text_in_account(textEditingController: yourmail_controller, event: () {}, title: 'Your email', hint: 'Your email', readOnly: true,),
+                                child: edit_text_in_account(textEditingController: yourmail_controller, event: () {}, title: finalLanguage.mainLang.yourEmail, hint: finalLanguage.mainLang.yourEmail, readOnly: true,),
                               ),
 
                               SizedBox(height: 20,),
 
                               Padding(
                                 padding: EdgeInsets.only(left: 25, right: 25),
-                                child: edit_text_in_account(textEditingController: phonenum_controller, event: () {}, title: 'Phone number', hint: 'Phone number', readOnly: false,),
+                                child: edit_text_in_account(textEditingController: phonenum_controller, event: () {}, title: finalLanguage.mainLang.phoneNumber, hint: finalLanguage.mainLang.phoneNumber, readOnly: false,),
                               ),
 
                               SizedBox(height: 20,),
 
                               Padding(
                                 padding: EdgeInsets.only(left: 25, right: 25),
-                                child: edit_text_in_account(textEditingController: address_controller, event: () {}, title: 'Your address', hint: 'Your address', readOnly: false,),
+                                child: edit_text_in_account(textEditingController: address_controller, event: () {}, title: finalLanguage.mainLang.yourAddress, hint: finalLanguage.mainLang.yourAddress, readOnly: false,),
                               ),
 
                               SizedBox(height: 20,),
@@ -154,12 +155,12 @@ class _account_info_screenState extends State<account_info_screen> {
                                       DatabaseReference database = FirebaseDatabase.instance.ref("Account");
                                       await database.child(finalData.account.id).set(finalData.account.toJson());
                                       setState(() {loading = false;});
-                                      toastMessage('Update success');
+                                      toastMessage(finalLanguage.mainLang.updateSuccess);
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.only(top: 5, bottom: 5),
                                       child: !loading ? Text(
-                                        'Save information',
+                                        finalLanguage.mainLang.saveInformation,
                                         style: TextStyle(
                                           fontFamily: 'rale',
                                           color: Colors.white,
@@ -188,7 +189,7 @@ class _account_info_screenState extends State<account_info_screen> {
                                     child: Padding(
                                       padding: const EdgeInsets.only(top: 5, bottom: 5),
                                       child: !loading ? Text(
-                                        'Cancel',
+                                        finalLanguage.mainLang.cancel,
                                         style: TextStyle(
                                           fontFamily: 'rale',
                                           color: Colors.black,
