@@ -61,6 +61,14 @@ double calculatetotalMoney() {
   return cost;
 }
 
+double calculatetotalSaleMoney() {
+  double cost = 0;
+  for (Cartdata cartdata in finalData.cartListSale) {
+    cost = cost + cartdata.dimension.cost * cartdata.number;
+  }
+  return cost;
+}
+
 double calculatetotalOrderMoney(Order order) {
   double cost = 0;
   for (Cartdata cartdata in order.productList) {
@@ -231,6 +239,11 @@ String getCostBeforeSaleString(List<Dimension> list) {
 String getAllTimeString(Time time) {
   return (time.hour >= 10 ? time.hour.toString() : '0' + time.hour.toString()) + ":" + (time.minute >= 10 ? time.minute.toString() : '0' + time.minute.toString()) + " " + (time.day >= 10 ? time.day.toString() : '0' + time.day.toString()) + "/" + (time.month >= 10 ? time.month.toString() : '0' + time.month.toString()) + "/" + time.year.toString();
 }
+
+String getAllATimeString(Time time) {
+  return (time.hour >= 10 ? time.hour.toString() : '0' + time.hour.toString()) + ":" + (time.minute >= 10 ? time.minute.toString() : '0' + time.minute.toString()) + ':' + time.second.toString() + " " + (time.day >= 10 ? time.day.toString() : '0' + time.day.toString()) + "/" + (time.month >= 10 ? time.month.toString() : '0' + time.month.toString()) + "/" + time.year.toString();
+}
+
 
 String getDayTimeString(Time time) {
   return (time.day >= 10 ? time.day.toString() : '0' + time.day.toString()) + "/" + (time.month >= 10 ? time.month.toString() : '0' + time.month.toString()) + "/" + time.year.toString();

@@ -14,7 +14,8 @@ import '../../ProductViewController.dart';
 
 class add_to_cart_dialog extends StatefulWidget {
   final Product product;
-  const add_to_cart_dialog({super.key, required this.product});
+  final int type;// 1: cart thường
+  const add_to_cart_dialog({super.key, required this.product, required this.type});
 
   @override
   State<add_to_cart_dialog> createState() => _add_to_cart_dialogState();
@@ -214,7 +215,8 @@ class _add_to_cart_dialogState extends State<add_to_cart_dialog> {
                   if (finalData.account.id == '') {
                     toastMessage('You must login to use this feature');
                   } else {
-                    ProductViewController.add_to_cart_handle(widget.product, selectDimension, numberProduct);
+                    ProductViewController.add_to_cart_handle(widget.product, selectDimension, numberProduct, widget.type);
+                    Navigator.of(context).pop();
                     print('number:: ' + finalData.cartList.length.toString());
                   }
                 },

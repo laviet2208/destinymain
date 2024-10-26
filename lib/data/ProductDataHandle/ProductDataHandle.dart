@@ -5,6 +5,8 @@ import 'package:destinymain/data/product/Product.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../otherData/Tool.dart';
+
 class ProductDataHandle {
   ///Key List
   ///enterTime: first time enter
@@ -58,6 +60,7 @@ class ProductDataHandle {
         finalData.allProductList.add(Product.fromJson(value));
       });
       finalData.isComplete = true;
+      print('Save: ' + getAllATimeString(getCurrentTime()) + ':' + DateTime.now().millisecond.toString());
       // await WriteStringDataList('productList', dataList.map((product) => jsonEncode(product.toJsonString())).toList());
       print('Đã lưu xong data');
     }

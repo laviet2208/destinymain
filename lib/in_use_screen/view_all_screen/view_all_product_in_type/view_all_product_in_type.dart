@@ -104,7 +104,7 @@ class _view_all_product_in_typeState extends State<view_all_product_in_type> {
                               itemCount: productList.length,
                               itemBuilder: (context, index) {
                                 return GestureDetector(
-                                  child: horizontal_product_item(product: productList[index], current: widget),
+                                  child: horizontal_product_item(product: productList[index], current: widget, type: 1,),
                                 );
                               },
                             ),

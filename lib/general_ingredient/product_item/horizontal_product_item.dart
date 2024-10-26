@@ -11,7 +11,8 @@ import '../../in_use_screen/product_view_screen/ingredient/add_to_cart_dialog/ad
 class horizontal_product_item extends StatelessWidget {
   final Product product;
   final Widget current;
-  const horizontal_product_item({super.key, required this.product, required this.current});
+  final int type;
+  const horizontal_product_item({super.key, required this.product, required this.current, required this.type});
 
   @override
   Widget build(BuildContext context) {
@@ -134,7 +135,7 @@ class horizontal_product_item extends StatelessWidget {
                 ),
               ),
               onTap: () {
-                generalController.changeScreenSlide(context, product_view_screen(product: product, previousWidget: current));
+                generalController.changeScreenSlide(context, product_view_screen(product: product, previousWidget: current, type: type,));
               },
             ),
           ),
@@ -171,7 +172,7 @@ class horizontal_product_item extends StatelessWidget {
                     ),
                   ),
                   builder: (context) {
-                    return add_to_cart_dialog(product: product,);
+                    return add_to_cart_dialog(product: product, type: type,);
                   },
                 );
               },

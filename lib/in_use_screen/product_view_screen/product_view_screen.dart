@@ -7,8 +7,9 @@ import 'package:flutter/material.dart';
 
 class product_view_screen extends StatefulWidget {
   final Product product;
+  final int type;
   final Widget previousWidget;
-  const product_view_screen({super.key, required this.product, required this.previousWidget});
+  const product_view_screen({super.key, required this.product, required this.previousWidget, required this.type});
 
   @override
   State<product_view_screen> createState() => _product_view_screenState();
@@ -48,7 +49,7 @@ class _product_view_screenState extends State<product_view_screen> {
                             ),
                           ),
                           builder: (context) {
-                            return add_to_cart_dialog(product: widget.product,);
+                            return add_to_cart_dialog(product: widget.product, type: widget.type,);
                           },
                         );
                       },

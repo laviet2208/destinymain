@@ -24,6 +24,14 @@ class MainPageController {
     return dataList;
   }
 
+  /// getFlashSaleStatus
+  static Future<int> getFlashSaleStatus() async {
+    final reference = FirebaseDatabase.instance.ref();
+    DatabaseEvent snapshot = await reference.child("Flashsale").child('isStart').once();
+    final dynamic data = snapshot.snapshot.value;
+    return int.parse(data.toString());
+  }
+
   /// getProductType
   static Future<List<ProductType>> getProductType() async {
     final reference = FirebaseDatabase.instance.ref();

@@ -1,4 +1,5 @@
 import 'package:destinymain/in_use_screen/main_screen/main_screen.dart';
+import 'package:destinymain/in_use_screen/page/main_page/ingredient/flashsale_button/flashsale_button.dart';
 import 'package:flutter/material.dart';
 import '../../../data/product/ProductDirectory.dart';
 import '../../../general_ingredient/generalController.dart';
@@ -95,6 +96,10 @@ class _main_pageState extends State<main_page> {
                     SizedBox(height: 10,),
 
                     !loading1 ? ads_area() : ads_area_loading(),
+
+                    SizedBox(height: 15,),
+
+                    flashsale_button(),
 
                     SizedBox(height: 15,),
 

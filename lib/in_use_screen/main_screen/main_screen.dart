@@ -5,6 +5,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import '../../data/Account/Account.dart';
 import '../../data/finalData.dart';
+import '../../data/otherData/Tool.dart';
 import '../page/cart_page/cart_page.dart';
 import '../page/voucher_page/voucher_page.dart';
 
@@ -45,7 +46,7 @@ class _main_screenState extends State<main_screen> {
 
   @override
   void initState() {
-    // TODO: implement initState
+    print('end: ' + getAllATimeString(getCurrentTime()));
     super.initState();
     get_account_data();
   }

@@ -61,7 +61,7 @@ class _top_product_itemState extends State<top_product_item> {
         setState(() {
           loading = false;
         });
-        generalController.changeScreenFade(context, product_view_screen(product: productS, previousWidget: main_screen()));
+        generalController.changeScreenFade(context, product_view_screen(product: productS, previousWidget: main_screen(), type: 1,));
       },
     );
   }

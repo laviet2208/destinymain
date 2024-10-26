@@ -89,7 +89,7 @@ class _ads_areaState extends State<ads_area> {
                                 if (proList.isEmpty) {
                                   toastMessage('This ads is not have product to go!');
                                 } else {
-                                  generalController.changeScreenFade(context, product_view_screen(product: proList.first, previousWidget: main_screen()));
+                                  generalController.changeScreenFade(context, product_view_screen(product: proList.first, previousWidget: main_screen(), type: 1,));
                                 }
                               } else {
                                 setState(() {
@@ -100,7 +100,7 @@ class _ads_areaState extends State<ads_area> {
                                   loading = false;
                                 });
                                 if (productS.id != '') {
-                                  generalController.changeScreenFade(context, product_view_screen(product: productS, previousWidget: main_screen()));
+                                  generalController.changeScreenFade(context, product_view_screen(product: productS, previousWidget: main_screen(), type: 1,));
                                 } else {
                                   toastMessage('This ads is not have product to go!');
                                 }

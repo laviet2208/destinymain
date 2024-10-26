@@ -143,7 +143,7 @@ class _search_screenState extends State<search_screen> {
                                 child: GestureDetector(
                                   child: item_product_search(product: filterList[index]),
                                   onTap: () {
-                                    Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => product_view_screen(product: filterList[index], previousWidget: search_screen())));
+                                    Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => product_view_screen(product: filterList[index], previousWidget: search_screen(), type: 1,)));
                                   },
                                 ),
                               );

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:destinymain/data/ProductDataHandle/ProductDataHandle.dart';
+import 'package:destinymain/data/otherData/Tool.dart';
 import 'package:destinymain/data/product/Product.dart';
 import 'package:destinymain/no_login_screen/loading_screen/loadingController.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -10,6 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'no_login_screen/loading_screen/welcome_screen.dart';
 
 Future<void> main() async {
+  print('Start: ' + getAllATimeString(getCurrentTime()));
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     // options: FirebaseOptions(
@@ -23,7 +25,8 @@ Future<void> main() async {
     //     measurementId: "G-B7X16QF6RK"
     //   ),
   );
-  await ProductDataHandle.getAllProductFB();
+  print('Start1: ' + getAllATimeString(getCurrentTime()));
+  ProductDataHandle.getAllProductFB();
   // if (await ProductDataHandle.CheckIfFirstTimeEnter()) {
   //   ProductDataHandle.getAllProductFB();
   // } else {
@@ -36,6 +39,7 @@ Future<void> main() async {
   //   print(prdList[0].name);
   // }
   runApp(const MyApp());
+  print('Start2: ' + getAllATimeString(getCurrentTime()));
 }
 
 class MyApp extends StatefulWidget {

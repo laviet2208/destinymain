@@ -105,7 +105,7 @@ class _view_all_product_indirectoryState extends State<view_all_product_indirect
                               itemCount: productList.length,
                               itemBuilder: (context, index) {
                                 return GestureDetector(
-                                  child: horizontal_product_item(product: productList[index], current: widget),
+                                  child: horizontal_product_item(product: productList[index], current: widget, type: 1,),
                                 );
                               },
                             ),

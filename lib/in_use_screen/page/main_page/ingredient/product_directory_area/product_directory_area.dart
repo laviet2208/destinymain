@@ -65,7 +65,7 @@ class _product_directory_areaState extends State<product_directory_area> {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: EdgeInsets.only(right: 15),
-                  child: horizontal_product_item(product: productList[index], current: widget.current,),
+                  child: horizontal_product_item(product: productList[index], current: widget.current, type: 1,),
                 );
               },
             ) : ListView.builder(
