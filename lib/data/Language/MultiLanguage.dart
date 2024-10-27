@@ -62,7 +62,41 @@ class MultiLanguage {
   final String areYouSureYouWantToCancelThisOrder;
   final String CancelThisOrder;
 
+  ///noticePage
+  final String yourNotice;
+
+  ///voucherPage
+  final String voucherWallet;
+  final String generalVoucher;
+  final String individualVoucher;
+  final String thereAreNotVoucherInHere;
+  final String voucherItem1;
+  final String voucherItem2;
+  final String voucherItem3;
+  final String timeLimit;
+  final String giftThis;
+  final String giftThisVoucher;
+  final String enterReceiverEmail;
+  final String accountDoesNotExist;
+
+  ///cartPage
+  final String yourCart1;
+  final String number;
+  final String remove;
+  final String changeNumber;
+
+  ///checkOutScreen
+  final String item;
+  final String confirmAndPay;
+  final String pleaseAddYourName;
+  final String pleaseAddYourDistrict;
+  final String pleaseAddYourNation;
+  final String pleaseAddYourPhoneNum;
+
   MultiLanguage({
+    required this.item,
+    required this.confirmAndPay,
+    required this.yourNotice,
     required this.search,
     required this.flashSaleJointNow,
     required this.categories,
@@ -112,5 +146,25 @@ class MultiLanguage {
     required this.cancelOrder,
     required this.areYouSureYouWantToCancelThisOrder,
     required this.CancelThisOrder,
+    required this.voucherWallet,
+    required this.generalVoucher,
+    required this.individualVoucher,
+    required this.thereAreNotVoucherInHere,
+    required this.voucherItem1,
+    required this.voucherItem2,
+    required this.voucherItem3,
+    required this.timeLimit,
+    required this.giftThis,
+    required this.giftThisVoucher,
+    required this.enterReceiverEmail,
+    required this.accountDoesNotExist,
+    required this.yourCart1,
+    required this.number,
+    required this.remove,
+    required this.changeNumber,
+    required this.pleaseAddYourName,
+    required this.pleaseAddYourDistrict,
+    required this.pleaseAddYourNation,
+    required this.pleaseAddYourPhoneNum,
   });
 }

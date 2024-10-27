@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:destinymain/data/ProductDataHandle/ProductDataHandle.dart';
+import 'package:destinymain/data/finalLanguage.dart';
 import 'package:destinymain/data/otherData/Tool.dart';
 import 'package:destinymain/data/product/Product.dart';
 import 'package:destinymain/no_login_screen/loading_screen/loadingController.dart';
@@ -26,6 +27,25 @@ Future<void> main() async {
     //   ),
   );
   print('Start1: ' + getAllATimeString(getCurrentTime()));
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String? language = prefs.getString('language');
+  if (language != null) {
+    if (language == 'en') {
+      finalLanguage.mainLang = finalLanguage.en;
+    }
+    if (language == 'vi') {
+      finalLanguage.mainLang = finalLanguage.vi;
+    }
+    if (language == 'ko') {
+      finalLanguage.mainLang = finalLanguage.ko;
+    }
+    if (language == 'ja') {
+      finalLanguage.mainLang = finalLanguage.ja;
+    }
+    if (language == 'tq') {
+      finalLanguage.mainLang = finalLanguage.tq;
+    }
+  }
   ProductDataHandle.getAllProductFB();
   // if (await ProductDataHandle.CheckIfFirstTimeEnter()) {
   //   ProductDataHandle.getAllProductFB();

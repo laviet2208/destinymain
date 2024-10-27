@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../data/finalData.dart';
+import '../../../data/finalLanguage.dart';
 import 'ingredient/general_voucher_page.dart';
 import 'ingredient/individual_voucher_page.dart';
 import 'ingredient/voucher_app_bar.dart';
@@ -95,8 +96,8 @@ class _voucher_pageState extends State<voucher_page> with SingleTickerProviderSt
                               color: Colors.blueGrey.withOpacity(0.2),
                             ),
                             tabs: [
-                              Tab(text: 'General Voucher'),
-                              Tab(text: 'Individual Voucher'),
+                              Tab(text: finalLanguage.mainLang.generalVoucher),
+                              Tab(text: finalLanguage.mainLang.individualVoucher),
                             ],
                           ),
                         ],

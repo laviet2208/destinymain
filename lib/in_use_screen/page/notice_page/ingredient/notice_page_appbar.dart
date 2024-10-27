@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:destinymain/data/finalLanguage.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../data/finalData.dart';
@@ -17,7 +18,7 @@ class notice_page_appbar extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            'Your notice',
+            finalLanguage.mainLang.yourNotice,
             style: TextStyle(
               fontFamily: 'raleb',
               color: Colors.black,

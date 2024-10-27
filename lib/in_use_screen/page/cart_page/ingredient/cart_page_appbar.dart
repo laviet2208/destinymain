@@ -1,4 +1,5 @@
 import 'package:destinymain/data/finalData.dart';
+import 'package:destinymain/data/finalLanguage.dart';
 import 'package:flutter/material.dart';
 
 class cart_page_appbar extends StatelessWidget {
@@ -15,7 +16,7 @@ class cart_page_appbar extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            'Your cart (' + finalData.cartList.length.toString() + ')',
+            finalLanguage.mainLang.yourCart1 + finalData.cartList.length.toString() + ')',
             style: TextStyle(
               fontFamily: 'raleb',
               color: Colors.black,

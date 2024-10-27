@@ -1,3 +1,4 @@
+import 'package:destinymain/data/finalLanguage.dart';
 import 'package:destinymain/no_login_screen/loading_screen/controller.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,7 @@ class _gift_voucherState extends State<gift_voucher> {
       insetPadding: EdgeInsets.zero,
       contentPadding: EdgeInsets.all(10),
       clipBehavior: Clip.antiAliasWithSaveLayer,
-      title: Text('Gift this voucher', style: TextStyle(fontSize: 15, fontFamily: 'muli', color: Colors.black,),),
+      title: Text(finalLanguage.mainLang.giftThisVoucher, style: TextStyle(fontSize: 15, fontFamily: 'muli', color: Colors.black,),),
       content: Container(
         width: width - 20,
         child: Column(
@@ -40,7 +41,7 @@ class _gift_voucherState extends State<gift_voucher> {
               child: Row(
                 children: [
                   Expanded(
-                    child: text_field_login(controller: emailController, hint: 'enter receiver email', event: () {}, iconData: Icons.person_2_outlined,),
+                    child: text_field_login(controller: emailController, hint: finalLanguage.mainLang.enterReceiverEmail, event: () {}, iconData: Icons.person_2_outlined,),
                   ),
 
                   Container(
@@ -88,7 +89,7 @@ class _gift_voucherState extends State<gift_voucher> {
                               builder: (BuildContext context) {
                                 return AlertDialog(
                                   title: Text('Error'),
-                                  content: Text('Account does not exist'),
+                                  content: Text(finalLanguage.mainLang.accountDoesNotExist),
                                   actions: <Widget>[
                                     TextButton(
                                       child: Text('Close'),

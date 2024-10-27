@@ -1,3 +1,4 @@
+import 'package:destinymain/data/finalLanguage.dart';
 import 'package:destinymain/in_use_screen/flash_sale_area/flash_sale_screen/flash_sale_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -49,7 +50,7 @@ class cart_sale_appbar extends StatelessWidget {
                   padding: EdgeInsets.only(top: 3, bottom: 7),
                   child: Container(
                     child: Text(
-                      "Flash Sale Cart",
+                      finalLanguage.mainLang.yourCart,
                       maxLines: 1,
                       style: TextStyle(
                         fontFamily: 'raleb',

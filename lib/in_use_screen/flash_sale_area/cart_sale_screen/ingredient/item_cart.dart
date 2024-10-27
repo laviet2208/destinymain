@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:typed_data';
+import 'package:destinymain/data/finalLanguage.dart';
 import 'package:flutter/material.dart';
 import '../../../../data/cartData/CartData.dart';
 import '../../../../data/otherData/Tool.dart';
@@ -91,7 +92,7 @@ class _item_cartState extends State<item_cart> {
                           child: Row(
                             children: [
                               Text(
-                                'Number',
+                                finalLanguage.mainLang.number,
                                 style: TextStyle(
                                   fontFamily: 'muli',
                                   color: Colors.grey,
@@ -179,7 +180,7 @@ class _item_cartState extends State<item_cart> {
                     widget.event();
                   },
                   child: Text(
-                    'Remove',
+                    finalLanguage.mainLang.remove,
                     style: TextStyle(
                       fontFamily: 'muli',
                       color: Colors.blue,
@@ -198,7 +199,7 @@ class _item_cartState extends State<item_cart> {
                     );
                   },
                   child: Text(
-                    'Change number',
+                    finalLanguage.mainLang.changeNumber,
                     style: TextStyle(
                       fontFamily: 'muli',
                       color: Colors.blue,

@@ -1,5 +1,6 @@
 import 'package:destinymain/general_ingredient/utils/utils.dart';
 import 'package:flutter/material.dart';
+import '../../../../data/finalLanguage.dart';
 import '../../../../data/otherData/Tool.dart';
 import '../../../../data/voucherData/Voucher.dart';
 
@@ -71,7 +72,7 @@ class voucher_item extends StatelessWidget {
                           Container(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              voucher.maxSale == 0 ? ('Destiny USA system gives you a '  + getStringNumber(voucher.Money) + " .USDT discount promo code for all products, buy now!") : ('Destiny USA system gives you a '  + voucher.Money.toStringAsFixed(0) + '% discount promo code for all products, buy now!'),
+                              voucher.maxSale == 0 ? (finalLanguage.mainLang.voucherItem1 + getStringNumber(voucher.Money) + finalLanguage.mainLang.voucherItem2) : (finalLanguage.mainLang.voucherItem1  + voucher.Money.toStringAsFixed(0) + finalLanguage.mainLang.voucherItem3),
                               textAlign: TextAlign.start,
                               style: TextStyle(
                                 fontFamily: 'rale',
@@ -90,7 +91,7 @@ class voucher_item extends StatelessWidget {
                               text: TextSpan(
                                   children: [
                                     TextSpan(
-                                      text: "Time limit: ",
+                                      text: finalLanguage.mainLang.timeLimit,
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: width / 30,

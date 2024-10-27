@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import '../../../../data/finalLanguage.dart';
 import '../../../../data/voucherData/Voucher.dart';
 import '../controller/voucher_page_controller.dart';
 import 'voucher_item.dart';
@@ -57,7 +58,7 @@ class _general_voucher_pageState extends State<general_voucher_page> {
                         child: voucher_item(voucher: voucherList[index]),
                       );
                     },
-                  ) : Container(height: 200, alignment: Alignment.center, child: Text('There are not voucher in here', style: TextStyle(color: Colors.black),),),
+                  ) : Container(height: 200, alignment: Alignment.center, child: Text(finalLanguage.mainLang.thereAreNotVoucherInHere, style: TextStyle(color: Colors.black),),),
                 ) : Container(
                   height: height - 200,
                   alignment: Alignment.center,

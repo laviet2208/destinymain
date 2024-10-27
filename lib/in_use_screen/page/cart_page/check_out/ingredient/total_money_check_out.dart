@@ -1,3 +1,4 @@
+import 'package:destinymain/data/finalLanguage.dart';
 import 'package:flutter/material.dart';
 import '../../../../../data/finalData.dart';
 import '../../../../../data/orderData/Order.dart';
@@ -39,12 +40,12 @@ class _total_money_check_outState extends State<total_money_check_out> {
           children: [
             SizedBox(height: 10,),
 
-            cost_text_line(title: 'Items (' + widget.order.productList.length.toString() + ')', content: getStringNumber(calculatetotalMoney()) + ' .USDT', size: width/25, contentColor: Colors.black, titleColor: Colors.grey,),
+            cost_text_line(title: finalLanguage.mainLang.item+ widget.order.productList.length.toString() + ')', content: getStringNumber(calculatetotalMoney()) + ' .USDT', size: width/25, contentColor: Colors.black, titleColor: Colors.grey,),
 
             SizedBox(height: 10,),
 
             GestureDetector(
-              child: cost_text_line(title: 'Voucher', content: (widget.order.voucher.id == '' ? 'do not select' : ('- ' + getStringNumber(getVoucherSale(widget.order.voucher, calculatetotalMoney())) + ' .USDT')), size: width/25, contentColor: Colors.blue, titleColor: Colors.grey,),
+              child: cost_text_line(title: finalLanguage.mainLang.voucher, content: (widget.order.voucher.id == '' ? finalLanguage.mainLang.doNotSelectVoucher : ('- ' + getStringNumber(getVoucherSale(widget.order.voucher, calculatetotalMoney())) + ' .USDT')), size: width/25, contentColor: Colors.blue, titleColor: Colors.grey,),
               onTap: () {
 
               },
@@ -61,7 +62,7 @@ class _total_money_check_outState extends State<total_money_check_out> {
 
             SizedBox(height: 10,),
 
-            cost_text_line(title: 'Sub total', content: getStringNumber(calculatetotalMoney() - getVoucherSale(widget.order.voucher, calculatetotalMoney())) + ' .USDT', size: width/25, contentColor: Colors.black, titleColor: Colors.black,),
+            cost_text_line(title: finalLanguage.mainLang.subTotal, content: getStringNumber(calculatetotalMoney() - getVoucherSale(widget.order.voucher, calculatetotalMoney())) + ' .USDT', size: width/25, contentColor: Colors.black, titleColor: Colors.black,),
 
             SizedBox(height: 20,),
 
@@ -108,7 +109,7 @@ class _total_money_check_outState extends State<total_money_check_out> {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 5, bottom: 5),
                     child: !loading ? Text(
-                      'Confirm and pay',
+                      finalLanguage.mainLang.confirmAndPay,
                       style: TextStyle(
                         fontFamily: 'muli',
                         color: Colors.white,

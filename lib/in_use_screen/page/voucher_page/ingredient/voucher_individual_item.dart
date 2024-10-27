@@ -1,5 +1,6 @@
 import 'package:destinymain/data/finalData.dart';
 import 'package:flutter/material.dart';
+import '../../../../data/finalLanguage.dart';
 import '../../../../data/otherData/Tool.dart';
 import '../../../../data/voucherData/Voucher.dart';
 import 'gift_voucher/gift_voucher.dart';
@@ -73,7 +74,7 @@ class voucher_individual_item extends StatelessWidget {
                           Container(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              voucher.Money >= 100 ? ('Destiny USA system gives you a '  + getStringNumber(voucher.Money) + " .USDT discount promo code for all products, buy now!") : ('Destiny USA system gives you a '  + voucher.Money.toStringAsFixed(0) + '% discount promo code for all products, buy now!'),
+                              voucher.Money >= 100 ? (finalLanguage.mainLang.voucherItem1 + getStringNumber(voucher.Money) + finalLanguage.mainLang.voucherItem2) : (finalLanguage.mainLang.voucherItem1  + voucher.Money.toStringAsFixed(0) + finalLanguage.mainLang.voucherItem3),
                               textAlign: TextAlign.start,
                               style: TextStyle(
                                 fontFamily: 'rale',
@@ -92,7 +93,7 @@ class voucher_individual_item extends StatelessWidget {
                               text: TextSpan(
                                   children: [
                                     TextSpan(
-                                      text: "Time limit: ",
+                                      text: finalLanguage.mainLang.timeLimit,
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: width / 30,
@@ -158,7 +159,7 @@ class voucher_individual_item extends StatelessWidget {
                                     child: Container(
                                       alignment: Alignment.centerLeft,
                                       child: Text(
-                                        "Gift this",
+                                        finalLanguage.mainLang.giftThis,
                                         style: TextStyle(
                                           fontFamily: 'rale',
                                           color: Colors.blue,

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:destinymain/data/finalLanguage.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import '../../../../../data/cartData/CartData.dart';
@@ -90,7 +91,7 @@ class _item_product_in_checkoutState extends State<item_product_in_checkout> {
                           child: Row(
                             children: [
                               Text(
-                                'Number',
+                                finalLanguage.mainLang.number,
                                 style: TextStyle(
                                   fontFamily: 'sf',
                                   color: Colors.grey,

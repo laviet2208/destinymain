@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../data/finalData.dart';
+import '../../../../data/finalLanguage.dart';
 import 'voucher_individual_item.dart';
 
 class individual_voucher_page extends StatefulWidget {
@@ -49,7 +50,7 @@ class _individual_voucher_pageState extends State<individual_voucher_page> {
                       );
                     },
                   ),
-                ) : Container(height: 200, alignment: Alignment.center, child: Text('There are not voucher in here', style: TextStyle(color: Colors.black),),),
+                ) : Container(height: 200, alignment: Alignment.center, child: Text(finalLanguage.mainLang.thereAreNotVoucherInHere, style: TextStyle(color: Colors.black),),),
               ],
             ),
           ),

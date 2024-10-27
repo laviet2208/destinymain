@@ -1,3 +1,4 @@
+import 'package:destinymain/data/finalLanguage.dart';
 import 'package:destinymain/in_use_screen/flash_sale_area/cart_sale_screen/ingredient/voucher_select.dart';
 import 'package:destinymain/in_use_screen/main_screen/main_screen.dart';
 import 'package:flutter/material.dart';
@@ -42,12 +43,12 @@ class _caculate_total_moneyState extends State<caculate_total_money> {
           children: [
             SizedBox(height: 10,),
 
-            cost_text_line(title: 'Items (' + finalData.cartListSale.length.toString() + ')', content: getStringNumber(calculatetotalSaleMoney()) + ' .USDT', size: width/25, contentColor: Colors.black, titleColor: Colors.grey,),
+            cost_text_line(title: finalLanguage.mainLang.item + finalData.cartListSale.length.toString() + ')', content: getStringNumber(calculatetotalSaleMoney()) + ' .USDT', size: width/25, contentColor: Colors.black, titleColor: Colors.grey,),
 
             SizedBox(height: 10,),
 
             GestureDetector(
-              child: cost_text_line(title: 'Voucher', content: (widget.voucher.id == '' ? 'Select voucher' : ('- ' + getStringNumber(getVoucherSale(widget.voucher, calculatetotalSaleMoney())) + ' .USDT')), size: width/25, contentColor: Colors.blue, titleColor: Colors.grey,),
+              child: cost_text_line(title: finalLanguage.mainLang.voucher, content: (widget.voucher.id == '' ? 'Select voucher' : ('- ' + getStringNumber(getVoucherSale(widget.voucher, calculatetotalSaleMoney())) + ' .USDT')), size: width/25, contentColor: Colors.blue, titleColor: Colors.grey,),
               onTap: () {
                 if (finalData.cartListSale.length == 0) {
                   toastMessage('Your cart is emty');
@@ -79,7 +80,7 @@ class _caculate_total_moneyState extends State<caculate_total_money> {
 
             SizedBox(height: 10,),
 
-            cost_text_line(title: 'Sub total', content: getStringNumber(calculatetotalSaleMoney() - getVoucherSale(widget.voucher, calculatetotalSaleMoney())) + ' .USDT', size: width/25, contentColor: Colors.black, titleColor: Colors.black,),
+            cost_text_line(title: finalLanguage.mainLang.subTotal, content: getStringNumber(calculatetotalSaleMoney() - getVoucherSale(widget.voucher, calculatetotalSaleMoney())) + ' .USDT', size: width/25, contentColor: Colors.black, titleColor: Colors.black,),
 
             SizedBox(height: 20,),
 

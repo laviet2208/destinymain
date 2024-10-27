@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:destinymain/data/finalLanguage.dart';
 import 'package:flutter/material.dart';
 import '../../../../../data/finalData.dart';
 import '../../../../../data/orderData/Order.dart';
@@ -52,7 +53,7 @@ class _receiver_infoState extends State<receiver_info> {
                           Container(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              widget.order.receiver.name == '' ? 'Please add your name' : widget.order.receiver.name,
+                              widget.order.receiver.name == '' ? finalLanguage.mainLang.pleaseAddYourName  : widget.order.receiver.name,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
@@ -67,7 +68,7 @@ class _receiver_infoState extends State<receiver_info> {
                           Container(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              widget.order.receiver.district == '' ? 'Please add your district' : widget.order.receiver.district,
+                              widget.order.receiver.district == '' ? finalLanguage.mainLang.pleaseAddYourDistrict  : widget.order.receiver.district,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
@@ -112,7 +113,7 @@ class _receiver_infoState extends State<receiver_info> {
                           Container(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              widget.order.receiver.nation == '' ? 'Please add your nation' : widget.order.receiver.nation,
+                              widget.order.receiver.nation == '' ? finalLanguage.mainLang.pleaseAddYourNation : widget.order.receiver.nation,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
@@ -127,7 +128,7 @@ class _receiver_infoState extends State<receiver_info> {
                           Container(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              widget.order.receiver.phoneNumber == '' ? 'Please add your phoneNum' : widget.order.receiver.phoneNumber,
+                              widget.order.receiver.phoneNumber == '' ? finalLanguage.mainLang.pleaseAddYourPhoneNum : widget.order.receiver.phoneNumber,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(

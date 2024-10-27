@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import '../../../../data/finalLanguage.dart';
 import '../../../../data/finaldata.dart';
 
 class voucher_app_bar extends StatelessWidget {
@@ -41,7 +42,7 @@ class voucher_app_bar extends StatelessWidget {
                   child: Container(
                     width: (width - 40)/2,
                     child: Text(
-                      "Voucher wallet",
+                      finalLanguage.mainLang.voucherWallet,
                       maxLines: 2,
                       style: TextStyle(
                         fontFamily: 'raleb',
