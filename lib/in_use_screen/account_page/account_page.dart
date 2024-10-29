@@ -14,7 +14,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../data/chatData/chatRoom.dart';
 import '../../data/chatData/messenger.dart';
 import '../../general_ingredient/utils/utils.dart';
-import '../../no_login_screen/loading_screen/loadingController.dart';
+import '../../no_login_screen/loading_screen/loading_screen.dart';
 import '../chat_room/chat_room.dart';
 import 'ingredient/language_change.dart';
 

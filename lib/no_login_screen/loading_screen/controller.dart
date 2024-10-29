@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'package:destinymain/no_login_screen/enter_referral_code_screen/enter_referral_code_screen.dart';
 import 'package:destinymain/no_login_screen/loading_screen/welcome_screen.dart';
+import 'package:destinymain/no_login_screen/lock_screen/lock_screen.dart';
 import 'package:destinymain/no_login_screen/login_screen/loginController.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +19,13 @@ class loadingController {
         finalData.account = await loginController.getAccountData(user.email.toString());
         print('Get account: ' + getAllATimeString(getCurrentTime()) + ':' + DateTime.now().millisecond.toString());
         if (finalData.account.id != '') {
-          Timer(const Duration(seconds: 3) , () => Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => main_screen())));
+          if (finalData.account.lockstatus == 0) {
+            Timer(const Duration(seconds: 3) , () => Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => lock_screen())));
+          } else if (finalData.account.lockstatus == 2) {
+            Timer(const Duration(seconds: 3) , () => Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => main_screen())));
+          } else if (finalData.account.lockstatus == 1) {
+            Timer(const Duration(seconds: 3) , () => Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => enter_referral_code_screen())));
+          }
         } else {
           toastMessage('Please check your email and password');
           Timer(const Duration(seconds: 3) , () => Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => welcome_screen())));

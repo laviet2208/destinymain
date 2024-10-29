@@ -1,6 +1,7 @@
 import 'package:destinymain/data/finalLanguage.dart';
 import 'package:destinymain/general_ingredient/generalController.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../data/finalData.dart';
 import '../../../general_ingredient/utils/utils.dart';
@@ -17,6 +18,7 @@ class account_info_screen extends StatefulWidget {
 
 class _account_info_screenState extends State<account_info_screen> {
   bool loading = false;
+  TextEditingController referral_controller = TextEditingController();
   TextEditingController firstname_controller = TextEditingController();
   TextEditingController lastname_controller = TextEditingController();
   TextEditingController yourmail_controller = TextEditingController();
@@ -34,6 +36,7 @@ class _account_info_screenState extends State<account_info_screen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    referral_controller.text = finalData.account.referralCode;
     firstname_controller.text = finalData.account.firstName;
     lastname_controller.text = finalData.account.lastName;
     yourmail_controller.text = finalData.account.username;
@@ -140,6 +143,13 @@ class _account_info_screenState extends State<account_info_screen> {
 
                               Padding(
                                 padding: EdgeInsets.only(left: 25, right: 25),
+                                child: edit_text_in_account(textEditingController: referral_controller, event: () {}, title: 'Your referral code', hint: finalLanguage.mainLang.yourAddress, readOnly: true,),
+                              ),
+
+                              SizedBox(height: 20,),
+
+                              Padding(
+                                padding: EdgeInsets.only(left: 25, right: 25),
                                 child: SizedBox(
                                   width: double.infinity,
                                   child: TextButton(
@@ -172,8 +182,6 @@ class _account_info_screenState extends State<account_info_screen> {
                                   ),
                                 ),
                               ),
-
-                              SizedBox(height: 20,),
 
                               Padding(
                                 padding: EdgeInsets.only(left: 25, right: 25),

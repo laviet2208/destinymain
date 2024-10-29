@@ -50,6 +50,12 @@ class _main_screenState extends State<main_screen> {
     print('end: ' + getAllATimeString(getCurrentTime()));
     super.initState();
     get_account_data();
+    if (finalData.account.lockstatus == 2) {
+
+    } else {
+      final reference = FirebaseDatabase.instance.ref();
+      reference.child("Account").child(finalData.account.id).child('lockstatus').set(2);
+    }
   }
 
   @override

@@ -12,12 +12,12 @@ class voucher_individual_item extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
+    double width = MediaQuery.of(context).size.width - 10;
     return Container(
       width: width,
+      height: width/(2301/879),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(5),
+        color: Color.fromARGB(255, 189, 21, 34),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.2), // màu của shadow
@@ -27,165 +27,122 @@ class voucher_individual_item extends StatelessWidget {
           ),
         ],
       ),
-      child: Padding(
-        padding: EdgeInsets.only(left: 5, right: 5),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SizedBox(height: 10,),
-
-            Container(
-              child: Row(
+      child: Row(
+        children: [
+          Expanded(
+            child: Container(
+              child: Column(
                 children: [
-                  Container(
-                    width: (width - 30)/3,
-                    height: (width - 30)/3,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage('assets/image/logo/mainlogo.png')
-                        )
-                    ),
-                  ),
+                  SizedBox(height: 5,),
 
-                  SizedBox(width: 10,),
-
-                  Expanded(
+                  Padding(
+                    padding: EdgeInsets.only(left: 22, right: 22),
                     child: Container(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              voucher.eventName,
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                fontFamily: 'rale',
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: width/25,
+                      height: width - ((width/(2301/879)) * (1599/879) - 20) - 44,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage('assets/image/decor/moon.png'),
+                        )
+                      ),
+                      child: Center(
+                        child: RichText(
+                          textAlign: TextAlign.center,
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: getStringNumber(voucher.Money),
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: width / 15,
+                                  fontFamily: 'muli',
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                          ),
-
-                          SizedBox(height: 10,),
-
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              voucher.Money >= 100 ? (finalLanguage.mainLang.voucherItem1 + getStringNumber(voucher.Money) + finalLanguage.mainLang.voucherItem2) : (finalLanguage.mainLang.voucherItem1  + voucher.Money.toStringAsFixed(0) + finalLanguage.mainLang.voucherItem3),
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                fontFamily: 'rale',
-                                color: Colors.grey,
-                                fontWeight: FontWeight.normal,
-                                fontSize: width/30,
+                              TextSpan(
+                                text: voucher.maxSale != 0 ? '%' : '\nUSDT',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: voucher.maxSale != 0 ? width / 15 : width/24,
+                                  fontFamily: 'muli',
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
+                            ],
                           ),
-
-                          SizedBox(height: 10,),
-
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            child: RichText(
-                              text: TextSpan(
-                                  children: [
-                                    TextSpan(
-                                      text: finalLanguage.mainLang.timeLimit,
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: width / 30,
-                                        fontFamily: 'rale',
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                    ),
-                                    TextSpan(
-                                      text: getDayTimeString(voucher.endTime),
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: width / 30,
-                                        fontFamily: 'rale',
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ]
-                              ),
-                            ),
-                          ),
-
-                          SizedBox(height: 10,),
-
-                          Container(
-                              alignment: Alignment.centerLeft,
-                              child: Row(
-                                children: [
-                                  Text(
-                                    voucher.id,
-                                    textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                      fontFamily: 'rale',
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: width/30,
-                                    ),
-                                  ),
-
-                                  SizedBox(width: 10,),
-
-                                  GestureDetector(
-                                    child: Container(
-                                      width: 15,
-                                      height: 15,
-                                      child: Icon(
-                                        Icons.copy,
-                                        color: Colors.grey,
-                                        size: 15,
-                                      ),
-                                    ),
-                                  ),
-
-                                  TextButton(
-                                    onPressed: () {
-                                      showDialog(
-                                        context: context,
-                                        builder: (context) {
-                                          return gift_voucher(voucher: voucher, event: event,);
-                                        },
-                                      );
-                                    },
-                                    autofocus: true,
-                                    child: Container(
-                                      alignment: Alignment.centerLeft,
-                                      child: Text(
-                                        finalLanguage.mainLang.giftThis,
-                                        style: TextStyle(
-                                          fontFamily: 'rale',
-                                          color: Colors.blue,
-                                          fontWeight: FontWeight.normal,
-                                          fontSize: 13,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              )
-                          ),
-
-                          SizedBox(height: 5,),
-                        ],
+                        ),
                       ),
                     ),
                   ),
+
+                  SizedBox(height: 3,),
+
+                  GestureDetector(
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: Text(
+                        finalLanguage.mainLang.giftThis,
+                        style: TextStyle(
+                          fontFamily: 'raleb',
+                          color: Color.fromARGB(255, 1, 162, 156),
+                          fontWeight: FontWeight.normal,
+                          fontSize: 13,
+                        ),
+                      ),
+                    ),
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return gift_voucher(voucher: voucher, event: event,);
+                        },
+                      );
+                    },
+                  ),
+
+                  SizedBox(height: 3,),
+
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 7, right: 7),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                        ),
+                        child: Center(
+                          child: Text(
+                            getDayTimeString(voucher.startTime) + ' - ' + getDayTimeString(voucher.endTime),
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'raleb',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 7.5,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  SizedBox(height: 5,),
                 ],
               ),
             ),
+          ),
 
-            SizedBox(height: 10,),
-          ],
-        ),
+          Container(
+            width: (width/(2301/879)) * (1599/879) - 20,
+            decoration: BoxDecoration(
+              color: Color.fromARGB(255, 1, 162, 156),
+              image: DecorationImage(
+                fit: BoxFit.fitHeight,
+                image: AssetImage('assets/image/decor/voucher.jpg')
+              ),
+            ),
+          ),
+        ],
       ),
+
     );
   }
 }

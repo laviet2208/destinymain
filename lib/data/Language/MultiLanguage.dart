@@ -53,6 +53,7 @@ class MultiLanguage {
   final String theOrderHasNotBeenProcessedYet;
   final String orderIsBeingProcessed;
   final String orderHasBeenCompleted;
+  final String refundOrder;
   final String theOrderHasBeenCancelled;
   final String paymentInformation;
   final String doNotSelectVoucher;
@@ -94,6 +95,7 @@ class MultiLanguage {
   final String pleaseAddYourPhoneNum;
 
   MultiLanguage({
+    required this.refundOrder,
     required this.item,
     required this.confirmAndPay,
     required this.yourNotice,

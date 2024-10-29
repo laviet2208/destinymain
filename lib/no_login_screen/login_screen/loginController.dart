@@ -16,12 +16,7 @@ class loginController {
       if (user != null && user.emailVerified) {
         finalData.account = await getAccountData(email);
         if (finalData.account.id != '') {
-          if (finalData.account.lockstatus == 1) {
-            successEvent();
-          } else {
-            failEvent();
-            toastMessage('Your account has been locked');
-          }
+          successEvent();
         } else {
           failEvent();
           toastMessage('Please check your email and password');
@@ -42,7 +37,7 @@ class loginController {
   }
 
   static Future<Account> getAccountData(String email) async {
-    Account account = Account(id: '', username: '', password: '', address: '', createTime: Time(second: 0, minute: 0, hour: 0, day: 0, month: 0, year: 0), money: 0, firstName: '', lastName: '', phoneNum: '', lockstatus: 0, voucherList: [],);
+    Account account = Account(id: '', username: '', password: '', address: '', createTime: Time(second: 0, minute: 0, hour: 0, day: 0, month: 0, year: 0), money: 0, firstName: '', lastName: '', phoneNum: '', lockstatus: 0, voucherList: [], referralCode: '',);
     print('đã khởi tạo account');
     final reference = FirebaseDatabase.instance.ref();
     print('đã khởi tạo ref');

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:destinymain/general_ingredient/generalController.dart';
 import 'package:destinymain/general_ingredient/normal_textfield.dart';
 import 'package:destinymain/general_ingredient/password_textfield.dart';
@@ -30,6 +32,12 @@ class _signup_screenState extends State<signup_screen> {
       return true;
     }
     return false;
+  }
+
+  String getRandomString(int length) {
+    const characters = 'ABCDEFGHIJKLMNOPQXYZTR123456789';
+    final random = Random();
+    return List.generate(length, (index) => characters[random.nextInt(characters.length)]).join();
   }
 
   @override
@@ -105,9 +113,10 @@ class _signup_screenState extends State<signup_screen> {
                               ),
                               onPressed: () async {
                                 if (can_continue()) {
-                                  Account account = Account(id: '', username: emailController.text.toString(), password: passController.text.toString(), address: '', createTime: getCurrentTime(), money: 0, firstName: firstnameController.text.toString(), lastName: lastnameController.text.toString(), phoneNum: '', lockstatus: 1, voucherList: []);
+                                  Account account = Account(id: '', username: emailController.text.toString(), password: passController.text.toString(), address: '', createTime: getCurrentTime(), money: 0, firstName: firstnameController.text.toString(), lastName: lastnameController.text.toString(), phoneNum: '', lockstatus: 1, voucherList: [], referralCode: '');
                                   String id = getCurrentTimeString();
                                   account.id = 'TK' + id;
+                                  account.referralCode = getRandomString(8);
                                   await signupController.signUpPressed(account,
                                         () {setState(() {loading = true;});},
                                         () {setState(() {loading = false;});},

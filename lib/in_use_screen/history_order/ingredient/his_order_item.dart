@@ -40,6 +40,11 @@ class _his_order_itemState extends State<his_order_item> {
       status = finalLanguage.mainLang.theOrderHasBeenCancelled;
       statusColor = Colors.red;
     }
+
+    if (widget.order.status == 'E') {
+      status = finalLanguage.mainLang.refundOrder;
+      statusColor = Colors.red;
+    }
   }
 
   @override

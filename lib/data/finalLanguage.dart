@@ -75,6 +75,7 @@ class finalLanguage {
     pleaseAddYourDistrict: 'thêm quận/huyện của bạn',
     pleaseAddYourNation: 'thêm quốc gia của bạn',
     pleaseAddYourPhoneNum: 'thêm số điện thoại của bạn',
+    refundOrder: 'Đơn hoàn tiền',
   );
   static MultiLanguage en = MultiLanguage(
     search: 'Search',
@@ -149,6 +150,7 @@ class finalLanguage {
     pleaseAddYourDistrict: 'Please add your District',
     pleaseAddYourNation: 'Please add your Nation',
     pleaseAddYourPhoneNum: 'Please add your PhoneNum',
+    refundOrder: 'Refund order',
   );
   static MultiLanguage ja = MultiLanguage(
     pleaseAddYourName: 'お名前を追加してください',
@@ -223,6 +225,7 @@ class finalLanguage {
     changeNumber: '数量を変更',
     item: 'アイテム (',
     confirmAndPay: '確認して支払う',
+    refundOrder: 'あなたのカート',
   );
   static MultiLanguage tq = MultiLanguage(
     pleaseAddYourName: '請添加您的姓名',
@@ -297,6 +300,7 @@ class finalLanguage {
     changeNumber: '更改數量',
     item: '項目 (',
     confirmAndPay: '確認並付款',
+    refundOrder: '更改數量',
   );
   static MultiLanguage ko = MultiLanguage(
     pleaseAddYourName: '이름을 추가하세요',
@@ -371,5 +375,6 @@ class finalLanguage {
     changeNumber: '수량 변경',
     item: '항목 (',
     confirmAndPay: '확인 및 결제',
+    refundOrder: '수량 변경',
   );
 }

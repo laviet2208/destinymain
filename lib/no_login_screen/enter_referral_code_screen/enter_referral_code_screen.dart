@@ -1,34 +1,31 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:destinymain/data/finalData.dart';
 import 'package:destinymain/general_ingredient/generalController.dart';
-import 'package:destinymain/no_login_screen/enter_referral_code_screen/enter_referral_code_screen.dart';
+import 'package:destinymain/general_ingredient/utils/utils.dart';
+import 'package:destinymain/in_use_screen/main_screen/main_screen.dart';
+import 'package:destinymain/no_login_screen/enter_referral_code_screen/enterReferralController.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import '../../data/finalData.dart';
 import '../../general_ingredient/normal_button.dart';
 import '../../general_ingredient/normal_textfield.dart';
-import '../../general_ingredient/utils/utils.dart';
-import '../../in_use_screen/main_screen/main_screen.dart';
-import '../loading_screen/welcome_screen.dart';
-import 'background.dart';
-import 'loginController.dart';
-import 'login_step_2_screen.dart';
+import '../loading_screen/loading_screen.dart';
+import '../login_screen/background.dart';
 
-class login_screen extends StatefulWidget {
-  const login_screen({super.key});
+class enter_referral_code_screen extends StatefulWidget {
+  const enter_referral_code_screen({super.key});
 
   @override
-  State<login_screen> createState() => _login_screenState();
+  State<enter_referral_code_screen> createState() => _enter_referral_code_screenState();
 }
 
-class _login_screenState extends State<login_screen> {
+class _enter_referral_code_screenState extends State<enter_referral_code_screen> {
+  final referralController = TextEditingController();
   bool loading = false;
-  final emailController = TextEditingController();
-  final passController = TextEditingController();
-
   bool can_continue() {
-    if (emailController.text.isNotEmpty && passController.text.isNotEmpty) {
-      return true;
+    if (referralController.text.isEmpty) {
+      return false;
     }
-    return false;
+    return true;
   }
 
   @override
@@ -60,9 +57,9 @@ class _login_screenState extends State<login_screen> {
                         Container(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            'Login',
+                            'Referral Code',
                             style: TextStyle(
-                              fontSize: width/8,
+                              fontSize: width/10,
                               color: Colors.black,
                               fontFamily: 'nuni',
                               fontWeight: FontWeight.bold,
@@ -73,7 +70,7 @@ class _login_screenState extends State<login_screen> {
                         Container(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            'Good to see you back! ♥',
+                            'Please use referral code for first time log in into the application! ♥',
                             style: TextStyle(
                               fontSize: width/24,
                               color: Colors.black,
@@ -85,40 +82,9 @@ class _login_screenState extends State<login_screen> {
 
                         SizedBox(height: 20,),
 
-                        normal_textfield(controller: emailController, hint: 'Your email', event: () {setState(() {});}),
+                        normal_textfield(controller: referralController, hint: 'Your referral code', event: () {setState(() {});}),
 
                         SizedBox(height: 20,),
-
-                        normal_textfield(controller: passController, hint: 'Your password', event: () {setState(() {});}),
-
-                        SizedBox(height: 5,),
-
-                        Padding(
-                          padding: EdgeInsets.only(left: 15, right: 15),
-                          child: GestureDetector(
-                            child: Container(
-                              height: 20,
-                              alignment: Alignment.centerRight,
-                              decoration: BoxDecoration(
-                                color: Colors.transparent,
-                              ),
-                              child: AutoSizeText(
-                                'Forgot password?',
-                                style: TextStyle(
-                                  fontFamily: 'rale',
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 100,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ),
-                            onTap: () {
-
-                            },
-                          ),
-                        ),
-
-                        SizedBox(height: 10,),
 
                         Padding(
                           padding: EdgeInsets.only(left: 0, right: 0),
@@ -136,24 +102,26 @@ class _login_screenState extends State<login_screen> {
                               ),
                               onPressed: () async {
                                 if (can_continue()) {
-                                  setState(() {loading = true;});
-                                  await loginController.loginHandleWeb(emailController.text.toString(), passController.text.toString(),
-                                        () {
-                                           if (finalData.account.lockstatus == 1) {
-                                             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => enter_referral_code_screen()),);
-                                           } else {
-                                             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => main_screen()),);
-                                           }
-                                        },
-                                        () {setState(() {loading = false;});},);
+                                  setState(() {
+                                    loading = true;
+                                  });
+                                  bool check = await enterReferralController.checkReferralCode(referralController.text.toString());
+                                  if (check) {
+                                    generalController.changeScreenSlide(context, main_screen());
+                                  } else {
+                                    toastMessage('Wrong code');
+                                  }
+                                  setState(() {
+                                    loading = false;
+                                  });
                                 } else {
-                                  toastMessage('Please fill all information and try again');
+                                  toastMessage('Enter code to continue');
                                 }
                               },
                               child: Padding(
                                 padding: const EdgeInsets.only(top: 7, bottom: 7),
                                 child: !loading ? Text(
-                                  'Log in',
+                                  'Continue',
                                   style: TextStyle(
                                     fontFamily: 'nuni',
                                     color: Colors.white,
@@ -168,9 +136,15 @@ class _login_screenState extends State<login_screen> {
 
                         SizedBox(height: 10,),
 
-                        normal_button(backgroundColor: Colors.transparent, overlayColor: Color.fromARGB(255, 0, 0, 0).withOpacity(0.1), borderRadius: 10, content: "Cancel", contentColor: Colors.black, padding: 0,
-                          event: () {
-                            generalController.changeScreenSlide(context, welcome_screen());
+                        normal_button(backgroundColor: Colors.transparent, overlayColor: Color.fromARGB(255, 0, 0, 0).withOpacity(0.1), borderRadius: 10, content: "Log out", contentColor: Colors.red, padding: 0,
+                          event: () async {
+                            final FirebaseAuth _auth = FirebaseAuth.instance;
+                            finalData.account.id = '';
+                            finalData.account.username = '';
+                            finalData.account.voucherList.clear();
+                            await _auth.signOut();
+                            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => loading_screen()), (route) => false,);
+
                           },
                         ),
 
@@ -185,9 +159,7 @@ class _login_screenState extends State<login_screen> {
         ),
       ),
       onWillPop: () async {
-        generalController.changeScreenSlide(context, welcome_screen());
-        return true;
+        return false;
       },
-    );
-  }
+    );  }
 }
