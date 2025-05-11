@@ -1,4 +1,8 @@
+import 'package:destinymain/data/cartData/CartData.dart';
 import 'package:destinymain/data/finalData.dart';
+import 'package:destinymain/general_ingredient/generalController.dart';
+import 'package:destinymain/in_use_screen/page/cart_page/ingredient/caculate_total_money_for_buy_now.dart';
+import 'package:destinymain/in_use_screen/page/cart_page/ingredient/item_cart_buy_now.dart';
 import 'package:flutter/material.dart';
 import '../../../data/otherData/Tool.dart';
 import '../../../data/voucherData/Voucher.dart';
@@ -7,14 +11,16 @@ import 'ingredient/cart_page_appbar.dart';
 import 'ingredient/item_cart.dart';
 import 'ingredient/no_product_container.dart';
 
-class cart_page extends StatefulWidget {
-  const cart_page({super.key});
+class cart_for_buy_now_screen extends StatefulWidget {
+  final List<Cartdata> cartList;
+  final Widget beforeWidget;
+  const cart_for_buy_now_screen({super.key, required this.cartList, required this.beforeWidget});
 
   @override
-  State<cart_page> createState() => _cart_pageState();
+  State<cart_for_buy_now_screen> createState() => _cart_for_buy_now_screenState();
 }
 
-class _cart_pageState extends State<cart_page> {
+class _cart_for_buy_now_screenState extends State<cart_for_buy_now_screen> {
   final Voucher voucher = Voucher(id: '', Money: 0, mincost: 0, startTime: getCurrentTime(), endTime: getCurrentTime(), useCount: 0, maxCount: 0, eventName: '', type: 0, perCustom: 0, CustomList: [], maxSale: 0);
 
   @override
@@ -61,13 +67,13 @@ class _cart_pageState extends State<cart_page> {
                       children: [
                         SizedBox(height: 10,),
 
-                        finalData.cartList.isEmpty ? no_product_container() : Container(
+                        widget.cartList.isEmpty ? no_product_container() : Container(
                           child: ListView.builder(
-                            itemCount: finalData.cartList.length,
+                            itemCount: widget.cartList.length,
                             physics: NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             itemBuilder: (context, index) {
-                              return item_cart(cartdata: finalData.cartList[index], event: () {setState(() {});},);
+                              return item_cart_buy_now(cartdata: widget.cartList[index], event: () {setState(() {});},);
                             },
                           ),
                         ),
@@ -76,7 +82,7 @@ class _cart_pageState extends State<cart_page> {
 
                         Padding(
                           padding: EdgeInsets.only(left: 5, right: 5),
-                          child: caculate_total_money(voucher: voucher,),
+                          child: caculate_total_money_for_buy_now(voucher: voucher, cartList: widget.cartList,),
                         ),
 
                         SizedBox(height: 30,),
@@ -90,7 +96,8 @@ class _cart_pageState extends State<cart_page> {
         ),
       ),
       onWillPop: () async {
-        return false;
+        generalController.changeScreenSlide(context, widget.beforeWidget);
+        return true;
       },
     );
   }

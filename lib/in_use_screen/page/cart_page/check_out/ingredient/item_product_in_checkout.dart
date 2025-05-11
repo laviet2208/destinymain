@@ -16,11 +16,11 @@ class item_product_in_checkout extends StatefulWidget {
 }
 
 class _item_product_in_checkoutState extends State<item_product_in_checkout> {
-  late Uint8List image;
+  // late Uint8List image;
 
   @override
   void initState() {
-    image = Uint8List.fromList(base64Decode(widget.cartdata.dimension.image));
+    // image = Uint8List.fromList(base64Decode(widget.cartdata.dimension.image));
     super.initState();
   }
 
@@ -56,7 +56,7 @@ class _item_product_in_checkoutState extends State<item_product_in_checkout> {
                     padding: EdgeInsets.all(3),
                     child:ClipRRect(
                       borderRadius: BorderRadius.circular(10),
-                      child: Image.memory(image, fit: BoxFit.fitHeight,),
+                      child: Image.network(widget.cartdata.dimension.image, fit: BoxFit.fitHeight,),
                     ),
                   ),
                 ),

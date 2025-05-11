@@ -1,3 +1,4 @@
+import 'package:destinymain/data/finalLanguage.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../data/finaldata.dart';
@@ -30,7 +31,7 @@ class _change_to_customer_careState extends State<change_to_customer_care> {
               child: Container(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'The system will transfer you to the customer care department to transact.',
+                  finalLanguage.mainLang.thissystemwilltranfer,
                   textAlign: TextAlign.start,
                   style: TextStyle(
                     fontSize: width/30,
@@ -83,7 +84,7 @@ class _change_to_customer_careState extends State<change_to_customer_care> {
                   ),
                 ),
                 onTap: () {
-                  // launch("https://t.me/Buysmart_support");
+                  launch("https://t.me/Destinyusa1990");
                 },
               ),
             ),

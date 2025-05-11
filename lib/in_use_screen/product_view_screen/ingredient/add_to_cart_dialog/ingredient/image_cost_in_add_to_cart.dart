@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import '../../../../../data/otherData/Tool.dart';
 
 class image_cost_in_add_to_cart extends StatelessWidget {
-  final Uint8List image;
+  final String image;
   final Dimension selectDimension;
   const image_cost_in_add_to_cart({super.key, required this.image, required this.selectDimension});
 
@@ -24,7 +24,7 @@ class image_cost_in_add_to_cart extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.grey,
               image: DecorationImage(
-                image: MemoryImage(image),
+                image: NetworkImage(image),
               ),
             ),
           ),

@@ -77,6 +77,7 @@ class _preview_screenState extends State<preview_screen> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
+          automaticallyImplyLeading: false,
           title: main_page_app_bar(),
         ),
         body: Container(

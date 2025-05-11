@@ -165,9 +165,9 @@ class _his_order_itemState extends State<his_order_item> {
                         child: Text('Yes', style: TextStyle(color: Colors.red),),
                         onPressed: () async {
                           DatabaseReference databaseRef = FirebaseDatabase.instance.ref();
-                          await databaseRef.child('Order').child(widget.order.id).child('status').set('D');
+                          await databaseRef.child('Order').child(widget.order.id).child('status').set('B');
                           toastMessage('Cancel success');
-                          widget.order.status = 'D';
+                          widget.order.status = 'B';
                           setState(() {
                             get_status();
                           });

@@ -60,7 +60,7 @@ class _receiver_infoState extends State<receiver_info> {
                                 fontSize: width/25,
                                 color: Colors.black,
                                 fontFamily: 'sf',
-                                fontWeight: FontWeight.normal,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
@@ -110,20 +110,20 @@ class _receiver_infoState extends State<receiver_info> {
                           //   ),
                           // ),
 
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              widget.order.receiver.nation == '' ? finalLanguage.mainLang.pleaseAddYourNation : widget.order.receiver.nation,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontSize: width/25,
-                                color: Colors.black,
-                                fontFamily: 'muli',
-                                fontWeight: FontWeight.normal,
-                              ),
-                            ),
-                          ),
+                          // Container(
+                          //   alignment: Alignment.centerLeft,
+                          //   child: Text(
+                          //     widget.order.receiver.nation == '' ? finalLanguage.mainLang.pleaseAddYourNation : widget.order.receiver.nation,
+                          //     maxLines: 1,
+                          //     overflow: TextOverflow.ellipsis,
+                          //     style: TextStyle(
+                          //       fontSize: width/25,
+                          //       color: Colors.black,
+                          //       fontFamily: 'muli',
+                          //       fontWeight: FontWeight.normal,
+                          //     ),
+                          //   ),
+                          // ),
 
                           Container(
                             alignment: Alignment.centerLeft,
@@ -170,57 +170,57 @@ class _receiver_infoState extends State<receiver_info> {
 
           SizedBox(height: 10,),
 
-          GestureDetector(
-            child: Container(
-              child: Row(
-                children: [
-                  Container(
-                    width: (width - 50)/3,
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Note',
-                      style: TextStyle(
-                        fontFamily: 'muli',
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: width/25,
-                      ),
-                    ),
-                  ),
-
-                  SizedBox(width: 10,),
-
-                  Expanded(
-                    child: Container(
-                      child: Text(
-                        widget.order.note == '' ? 'Click to add note' : widget.order.note,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontSize: width/25,
-                          color: Colors.black,
-                          fontFamily: 'muli',
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  SizedBox(width: 10,),
-                ],
-              ),
-            ),
-            onTap: () {
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return update_note(order: widget.order, event: () {setState(() {});},);
-                },
-              );
-            },
-          ),
-
-          SizedBox(height: 10,),
+          // GestureDetector(
+          //   child: Container(
+          //     child: Row(
+          //       children: [
+          //         Container(
+          //           width: (width - 50)/3,
+          //           alignment: Alignment.centerLeft,
+          //           child: Text(
+          //             'Note',
+          //             style: TextStyle(
+          //               fontFamily: 'muli',
+          //               color: Colors.black,
+          //               fontWeight: FontWeight.bold,
+          //               fontSize: width/25,
+          //             ),
+          //           ),
+          //         ),
+          //
+          //         SizedBox(width: 10,),
+          //
+          //         Expanded(
+          //           child: Container(
+          //             child: Text(
+          //               widget.order.note == '' ? 'Click to add note' : widget.order.note,
+          //               maxLines: 1,
+          //               overflow: TextOverflow.ellipsis,
+          //               style: TextStyle(
+          //                 fontSize: width/25,
+          //                 color: Colors.black,
+          //                 fontFamily: 'muli',
+          //                 fontWeight: FontWeight.normal,
+          //               ),
+          //             ),
+          //           ),
+          //         ),
+          //
+          //         SizedBox(width: 10,),
+          //       ],
+          //     ),
+          //   ),
+          //   onTap: () {
+          //     showDialog(
+          //       context: context,
+          //       builder: (context) {
+          //         return update_note(order: widget.order, event: () {setState(() {});},);
+          //       },
+          //     );
+          //   },
+          // ),
+          //
+          // SizedBox(height: 10,),
         ],
       ),
     );

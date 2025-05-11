@@ -29,6 +29,7 @@ class MultiLanguage {
   final String yourVouchers;
   final String yourCart;
   final String language;
+  final String voucherhistory;
 
   ///searchScreen
   final String searchProductOnApp;
@@ -48,6 +49,13 @@ class MultiLanguage {
   final String deposit;
   final String withdraw;
   final String historyTransaction;
+  final String thissystemwilltranfer;
+  final String filloutform;
+  final String enterwalletaddress;
+  final String completetheform;
+  final String othermoney;
+  final String verifyAccount;
+  final String verifyAccounttosubmit;
 
   ///historyOrderScreen
   final String theOrderHasNotBeenProcessedYet;
@@ -93,21 +101,33 @@ class MultiLanguage {
   final String pleaseAddYourDistrict;
   final String pleaseAddYourNation;
   final String pleaseAddYourPhoneNum;
+  final String Pleasefillreceiverinfomation;
+  final String youarenotenoughmoney;
 
   MultiLanguage({
     required this.refundOrder,
+    required this.voucherhistory,
+    required this.completetheform,
+    required this.thissystemwilltranfer,
+    required this.enterwalletaddress,
+    required this.othermoney,
+    required this.filloutform,
     required this.item,
     required this.confirmAndPay,
     required this.yourNotice,
     required this.search,
+    required this.youarenotenoughmoney,
     required this.flashSaleJointNow,
     required this.categories,
     required this.seeAll,
     required this.topProducts,
+    required this.verifyAccount,
+    required this.verifyAccounttosubmit,
     required this.thisAdsIsNotHaveProductToGo,
     required this.oOPSFlashSaleHasntStartedYet,
     required this.searchProductOnApp,
     required this.home,
+    required this.Pleasefillreceiverinfomation,
     required this.account,
     required this.cart,
     required this.notification,

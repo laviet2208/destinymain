@@ -13,7 +13,7 @@ class loginController {
     try {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(email: email, password: password);
       User? user = userCredential.user;
-      if (user != null && user.emailVerified) {
+      if (user != null) {
         finalData.account = await getAccountData(email);
         if (finalData.account.id != '') {
           successEvent();

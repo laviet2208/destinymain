@@ -1,3 +1,4 @@
+import 'package:destinymain/data/finalData.dart';
 import 'package:destinymain/in_use_screen/main_screen/main_screen.dart';
 import 'package:destinymain/in_use_screen/page/main_page/ingredient/flashsale_button/flashsale_button.dart';
 import 'package:flutter/material.dart';
@@ -80,6 +81,7 @@ class _main_pageState extends State<main_page> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
+          automaticallyImplyLeading: false,
           title: main_page_app_bar(),
         ),
         body: Container(
@@ -147,6 +149,9 @@ class _main_pageState extends State<main_page> {
         ),
       ),
       onWillPop: () async {
+        if (finalData.account.id != '') {
+          return false;
+        }
         generalController.changeScreenFade(context, welcome_screen());
         return true;
       },

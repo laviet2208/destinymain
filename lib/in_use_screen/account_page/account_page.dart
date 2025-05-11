@@ -5,6 +5,7 @@ import 'package:destinymain/in_use_screen/account_page/account_info_screen/accou
 import 'package:destinymain/in_use_screen/account_page/ingredient/account_page_appbar.dart';
 import 'package:destinymain/in_use_screen/account_page/ingredient/feature_button.dart';
 import 'package:destinymain/in_use_screen/history_order/history_order_screen.dart';
+import 'package:destinymain/in_use_screen/history_voucher/history_voucher_screen.dart';
 import 'package:destinymain/in_use_screen/wallet_info/wallet_info.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -82,6 +83,7 @@ class _account_pageState extends State<account_page> {
               child: Scaffold(
                 appBar: AppBar(
                   backgroundColor: Colors.transparent,
+                  automaticallyImplyLeading: false,
                   title: account_page_appbar(),
                 ),
                 backgroundColor: Colors.transparent,
@@ -166,6 +168,25 @@ class _account_pageState extends State<account_page> {
 
                       Padding(
                         padding: EdgeInsets.only(left: 20, right: 20),
+                        child: feature_button(iconData: Icons.history, title: finalLanguage.mainLang.voucherhistory, event: () { generalController.changeScreenSlide(context, history_voucher_screen()); },),
+                      ),
+
+                      SizedBox(height: 18,),
+
+                      Padding(
+                        padding: EdgeInsets.only(left: 15, right: 15),
+                        child: Container(
+                          height: 0.5,
+                          decoration: BoxDecoration(
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+
+                      SizedBox(height: 18,),
+
+                      Padding(
+                        padding: EdgeInsets.only(left: 20, right: 20),
                         child: feature_button(iconData: Icons.chat_outlined, title: finalLanguage.mainLang.customerCare, event: () {
                           showDialog(
                             context: context,
@@ -220,7 +241,7 @@ class _account_pageState extends State<account_page> {
                                             ),
                                           ),
                                           onTap: () {
-                                            // launch("https://t.me/Buysmart_support");
+                                            launch("https://t.me/Destinyusa1990");
                                           },
                                         ),
                                       ),

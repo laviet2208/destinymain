@@ -5,18 +5,18 @@ import 'package:flutter/material.dart';
 import '../../../../data/cartData/CartData.dart';
 import '../../../../data/otherData/Tool.dart';
 import '../../../../data/finalData.dart';
-import '../../../page/cart_page/ingredient/change_number.dart';
+import 'change_number.dart';
 
-class item_cart extends StatefulWidget {
+class item_cart_buy_now extends StatefulWidget {
   final Cartdata cartdata;
   final VoidCallback event;
-  const item_cart({super.key, required this.cartdata, required this.event});
+  const item_cart_buy_now({super.key, required this.cartdata, required this.event});
 
   @override
-  State<item_cart> createState() => _item_cartState();
+  State<item_cart_buy_now> createState() => _item_cart_buy_nowState();
 }
 
-class _item_cartState extends State<item_cart> {
+class _item_cart_buy_nowState extends State<item_cart_buy_now> {
   // late Uint8List image;
 
   @override
@@ -166,47 +166,6 @@ class _item_cartState extends State<item_cart> {
                 ),
 
                 SizedBox(width: 10,),
-              ],
-            ),
-          ),
-
-          Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                TextButton(
-                  onPressed: () {
-                    finalData.cartListSale.remove(widget.cartdata);
-                    widget.event();
-                  },
-                  child: Text(
-                    finalLanguage.mainLang.remove,
-                    style: TextStyle(
-                      fontFamily: 'muli',
-                      color: Colors.blue,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-
-                TextButton(
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return change_cart_number(cartdata: widget.cartdata, event: () {setState(() {});});
-                      },
-                    );
-                  },
-                  child: Text(
-                    finalLanguage.mainLang.changeNumber,
-                    style: TextStyle(
-                      fontFamily: 'muli',
-                      color: Colors.blue,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
               ],
             ),
           ),

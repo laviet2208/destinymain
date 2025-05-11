@@ -1,3 +1,4 @@
+import 'package:destinymain/data/finalLanguage.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import '../../../../data/MoneyRequest/MoneyRequest.dart';
@@ -14,6 +15,7 @@ class enter_email_and_password extends StatefulWidget {
 
 class _enter_email_and_passwordState extends State<enter_email_and_password> {
   bool loading = false;
+  bool _obscureText = true;
   TextEditingController userController = TextEditingController();
   TextEditingController passController = TextEditingController();
 
@@ -30,7 +32,7 @@ class _enter_email_and_passwordState extends State<enter_email_and_password> {
         text: TextSpan(
             children: [
               TextSpan(
-                text: 'Verify account\n',
+                text: finalLanguage.mainLang.verifyAccount + '\n',
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 15,
@@ -39,7 +41,7 @@ class _enter_email_and_passwordState extends State<enter_email_and_password> {
                 ),
               ),
               TextSpan(
-                text: 'Verify account to submit withdrawal request!',
+                text: finalLanguage.mainLang.verifyAccounttosubmit,
                 style: TextStyle(
                   color: Colors.red,
                   fontSize: 13,
@@ -68,7 +70,7 @@ class _enter_email_and_passwordState extends State<enter_email_and_password> {
                       // border: InputBorder.none,
                       fillColor: Colors.transparent, // Background color when not focused
                       contentPadding: EdgeInsets.all(0),
-                      hintText: 'Enter your email',
+                      hintText: finalLanguage.mainLang.yourEmail,
                       hintStyle: TextStyle(color: Colors.grey[600]),
                     ),
                     cursorColor: Color.fromARGB(255, 23, 87, 83),
@@ -84,13 +86,23 @@ class _enter_email_and_passwordState extends State<enter_email_and_password> {
                   padding: EdgeInsets.only(top: 0, bottom: 0, left: 20, right: 10),
                   child: TextField(
                     controller: passController,
+                    obscureText: _obscureText,
                     decoration: InputDecoration(
                       filled: true,
                       // border: InputBorder.none,
                       fillColor: Colors.transparent, // Background color when not focused
-                      contentPadding: EdgeInsets.all(0),
-                      hintText: 'Enter your password',
+                      contentPadding: EdgeInsets.only(top: 10),
+                      hintText: 'Password',
                       hintStyle: TextStyle(color: Colors.grey[600]),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _obscureText ? Icons.visibility : Icons.visibility_off,
+                          size: 20,
+                        ),
+                        onPressed: () {
+                          setState(() => _obscureText = !_obscureText);
+                        },
+                      ),
                     ),
                     cursorColor: Color.fromARGB(255, 23, 87, 83),
                   ),

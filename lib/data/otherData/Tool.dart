@@ -99,7 +99,7 @@ double getVoucherSale(Voucher voucher, double cost) {
     money = voucher.Money;
   }
 
-  return money;
+  return 0;
 }
 
 String generateID(int count) {

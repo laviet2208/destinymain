@@ -2,8 +2,6 @@ import 'package:destinymain/general_ingredient/generalController.dart';
 import 'package:destinymain/general_ingredient/normal_button.dart';
 import 'package:destinymain/no_login_screen/preview_screen/preview_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../login_screen/login_screen.dart';
 import '../signup_screen/signup_screen.dart';
 

@@ -60,10 +60,12 @@ class voucher_individual_item extends StatelessWidget {
                                 ),
                               ),
                               TextSpan(
-                                text: voucher.maxSale != 0 ? '%' : '\nUSDT',
+                                // text: voucher.maxSale != 0 ? '%' : '\nUSDT',
+                                text: "\nVoucher",
                                 style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: voucher.maxSale != 0 ? width / 15 : width/24,
+                                  // fontSize: voucher.maxSale != 0 ? width / 15 : width/24,
+                                  fontSize: 10,
                                   fontFamily: 'muli',
                                   fontWeight: FontWeight.bold,
                                 ),

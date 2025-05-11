@@ -2,6 +2,7 @@ import 'package:destinymain/data/finalLanguage.dart';
 import 'package:destinymain/in_use_screen/account_page/account_page.dart';
 import 'package:destinymain/in_use_screen/page/main_page/main_page.dart';
 import 'package:destinymain/in_use_screen/page/notice_page/notice_page.dart';
+import 'package:destinymain/in_use_screen/page/voucher_page/ingredient/individual_voucher_page.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import '../../data/Account/Account.dart';
@@ -32,6 +33,7 @@ class _main_screenState extends State<main_screen> {
       return notice_page();
     }
     if (index == 4) {
+      // return voucher_page();
       return voucher_page();
     }
     return Container();
@@ -62,6 +64,9 @@ class _main_screenState extends State<main_screen> {
   Widget build(BuildContext context) {
     return WillPopScope(
       child: Scaffold(
+        // appBar: AppBar(
+        //   automaticallyImplyLeading: false,
+        // ),
         backgroundColor: Color.fromARGB(255, 240, 241, 242),
         body: getBody(finalData.currentPage),
         bottomNavigationBar: Padding(

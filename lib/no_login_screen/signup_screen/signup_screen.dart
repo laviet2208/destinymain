@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:destinymain/general_ingredient/PasswordField.dart';
 import 'package:destinymain/general_ingredient/generalController.dart';
 import 'package:destinymain/general_ingredient/normal_textfield.dart';
 import 'package:destinymain/general_ingredient/password_textfield.dart';
@@ -79,13 +81,21 @@ class _signup_screenState extends State<signup_screen> {
                           ),
                         ),
 
-                        SizedBox(height: height/4,),
+                        SizedBox(height: height/4.5,),
 
                         normal_textfield(controller: emailController, hint: 'Your email', event: () {}),
 
                         SizedBox(height: 10,),
 
-                        password_textfield(controller: passController, hint: 'Password', event: () {}),
+                        PasswordField(
+                          controller: passController,
+                          hint: 'Your password',
+                          onChanged: () {
+                            // setState(() {
+                            //
+                            // });
+                          },
+                        ),
 
                         SizedBox(height: 10,),
 
@@ -95,7 +105,34 @@ class _signup_screenState extends State<signup_screen> {
 
                         normal_textfield(controller: lastnameController, hint: 'Your last name', event: () {}),
 
-                        SizedBox(height: 10,),
+                        SizedBox(height: 16,),
+
+                        Padding(
+                          padding: EdgeInsets.only(left: 15, right: 15),
+                          child: GestureDetector(
+                            child: Container(
+                              height: 16,
+                              alignment: Alignment.centerRight,
+                              decoration: BoxDecoration(
+                                color: Colors.transparent,
+                              ),
+                              child: AutoSizeText(
+                                "You already have an account? Log in now!",
+                                style: TextStyle(
+                                  fontFamily: 'rale',
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 100,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                            onTap: () {
+                              generalController.changeScreenSlide(context, signup_screen());
+                            },
+                          ),
+                        ),
+
+                        SizedBox(height: 16,),
 
                         Padding(
                           padding: EdgeInsets.only(left: 0, right: 0),
@@ -120,7 +157,7 @@ class _signup_screenState extends State<signup_screen> {
                                   await signupController.signUpPressed(account,
                                         () {setState(() {loading = true;});},
                                         () {setState(() {loading = false;});},
-                                        () {setState(() {loading = false;}); toastMessage('PLease check your email to verify'); generalController.changeScreenFade(context, login_screen());},
+                                        () {setState(() {loading = false;}); toastMessage('Signup success'); generalController.changeScreenFade(context, login_screen());},
                                   );
                                 } else {
                                   toastMessage('please fill all infomation');

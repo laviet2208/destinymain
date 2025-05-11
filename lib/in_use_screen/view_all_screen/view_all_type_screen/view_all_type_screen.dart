@@ -74,6 +74,7 @@ class _view_all_type_screenState extends State<view_all_type_screen> {
               child: Scaffold(
                 appBar: AppBar(
                   backgroundColor: Colors.transparent,
+                  automaticallyImplyLeading: false,
                   title: view_all_type_appbar(),
                 ),
                 backgroundColor: Colors.transparent,
@@ -99,7 +100,8 @@ class _view_all_type_screenState extends State<view_all_type_screen> {
                                 return GestureDetector(
                                   child: item_product_type(productType: typeList[index]),
                                   onTap: () {
-                                    generalController.changeScreenFade(context, view_all_product_in_type(productType: mainpage_final_data.typeList[index], beforeWidget: widget));
+                                    print(typeList[index].name);
+                                    generalController.changeScreenFade(context, view_all_product_in_type(productType: typeList[index], beforeWidget: widget));
                                   },
                                 );
                               },

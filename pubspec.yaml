@@ -48,7 +48,7 @@ dependencies:
   flutter_typeahead: ^5.2.0
   flutter_locales: ^3.0.2
   shared_preferences: ^2.2.3
-  image_picker: ^1.0.4
+  image_picker: ^1.1.2
   flutter_widget_from_html: ^0.15.1
   shimmer: ^3.0.0
   image: ^4.3.0

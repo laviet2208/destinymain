@@ -1,3 +1,4 @@
+import 'package:destinymain/data/finalLanguage.dart';
 import 'package:flutter/material.dart';
 import '../../../../../data/finalData.dart';
 import '../../../../../data/orderData/Order.dart';
@@ -18,14 +19,14 @@ class _update_receiver_infoState extends State<update_receiver_info> {
   final districtController = TextEditingController();
   // final cityController = TextEditingController();
   // final provinceController = TextEditingController();
-  final nationController = TextEditingController();
-  final podCodeController = TextEditingController();
+  // final nationController = TextEditingController();
+  // final podCodeController = TextEditingController();
   final phoneController = TextEditingController();
-  final addressController = TextEditingController();
+  // final addressController = TextEditingController();
 
   bool _cansave() {
     if (nameController.text.isNotEmpty && districtController.text.isNotEmpty &&
-        nationController.text.isNotEmpty && podCodeController.text.isNotEmpty && phoneController.text.isNotEmpty && addressController.text.isNotEmpty) {
+        phoneController.text.isNotEmpty) {
       return true;
     }
     return false;
@@ -39,10 +40,10 @@ class _update_receiver_infoState extends State<update_receiver_info> {
     districtController.text = widget.order.receiver.district;
     // cityController.text = widget.order.receiver.city;
     // provinceController.text = widget.order.receiver.province;
-    nationController.text = widget.order.receiver.nation;
-    podCodeController.text = widget.order.receiver.podcode;
+    // nationController.text = widget.order.receiver.nation;
+    // podCodeController.text = widget.order.receiver.podcode;
     phoneController.text = widget.order.receiver.phoneNumber;
-    addressController.text = widget.order.receiver.address;
+    // addressController.text = widget.order.receiver.address;
   }
 
   @override
@@ -62,14 +63,14 @@ class _update_receiver_infoState extends State<update_receiver_info> {
           children: [
             SizedBox(
               height: 50,
-              child: edit_text_in_signup_step_1(controller: nameController, hint: 'Enter your name', event: () {setState(() {});  },),
+              child: edit_text_in_signup_step_1(controller: nameController, hint: finalLanguage.mainLang.pleaseAddYourName, event: () {setState(() {});  },),
             ),
 
             SizedBox(height: 10,),
 
             SizedBox(
               height: 50,
-              child: edit_text_in_signup_step_1(controller: districtController, hint: 'Enter your district', event: () {setState(() {});  },),
+              child: edit_text_in_signup_step_1(controller: districtController, hint: finalLanguage.mainLang.pleaseAddYourDistrict, event: () {setState(() {});  },),
             ),
 
             // SizedBox(height: 10,),
@@ -88,31 +89,31 @@ class _update_receiver_infoState extends State<update_receiver_info> {
 
             SizedBox(height: 10,),
 
+            // SizedBox(
+            //   height: 50,
+            //   child: edit_text_in_signup_step_1(controller: nationController, hint: 'Enter your nation', event: () {setState(() {});  },),
+            // ),
+            //
+            // SizedBox(height: 10,),
+
+            // SizedBox(
+            //   height: 50,
+            //   child: edit_text_in_signup_step_1(controller: podCodeController, hint: 'Enter your podcode', event: () {setState(() {});  },),
+            // ),
+            //
+            // SizedBox(height: 10,),
+
             SizedBox(
               height: 50,
-              child: edit_text_in_signup_step_1(controller: nationController, hint: 'Enter your nation', event: () {setState(() {});  },),
+              child: edit_text_in_signup_step_1(controller: phoneController, hint: finalLanguage.mainLang.pleaseAddYourPhoneNum, event: () {setState(() {});  },),
             ),
 
             SizedBox(height: 10,),
 
-            SizedBox(
-              height: 50,
-              child: edit_text_in_signup_step_1(controller: podCodeController, hint: 'Enter your podcode', event: () {setState(() {});  },),
-            ),
-
-            SizedBox(height: 10,),
-
-            SizedBox(
-              height: 50,
-              child: edit_text_in_signup_step_1(controller: phoneController, hint: 'Enter your phoneNum', event: () {setState(() {});  },),
-            ),
-
-            SizedBox(height: 10,),
-
-            SizedBox(
-              height: 50,
-              child: edit_text_in_signup_step_1(controller: addressController, hint: 'Enter specific address', event: () {setState(() {});  },),
-            ),
+            // SizedBox(
+            //   height: 50,
+            //   child: edit_text_in_signup_step_1(controller: addressController, hint: 'Enter specific address', event: () {setState(() {});  },),
+            // ),
           ],
         ),
       ),
@@ -123,11 +124,11 @@ class _update_receiver_infoState extends State<update_receiver_info> {
               widget.order.receiver.name = nameController.text.toString();
               widget.order.receiver.district = districtController.text.toString();
               // widget.order.receiver.city = cityController.text.toString();
-              widget.order.receiver.nation = nationController.text.toString();
-              widget.order.receiver.podcode = podCodeController.text.toString();
+              // widget.order.receiver.nation = nationController.text.toString();
+              // widget.order.receiver.podcode = podCodeController.text.toString();
               // widget.order.receiver.province = provinceController.text.toString();
               widget.order.receiver.phoneNumber = phoneController.text.toString();
-              widget.order.receiver.address = addressController.text.toString();
+              // widget.order.receiver.address = addressController.text.toString();
               widget.event();
               Navigator.of(context).pop();
             } else {

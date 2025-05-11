@@ -61,6 +61,7 @@ class _chatRoomScreenState extends State<chatRoomScreen> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
+          // automaticallyImplyLeading: false,
           leading: IconButton(
             icon: Icon(Icons.arrow_back_ios_new_outlined, color: Colors.blueGrey,),
             onPressed: () {

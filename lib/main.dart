@@ -17,18 +17,19 @@ Future<void> main() async {
   print('Start: ' + getAllATimeString(getCurrentTime()));
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    // options: FirebaseOptions(
-    //     apiKey: "AIzaSyBcRF7x0mYTbTEwm3C_DTEFOPvhqyX7X-c",
-    //     authDomain: "destiny-usa.firebaseapp.com",
-    //     databaseURL: "https://destiny-usa-default-rtdb.firebaseio.com",
-    //     projectId: "destiny-usa",
-    //     storageBucket: "destiny-usa.appspot.com",
-    //     messagingSenderId: "96965763722",
-    //     appId: "1:96965763722:web:683ba60b8d977c7dbb0373",
-    //     measurementId: "G-B7X16QF6RK"
-    //   ),
+    options: FirebaseOptions(
+        apiKey: "AIzaSyBcRF7x0mYTbTEwm3C_DTEFOPvhqyX7X-c",
+        authDomain: "destiny-usa.firebaseapp.com",
+        databaseURL: "https://destiny-usa-default-rtdb.firebaseio.com",
+        projectId: "destiny-usa",
+        storageBucket: "destiny-usa.appspot.com",
+        messagingSenderId: "96965763722",
+        appId: "1:96965763722:web:683ba60b8d977c7dbb0373",
+        measurementId: "G-B7X16QF6RK"
+      ),
   );
   print('Start1: ' + getAllATimeString(getCurrentTime()));
+
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? language = prefs.getString('language');
   if (language != null) {

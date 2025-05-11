@@ -1,21 +1,66 @@
+import 'package:destinymain/data/finalData.dart';
+import 'package:destinymain/data/historyData/VoucherTransaction.dart';
+import 'package:destinymain/in_use_screen/history_voucher/his_voucher_appbar.dart';
+import 'package:destinymain/in_use_screen/history_voucher/his_voucher_item.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 import '../../../data/orderData/Order.dart';
 import '../main_screen/main_screen.dart';
-import 'controller/history_order_controller.dart';
-import 'ingredient/his_order_appbar.dart';
-import 'ingredient/his_order_item.dart';
-class history_order_screen extends StatefulWidget {
-  const history_order_screen({super.key});
+// import 'controller/history_order_controller.dart';
+// import 'ingredient/his_order_appbar.dart';
+// import 'ingredient/his_order_item.dart';
+class history_voucher_screen extends StatefulWidget {
+  const history_voucher_screen({super.key});
+
   @override
-  State<history_order_screen> createState() => _history_order_screenState();
+  State<history_voucher_screen> createState() => _history_voucher_screenState();
 }
 
-class _history_order_screenState extends State<history_order_screen> {
-  List<Order> orderList = [];
+class _history_voucher_screenState extends State<history_voucher_screen> {
+  List<VoucherTransactionHis> hisList = [];
+
+  // Future<List<VoucherTransactionHis>> get_voucher_his_list() async {
+  //   List<VoucherTransactionHis> list = [];
+  //   final reference = FirebaseDatabase.instance.ref();
+  //   DatabaseEvent snapshot = await reference.child("VoucherSendHis").orderByChild('sender').equalTo(finalData.account.id).once();
+  //   final dynamic data = snapshot.snapshot.value;
+  //   data.forEach((key, value) {
+  //     VoucherTransactionHis data = VoucherTransactionHis.fromJson(value);
+  //     list.add(data);
+  //   });
+  //   return list;
+  // }
+
+  Future<List<VoucherTransactionHis>> get_voucher_his_list() async {
+    final id = finalData.account.id;
+    final ref = FirebaseDatabase.instance.ref().child('VoucherSendHis');
+    final List<VoucherTransactionHis> list = [];
+    final seenKeys = <String>{};
+
+    // Chạy đồng thời 2 query
+    final results = await Future.wait([
+      ref.orderByChild('sender').equalTo(id).once(),
+      ref.orderByChild('receiver').equalTo(id).once(),
+    ]);
+
+    for (final event in results) {
+      final data = event.snapshot.value;
+      if (data is Map) {
+        data.forEach((key, value) {
+          if (!seenKeys.contains(key)) {
+            seenKeys.add(key);
+            list.add(VoucherTransactionHis.fromJson(value));
+          }
+        });
+      }
+    }
+
+    return list;
+  }
 
   Future<void> _refresh() async {
-    orderList = await history_order_controller.get_order_list();
+    hisList = await get_voucher_his_list();
     setState(() {
 
     });
@@ -34,7 +79,7 @@ class _history_order_screenState extends State<history_order_screen> {
     return WillPopScope(
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white
+            color: Colors.white
         ),
         child: Stack(
           children: <Widget>[
@@ -70,14 +115,14 @@ class _history_order_screenState extends State<history_order_screen> {
                       Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => main_screen()));
                     },
                   ),
-                  title: his_order_appbar(),
+                  title: his_voucher_appbar(),
                 ),
                 body: RefreshIndicator(
                   child: Container(
                     alignment: Alignment.center,
                     child: Padding(
                       padding: EdgeInsets.only(left: 15, right: 15),
-                      child: orderList.length != 0 ? ListView(
+                      child: hisList.length != 0 ? ListView(
                         padding: EdgeInsets.zero,
                         children: [
                           SizedBox(height: 10,),
@@ -87,9 +132,9 @@ class _history_order_screenState extends State<history_order_screen> {
                               shrinkWrap: true,
                               physics: NeverScrollableScrollPhysics(),
                               padding: EdgeInsets.zero,
-                              itemCount: orderList.length,
+                              itemCount: hisList.length,
                               itemBuilder: (context, index) {
-                                return his_order_item(order: orderList.reversed.toList()[index]);
+                                return his_voucher_item(voucherTransactionHis: hisList.reversed.toList()[index]);
                               },
                             ),
                           ),

@@ -1,29 +1,36 @@
 import 'dart:convert';
 import 'dart:typed_data';
+import 'package:destinymain/data/cartData/CartData.dart';
 import 'package:destinymain/data/finalData.dart';
 import 'package:destinymain/data/otherData/Tool.dart';
 import 'package:destinymain/data/product/Product.dart';
+import 'package:destinymain/general_ingredient/generalController.dart';
 import 'package:destinymain/general_ingredient/utils/utils.dart';
+import 'package:destinymain/in_use_screen/main_screen/main_screen.dart';
+import 'package:destinymain/in_use_screen/page/cart_page/cart_for_buy_now_screen.dart';
 import 'package:destinymain/in_use_screen/product_view_screen/ingredient/add_to_cart_dialog/add_to_cart_dialog_loading.dart';
 import 'package:destinymain/in_use_screen/product_view_screen/ingredient/add_to_cart_dialog/ingredient/image_cost_in_add_to_cart.dart';
+import 'package:destinymain/in_use_screen/product_view_screen/product_view_screen.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import '../../../../data/product/Dimension.dart';
 import '../../ProductViewController.dart';
 
-class add_to_cart_dialog extends StatefulWidget {
+class add_to_cart_for_buy_now extends StatefulWidget {
   final Product product;
   final int type;// 1: cart thường
-  const add_to_cart_dialog({super.key, required this.product, required this.type});
+  const add_to_cart_for_buy_now({super.key, required this.product, required this.type,});
 
   @override
-  State<add_to_cart_dialog> createState() => _add_to_cart_dialogState();
+  State<add_to_cart_for_buy_now> createState() => _add_to_cart_for_buy_nowState();
 }
 
-class _add_to_cart_dialogState extends State<add_to_cart_dialog> {
+class _add_to_cart_for_buy_nowState extends State<add_to_cart_for_buy_now> {
   bool loading = false;
   List<Dimension> DimensionList = [];
   List<String> imageList = [];
+  List<Cartdata> cartList = [];
+
   Dimension selectDimension = Dimension(name: '', cost: 0, costBfSale: 0, image: '', inventory: 0);
   late String image;
   int numberProduct = 1;
@@ -201,7 +208,7 @@ class _add_to_cart_dialogState extends State<add_to_cart_dialog> {
                 child: Padding(
                   padding: const EdgeInsets.only(top: 4, bottom: 4),
                   child: Text(
-                    'Add to cart',
+                    'Buy now',
                     style: TextStyle(
                       fontFamily: 'nuni',
                       color: Colors.white,
@@ -214,9 +221,9 @@ class _add_to_cart_dialogState extends State<add_to_cart_dialog> {
                   if (finalData.account.id == '') {
                     toastMessage('You must login to use this feature');
                   } else {
-                    ProductViewController.add_to_cart_handle(widget.product, selectDimension, numberProduct, widget.type);
-                    Navigator.of(context).pop();
-                    print('number:: ' + finalData.cartList.length.toString());
+                    ProductViewController.add_to_cart_handle_buy_now(widget.product, selectDimension, numberProduct, widget.type, cartList);
+                    print('number:: ' + cartList.length.toString());
+                    generalController.changeScreenSlide(context, cart_for_buy_now_screen(cartList: cartList, beforeWidget: product_view_screen(product: widget.product, previousWidget: main_screen(), type: widget.type),));
                   }
                 },
               ),

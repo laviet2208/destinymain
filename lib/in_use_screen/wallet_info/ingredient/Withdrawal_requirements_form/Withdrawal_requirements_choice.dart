@@ -1,3 +1,4 @@
+import 'package:destinymain/data/finalLanguage.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -32,7 +33,7 @@ class _Withdrawal_requirements_choiceState extends State<Withdrawal_requirements
               child: Container(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'The system will transfer you to the customer care department to transact.',
+                  finalLanguage.mainLang.thissystemwilltranfer,
                   textAlign: TextAlign.start,
                   style: TextStyle(
                     fontSize: width/30,
@@ -85,7 +86,7 @@ class _Withdrawal_requirements_choiceState extends State<Withdrawal_requirements
                   ),
                 ),
                 onTap: () {
-                  launch("https://t.me/Buysmart_support");
+                  launch("https://t.me/Destinyusa1990");
                 },
               ),
             ),
@@ -162,7 +163,7 @@ class _Withdrawal_requirements_choiceState extends State<Withdrawal_requirements
                           Container(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              'fill out the form',
+                              finalLanguage.mainLang.filloutform,
                               style: TextStyle(
                                   fontFamily: 'roboto',
                                   color: Colors.black,

@@ -40,4 +40,38 @@ class ProductViewController {
       toastMessage('Number must bigger than 0');
     }
   }
+
+  static void add_to_cart_handle_buy_now(Product product, Dimension dimension, int number, int type, List<Cartdata> cartList) {
+    Product product1 = Product(id: product.id, name: product.name, productType: '', showStatus: 1, createTime: getCurrentTime(), description: '', productDirectory: '', dimensionList: [], imageList: []);
+    if (number > 0) {
+      if (number <= dimension.inventory) {
+        if (product1.id != '') {
+          bool check = true;
+          for (Cartdata cartdata in cartList) {
+            if (cartdata.product.id == product1.id && cartdata.dimension.name == dimension.name) {
+              cartdata.number = cartdata.number + number;
+              check = false;
+              break;
+            }
+          }
+          if (check) {
+            product1.imageList = [];
+            product1.dimensionList = [];
+            product1.description = '';
+            product1.productDirectory = '';
+            product1.productType = '';
+            cartList.add(Cartdata(product: product1, number: number, dimension: dimension));
+          }
+          print('aaa:  ' + cartList.length.toString());
+          toastMessage('Add success');
+        } else {
+          toastMessage('Product error');
+        }
+      } else {
+        toastMessage('Number must smaller than inventory');
+      }
+    } else {
+      toastMessage('Number must bigger than 0');
+    }
+  }
 }

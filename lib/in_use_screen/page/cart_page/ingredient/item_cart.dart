@@ -17,11 +17,11 @@ class item_cart extends StatefulWidget {
 }
 
 class _item_cartState extends State<item_cart> {
-  late Uint8List image;
+  // late Uint8List image;
 
   @override
   void initState() {
-    image = Uint8List.fromList(base64Decode(widget.cartdata.dimension.image));
+    // image = Uint8List.fromList(base64Decode(widget.cartdata.dimension.image));
     super.initState();
   }
 
@@ -57,7 +57,7 @@ class _item_cartState extends State<item_cart> {
                     padding: EdgeInsets.all(3),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
-                      child: Image.memory(image),
+                      child: Image.network(widget.cartdata.dimension.image),
                     ),
                   ),
                 ),

@@ -82,6 +82,7 @@ class _view_all_product_indirectoryState extends State<view_all_product_indirect
               child: Scaffold(
                 appBar: AppBar(
                   backgroundColor: Colors.transparent,
+                  automaticallyImplyLeading: false,
                   title: view_all_in_directory_appbar(name: widget.productDirectory.name),
                 ),
                 backgroundColor: Colors.transparent,

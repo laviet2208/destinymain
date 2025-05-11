@@ -19,7 +19,7 @@ class horizontal_product_item extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     double width1 = (width - 45)/2;
-    Uint8List image = Uint8List.fromList(base64Decode(product.imageList.first));
+    // Uint8List image = Uint8List.fromList(base64Decode(product.imageList.first));
     return Container(
       width: width1,
       height: height/2*3,
@@ -61,7 +61,7 @@ class horizontal_product_item extends StatelessWidget {
                               bottom: 0,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(5),
-                                child: Image.memory(image),
+                                child: Image.network(product.imageList.first)
                               ),
                             ),
                           ],

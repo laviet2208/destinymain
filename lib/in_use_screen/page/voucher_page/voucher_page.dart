@@ -14,7 +14,7 @@ class voucher_page extends StatefulWidget {
 }
 
 class _voucher_pageState extends State<voucher_page> with SingleTickerProviderStateMixin {
-  int indexTab = 0;
+  int indexTab = 1;
   late TabController _tabController;
 
   Widget getwidget() {
@@ -65,45 +65,46 @@ class _voucher_pageState extends State<voucher_page> with SingleTickerProviderSt
                 child: Scaffold(
                   appBar: AppBar(
                     backgroundColor: Colors.transparent,
+                    automaticallyImplyLeading: false,
                     title: voucher_app_bar(),
                   ),
                   backgroundColor: Colors.transparent,
                   body: Scaffold(
                     backgroundColor: Colors.transparent,
-                    appBar: AppBar(
-                      automaticallyImplyLeading: false,
-                      backgroundColor: Colors.transparent,
-                      elevation: 0,
-                      title: SizedBox.shrink(),
-                      flexibleSpace: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          TabBar(
-                            controller: _tabController,
-                            labelColor: Colors.black,
-                            indicatorColor: Colors.transparent,
-                            onTap: (index) {
-                              setState(() {
-                                indexTab = index;
-                              });
-                            },
-                            dividerColor: Colors.transparent,
-                            indicatorSize: TabBarIndicatorSize.tab,
-                            labelStyle: TextStyle(fontFamily: 'muli', fontWeight: FontWeight.bold), // TextStyle của văn bản khi được chọn
-                            padding: EdgeInsets.only(left: 0, right: 0, bottom: 0, top: 5),
-                            indicator: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: Colors.blueGrey.withOpacity(0.2),
-                            ),
-                            tabs: [
-                              Tab(text: finalLanguage.mainLang.generalVoucher),
-                              Tab(text: finalLanguage.mainLang.individualVoucher),
-                            ],
-                          ),
-                        ],
-
-                      ),
-                    ),
+                    // appBar: AppBar(
+                    //   automaticallyImplyLeading: false,
+                    //   backgroundColor: Colors.transparent,
+                    //   elevation: 0,
+                    //   title: SizedBox.shrink(),
+                    //   flexibleSpace: Column(
+                    //     mainAxisAlignment: MainAxisAlignment.end,
+                    //     children: [
+                    //       TabBar(
+                    //         controller: _tabController,
+                    //         labelColor: Colors.black,
+                    //         indicatorColor: Colors.transparent,
+                    //         onTap: (index) {
+                    //           setState(() {
+                    //             indexTab = index;
+                    //           });
+                    //         },
+                    //         dividerColor: Colors.transparent,
+                    //         indicatorSize: TabBarIndicatorSize.tab,
+                    //         labelStyle: TextStyle(fontFamily: 'muli', fontWeight: FontWeight.bold), // TextStyle của văn bản khi được chọn
+                    //         padding: EdgeInsets.only(left: 0, right: 0, bottom: 0, top: 5),
+                    //         indicator: BoxDecoration(
+                    //           borderRadius: BorderRadius.circular(5),
+                    //           color: Colors.blueGrey.withOpacity(0.2),
+                    //         ),
+                    //         tabs: [
+                    //           // Tab(text: finalLanguage.mainLang.generalVoucher),
+                    //           // Tab(text: finalLanguage.mainLang.individualVoucher),
+                    //         ],
+                    //       ),
+                    //     ],
+                    //
+                    //   ),
+                    // ),
                     body: getwidget(),
                   ),
                 ),

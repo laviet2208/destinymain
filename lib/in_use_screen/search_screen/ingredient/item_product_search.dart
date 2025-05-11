@@ -11,7 +11,7 @@ class item_product_search extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    Uint8List image = Uint8List.fromList(base64Decode(product.imageList.first));
+    // Uint8List image = Uint8List.fromList(base64Decode(product.imageList.first));
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -33,7 +33,7 @@ class item_product_search extends StatelessWidget {
                       color: Colors.blueGrey.withOpacity(0.2),
                       image: DecorationImage(
                         fit: BoxFit.fitWidth,
-                        image: MemoryImage(image),
+                        image: NetworkImage(product.imageList.first),
                       ),
                     ),
                   ),

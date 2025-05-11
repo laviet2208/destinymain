@@ -19,7 +19,7 @@ class _image_and_name_areaState extends State<image_and_name_area> {
   int currentImage = 0;
   String costString = '';
   String costBeforeString = '';
-  List<Uint8List> imageList = [];
+  List<String> imageList = [];
 
   @override
   void initState() {
@@ -28,7 +28,7 @@ class _image_and_name_areaState extends State<image_and_name_area> {
     costString = getCostString(widget.product.dimensionList);
     costBeforeString = getCostBeforeSaleString(widget.product.dimensionList);
     for (int i = 0; i < widget.product.imageList.length; i++) {
-      imageList.add(Uint8List.fromList(base64Decode(widget.product.imageList[i])));
+      imageList.add(widget.product.imageList[i]);
     }
     print('Xử lý xong');
   }
@@ -57,7 +57,7 @@ class _image_and_name_areaState extends State<image_and_name_area> {
                     height: width/3*2,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: MemoryImage(imageList[currentImage]),
+                        image: NetworkImage(imageList[currentImage]),
                         filterQuality: FilterQuality.high,
                         fit: BoxFit.fitWidth,
                       ),
@@ -115,7 +115,7 @@ class _image_and_name_areaState extends State<image_and_name_area> {
                               child: Container(
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: MemoryImage(imageList[index]),
+                                    image: NetworkImage(imageList[index]),
                                     fit: BoxFit.fitWidth,
                                   ),
                                 ),

@@ -2,7 +2,9 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:destinymain/data/finalData.dart';
 import 'package:destinymain/general_ingredient/generalController.dart';
 import 'package:destinymain/no_login_screen/enter_referral_code_screen/enter_referral_code_screen.dart';
+import 'package:destinymain/no_login_screen/signup_screen/signup_screen.dart';
 import 'package:flutter/material.dart';
+import '../../general_ingredient/PasswordField.dart';
 import '../../general_ingredient/normal_button.dart';
 import '../../general_ingredient/normal_textfield.dart';
 import '../../general_ingredient/utils/utils.dart';
@@ -89,9 +91,17 @@ class _login_screenState extends State<login_screen> {
 
                         SizedBox(height: 20,),
 
-                        normal_textfield(controller: passController, hint: 'Your password', event: () {setState(() {});}),
+                        PasswordField(
+                          controller: passController,
+                          hint: 'Your password',
+                          onChanged: () {
+                            setState(() {
 
-                        SizedBox(height: 5,),
+                            });
+                          },
+                        ),
+
+                        SizedBox(height: 12,),
 
                         Padding(
                           padding: EdgeInsets.only(left: 15, right: 15),
@@ -103,7 +113,7 @@ class _login_screenState extends State<login_screen> {
                                 color: Colors.transparent,
                               ),
                               child: AutoSizeText(
-                                'Forgot password?',
+                                "Don't have an account? Create now!",
                                 style: TextStyle(
                                   fontFamily: 'rale',
                                   fontWeight: FontWeight.normal,
@@ -113,12 +123,12 @@ class _login_screenState extends State<login_screen> {
                               ),
                             ),
                             onTap: () {
-
+                              generalController.changeScreenSlide(context, signup_screen());
                             },
                           ),
                         ),
 
-                        SizedBox(height: 10,),
+                        SizedBox(height: 12,),
 
                         Padding(
                           padding: EdgeInsets.only(left: 0, right: 0),

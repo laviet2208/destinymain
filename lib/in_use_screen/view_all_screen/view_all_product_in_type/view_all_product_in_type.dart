@@ -81,6 +81,7 @@ class _view_all_product_in_typeState extends State<view_all_product_in_type> {
               child: Scaffold(
                 appBar: AppBar(
                   backgroundColor: Colors.transparent,
+                  automaticallyImplyLeading: false,
                   title: view_all_in_type_appbar(name: widget.productType.name, beforeWidget: widget.beforeWidget,),
                 ),
                 backgroundColor: Colors.transparent,

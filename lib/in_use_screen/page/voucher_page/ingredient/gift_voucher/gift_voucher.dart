@@ -1,4 +1,6 @@
 import 'package:destinymain/data/finalLanguage.dart';
+import 'package:destinymain/data/historyData/VoucherTransaction.dart';
+import 'package:destinymain/data/otherData/Tool.dart';
 import 'package:destinymain/no_login_screen/loading_screen/controller.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -74,6 +76,16 @@ class _gift_voucherState extends State<gift_voucher> {
                             await database.child(acc.id).set(acc.toJson());
                             database = FirebaseDatabase.instance.ref("Account");
                             await database.child(finalData.account.id).set(finalData.account.toJson());
+                            String id = (DateTime.now().hour >= 10 ? DateTime.now().hour.toString() : '0' + DateTime.now().hour.toString()) + (DateTime.now().minute >= 10 ? DateTime.now().minute.toString() : '0' + DateTime.now().minute.toString()) + (DateTime.now().second >= 10 ? DateTime.now().second.toString() : '0' + DateTime.now().second.toString()) + (DateTime.now().day >= 10 ? DateTime.now().day.toString() : '0' + DateTime.now().day.toString()) + (DateTime.now().month >= 10 ? DateTime.now().month.toString() : '0' + DateTime.now().month.toString()) + (DateTime.now().year >= 10 ? DateTime.now().year.toString() : '0' + DateTime.now().year.toString());
+                            VoucherTransactionHis voucherHis = VoucherTransactionHis(
+                              id: "VCH" + id,
+                              createTime: getCurrentTime(),
+                              sender: finalData.account.id,
+                              receiver: acc.id,
+                              voucher: widget.voucher,
+                            );
+                            database = FirebaseDatabase.instance.ref("VoucherSendHis");
+                            await database.child(voucherHis.id).set(voucherHis.toJson());
                             widget.event();
                             toastMessage('Update Complete');
                             setState(() {

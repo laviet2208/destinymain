@@ -77,6 +77,7 @@ class _wallet_infoState extends State<wallet_info> {
                   appBar: AppBar(
                     backgroundColor: Colors.transparent,
                     surfaceTintColor: Colors.transparent,
+                    automaticallyImplyLeading: false,
                     leading: IconButton(
                       icon: Icon(Icons.arrow_back),
                       onPressed: () {

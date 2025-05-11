@@ -18,11 +18,11 @@ class top_product_item extends StatefulWidget {
 }
 
 class _top_product_itemState extends State<top_product_item> {
-  late Uint8List image;
+  // late Uint8List image;
   bool loading = false;
   @override
   void initState() {
-    image = Uint8List.fromList(base64Decode(widget.product.imageList.first));
+    // image = Uint8List.fromList(base64Decode(widget.product.imageList.first));
     super.initState();
   }
 
@@ -49,7 +49,7 @@ class _top_product_itemState extends State<top_product_item> {
           padding: EdgeInsets.all(5),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(1000),
-            child: Image.memory(image),
+            child: Image.network(widget.product.imageList.first),
           ),
         ) : SpinKitFoldingCube(color: Colors.black, size: 15,),
       ),

@@ -1,5 +1,6 @@
 import 'package:destinymain/data/finalLanguage.dart';
 import 'package:flutter/material.dart';
+import '../../../../../data/cartData/CartData.dart';
 import '../../../../../data/finalData.dart';
 import '../../../../../data/orderData/Order.dart';
 import '../../../../../data/otherData/Tool.dart';
@@ -9,19 +10,27 @@ import '../../ingredient/cost_text_line.dart';
 import '../check_out_controller.dart';
 import 'receiver_info.dart';
 
-class total_money_check_out extends StatefulWidget {
+class total_money_check_out_buy_now extends StatefulWidget {
   final Order order;
-  const total_money_check_out({super.key, required this.order});
+  final List<Cartdata> cartList;
+  const total_money_check_out_buy_now({super.key, required this.order, required this.cartList});
 
   @override
-  State<total_money_check_out> createState() => _total_money_check_outState();
+  State<total_money_check_out_buy_now> createState() => _total_money_check_out_buy_nowState();
 }
 
-class _total_money_check_outState extends State<total_money_check_out> {
+class _total_money_check_out_buy_nowState extends State<total_money_check_out_buy_now> {
   bool loading = false;
 
+  double calculatetotalMoney() {
+    double cost = 0;
+    for (Cartdata cartdata in widget.cartList) {
+      cost = cost + cartdata.dimension.cost * cartdata.number;
+    }
+    return cost;
+  }
+
   bool _canPush() {
-    print('Thông tin ' + widget.order.receiver.name + ' ' + widget.order.receiver.district + ' ' + widget.order.receiver.phoneNumber);
     if (widget.order.receiver.name != '' && widget.order.receiver.district != '' && widget.order.receiver.phoneNumber != '') {
       return true;
     }
@@ -40,7 +49,7 @@ class _total_money_check_outState extends State<total_money_check_out> {
           children: [
             SizedBox(height: 10,),
 
-            cost_text_line(title: finalLanguage.mainLang.item+ widget.order.productList.length.toString() + ')', content: getStringNumber(calculatetotalMoney()) + ' .USDT', size: width/25, contentColor: Colors.black, titleColor: Colors.grey,),
+            cost_text_line(title: finalLanguage.mainLang.item + widget.order.productList.length.toString() + ')', content: getStringNumber(calculatetotalMoney()) + ' .USDT', size: width/25, contentColor: Colors.black, titleColor: Colors.grey,),
 
             SizedBox(height: 10,),
 
@@ -94,10 +103,10 @@ class _total_money_check_outState extends State<total_money_check_out> {
                         setState(() {
                           loading = true;
                         });
-                        await check_out_controller.push_new_order(
+                        await check_out_controller.push_new_order_buy_now(
                           widget.order,
                               () {setState(() {loading = false;}); Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => main_screen()),);},
-                              () {setState(() {loading = false;});},
+                              () {setState(() {loading = false;});}, (calculatetotalMoney() - getVoucherSale(widget.order.voucher, calculatetotalMoney()))
                         );
                       } else {
                         toastMessage('Please fill receiver infomation');
