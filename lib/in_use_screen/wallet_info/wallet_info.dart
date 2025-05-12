@@ -99,6 +99,8 @@ class _wallet_infoState extends State<wallet_info> {
 
                             card_info(),
 
+                            SizedBox(height: 10,),
+
                             Container(
                               alignment: Alignment.centerLeft,
                               child: Row(
