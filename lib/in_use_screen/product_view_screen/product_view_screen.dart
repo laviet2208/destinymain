@@ -97,6 +97,7 @@ class _product_view_screenState extends State<product_view_screen> {
                               ),
                             ),
                             builder: (context) {
+                              //check
                               return add_to_cart_for_buy_now(product: widget.product, type: widget.type,);
                             },
                           );
