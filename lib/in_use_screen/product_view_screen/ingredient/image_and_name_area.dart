@@ -71,7 +71,7 @@ class _image_and_name_areaState extends State<image_and_name_area> {
                   child: IconButton(
                     onPressed: () {
                       if (finalData.account.id == '') {
-
+                        generalController.changeScreenSlide(context, widget.previousWidget);
                       } else {
                         generalController.changeScreenSlide(context, widget.previousWidget);
                       }
