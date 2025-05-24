@@ -30,6 +30,7 @@ class account_page extends StatefulWidget {
 class _account_pageState extends State<account_page> {
   bool loading = false;
   chatRoom room = chatRoom(account: finalData.account, messengerList: []);
+  int isShow1 = 0;
   Future<void> getChatRoom() async {
     final reference = FirebaseDatabase.instance.ref();
     await reference.child("Chatrooms").child(finalData.account.id).onValue.listen((event) async {
@@ -45,9 +46,34 @@ class _account_pageState extends State<account_page> {
     });
   }
 
+  void getShowWalletButton() async {
+    final reference = FirebaseDatabase.instance.ref();
+    await reference.child("isShowWallet").onValue.listen((event) async {
+      final dynamic isShow = event.snapshot.value;
+      if(isShow != null) {
+        isShow1 = int.parse(isShow.toString());
+        setState(() {
+
+        });
+      } else {
+        isShow1 = 0;
+        setState(() {
+
+        });
+      }
+    });
+  }
+
   Future<void> pushChatRooms(chatRoom room) async {
     final reference = FirebaseDatabase.instance.ref();
     await reference.child("Chatrooms").child(finalData.account.id).set(room.toJson());
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getShowWalletButton();
   }
 
   @override
@@ -128,14 +154,14 @@ class _account_pageState extends State<account_page> {
 
                       SizedBox(height: 18,),
 
-                      Padding(
+                      isShow1 == 1 ? Padding(
                         padding: EdgeInsets.only(left: 20, right: 20),
                         child: feature_button(iconData: Icons.account_balance_wallet_outlined, title: finalLanguage.mainLang.yourWallet, event: () { generalController.changeScreenSlide(context, wallet_info()); },),
-                      ),
+                      ) : Container(),
 
-                      SizedBox(height: 18,),
+                      SizedBox(height: isShow1 == 1 ? 18 : 0,),
 
-                      Padding(
+                      isShow1 == 1 ? Padding(
                         padding: EdgeInsets.only(left: 15, right: 15),
                         child: Container(
                           height: 0.5,
@@ -143,7 +169,7 @@ class _account_pageState extends State<account_page> {
                             color: Colors.black,
                           ),
                         ),
-                      ),
+                      ): Container(),
 
                       SizedBox(height: 18,),
 
