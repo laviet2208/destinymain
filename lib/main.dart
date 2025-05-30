@@ -10,7 +10,7 @@ import 'package:destinymain/no_login_screen/lock_screen/lock_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'no_login_screen/loading_screen/welcome_screen.dart';
 
 Future<void> main() async {
@@ -27,6 +27,10 @@ Future<void> main() async {
     //     appId: "1:96965763722:web:683ba60b8d977c7dbb0373",
     //     measurementId: "G-B7X16QF6RK"
     //   ),
+  );
+  await Supabase.initialize(
+    url: 'https://oyplcvasykdowbaaqnye.supabase.co',
+    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im95cGxjdmFzeWtkb3diYWFxbnllIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY4MDI2MzQsImV4cCI6MjA2MjM3ODYzNH0.sDnJyBaJFwpPQ7MOog_cxqjpnHdcYJTpV9AWDfTTvl0',
   );
   print('Start1: ' + getAllATimeString(getCurrentTime()));
 
