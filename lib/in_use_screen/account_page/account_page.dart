@@ -313,13 +313,13 @@ class _account_pageState extends State<account_page> {
                                             ),
                                           ),
                                           onTap: () async {
-                                            setState(() {
-                                              loading = false;
-                                            });
-                                            await getChatRoom();
-                                            setState(() {
-                                              loading = false;
-                                            });
+                                            // setState(() {
+                                            //   loading = false;
+                                            // });
+                                            // await getChatRoom();
+                                            // setState(() {
+                                            //   loading = false;
+                                            // });
                                             generalController.changeScreenSlide(context, chatRoomScreen());
                                           },
                                         ),

@@ -65,13 +65,6 @@ class _chatRoomScreenState extends State<chatRoomScreen> {
         setState(() {
 
         });
-      } else {
-        room = chatRoom(account: finalData.account, messengerList: []);
-        room.messengerList.add(messenger(type: 2, content: "Hello, this is Buy Smart's customer service department, how can we help you?"));
-        pushChatRooms(room);
-        setState(() {
-
-        });
       }
     });
   }
