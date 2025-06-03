@@ -152,7 +152,24 @@ class _account_pageState extends State<account_page> {
                         ),
                       ),
 
-                      SizedBox(height: 18,),
+                      SizedBox(height: isShow1 == 1 ? 18 : 0,),
+
+                      // Padding(
+                      //   padding: EdgeInsets.only(left: 20, right: 20),
+                      //   child: feature_button(iconData: Icons.account_balance_wallet_outlined, title: finalLanguage.mainLang.yourWallet, event: () { generalController.changeScreenSlide(context, wallet_info()); },),
+                      // ),
+                      //
+                      // SizedBox(height: 18,),
+                      //
+                      // Padding(
+                      //   padding: EdgeInsets.only(left: 15, right: 15),
+                      //   child: Container(
+                      //     height: 0.5,
+                      //     decoration: BoxDecoration(
+                      //       color: Colors.black,
+                      //     ),
+                      //   ),
+                      // ),
 
                       isShow1 == 1 ? Padding(
                         padding: EdgeInsets.only(left: 20, right: 20),

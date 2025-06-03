@@ -1,10 +1,10 @@
 import 'dart:convert';
-
+import 'dart:io';
+import 'dart:typed_data';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:destinymain/general_ingredient/utils/utils.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import '../../../../../data/chatData/chatRoom.dart';
 import '../../../../../data/chatData/messenger.dart';
 import '../../../data/finalData.dart';
@@ -39,12 +39,52 @@ class _chatRoomScreenState extends State<chatRoomScreen> {
     }
   }
 
+  // Future<void> _pickImageAndConvert() async {
+  //   try {
+  //     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+  //     if (image == null) return;
+  //     final bytes = await image.readAsBytes();
+  //     final base64Str = base64Encode(bytes);
+  //     setState(() {
+  //       base64image = base64Str;
+  //     });
+  //   } catch (e) {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(content: Text('Lỗi khi chọn ảnh: $e')),
+  //     );
+  //   }
+  // }
+
   Future<void> _pickImageAndConvert() async {
     try {
-      final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-      if (image == null) return;
-      final bytes = await image.readAsBytes();
-      final base64Str = base64Encode(bytes);
+      // Mở dialog chỉ cho chọn file ảnh
+      final FilePickerResult? result = await FilePicker.platform.pickFiles(
+        type: FileType.image,
+        withData: true, // để trả về luôn Uint8List bytes
+      );
+
+      // Nếu user hủy thì result sẽ null
+      if (result == null) return;
+
+      // Lấy file đầu tiên
+      final PlatformFile file = result.files.first;
+
+      // Cố lấy bytes từ file.bytes
+      Uint8List? bytes = file.bytes;
+
+      // Nếu bytes null (ví dụ với một số cấu hình), thì đọc từ đường dẫn path
+      if (bytes == null && file.path != null) {
+        bytes = await File(file.path!).readAsBytes();
+      }
+
+      // Nếu vẫn null thì throw lỗi
+      if (bytes == null) {
+        throw Exception('Không thể đọc dữ liệu ảnh');
+      }
+
+      // Encode bytes lên Base64
+      final String base64Str = base64Encode(bytes);
+
       setState(() {
         base64image = base64Str;
       });
