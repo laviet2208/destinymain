@@ -22,7 +22,6 @@ class chatRoomScreen extends StatefulWidget {
 class _chatRoomScreenState extends State<chatRoomScreen> {
   chatRoom room = chatRoom(account: finalData.account, messengerList: []);
   String base64image = '';
-  final ImagePicker _picker = ImagePicker();
 
   Future<String> uploadBase64Image({required String base64Data, String bucket = 'destinyusa', String folder = '',}) async {
     final bytes = base64Decode(base64Data);
